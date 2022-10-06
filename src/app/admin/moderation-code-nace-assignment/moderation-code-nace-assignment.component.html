@@ -1,0 +1,67 @@
+<ng-container *transloco="let t">
+    <section class="">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-12">
+                  <p class="size-18 mb-4"> {{ t('admin.CHOOSE_IN_WHICH_CATEGORY_THIS_NACE_CODE_SHOULD_APPEAR') }} </p>
+              </div>
+          </div>
+        <div class="row">
+            <div class="col-sm-6 mb-3">
+                <button class="btn primary w-100" (click)="addCategory('category', null, 'add')" >
+                    {{ t('admin.ADD_A_MOTHER_CATEGORY') }}
+                </button>
+            </div>
+            <div class="col-sm-6 mb-3">
+                <button class="btn primary w-100"
+                (click)="addCategory('subcategory', null, 'add')"
+                *ngIf="selectedCategory">
+                    {{ t('admin.ADD_A_SUB_CATEGORY') }}
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="categories_list">
+                    <div class="category cursor-pointer"*ngFor="let category of categoriesList; let index = index" (click)="getSubCategories(category.id)" >
+                        <p [ngClass]="{'active' : selectedCategory == category.id }"  >
+                            {{ category.name }}
+                        </p>
+                    </div>
+                </div>  
+            </div>
+            <div class="col-sm-6">
+                <div class="categories_list">
+                    <p class="select_category " *ngIf="!selectedCategory">
+                        {{ t('admin.PLEASE_SELECT_A_CATEGORY') }}
+                    </p>
+                    <div class="category cursor-pointer"  *ngFor="let category of subCategoriesList; let index = index" (click)="getcompetences(category.id)">
+                        <p [ngClass]="{'active' : selectedSubCategory == category.id }">
+                            {{ category.name }}
+                        </p>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 pt-4">
+                <div class="white-background-color border-raduis-15 p-3">
+                    <form [formGroup]="codeForm" class="row" (ngSubmit)="onCodeFormSubmit()">
+                        <div class="col-sm-6 d-flex align-items-center">
+                            <label class="size-10 text-nowrap pr-2 mb-0" for=""> {{ t('admin.VALIDATE_THE_ADDICTION_OF_THIS_NACE_CODE_WITH_THE_FOLLOWING_WORKING') }} </label>
+                            <mat-form-field appearance="outline" class="orange medium pt-1">
+                                <input matInput formControlName="description" placeholder="{{ t('fields.DESCRIPTION') }}" >    
+                            </mat-form-field>
+                            <button class="btn secondary ml-2" style="height: 31px;" [ngClass]="{'disabled': !selectedSubCategory }" >
+                                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 6L5 9L10 3" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>                                    
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+</ng-container>

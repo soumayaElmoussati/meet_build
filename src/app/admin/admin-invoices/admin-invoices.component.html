@@ -1,0 +1,94 @@
+<ng-container *transloco="let t">
+    <section class="">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="row white-background-color border-raduis-15 py-4">
+              <div class="col-12">
+                <div class="row justify-content-end">
+                  <div class="col-sm-3 d-flex justify-content-end">
+                    <mat-form-field appearance="outline">
+                        <mat-date-range-input [rangePicker]="picker">
+                          <input matStartDate placeholder="{{ t('FROM') }}" [formControl]="startDate" (click)="picker.open()" readonly >
+                          <input matEndDate placeholder="{{ t('TO') }}" [max]="maxDate" [formControl]="endDate" (click)="picker.open()" readonly>
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                      </mat-form-field>
+                  </div>
+                  <div class="col-sm-2 pl-0" *ngIf="rangeSelected()">
+                    <button class="btn primary w-100 h-100" (click)="onExport()"> {{ t('EXPORT') }} </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 px-0">
+                <table mat-table [dataSource]="invoicesDataSource" class="w-100  ">
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('admin.DATE') }} </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.payment_date}}
+                    </td>
+                  </ng-container>
+                  <ng-container matColumnDef="number">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('admin.INVOICE_NUMBER') }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.number}} </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="invoice">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('admin.INVOICE') }} </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.subscription_type }} & {{ t('MONTH_'+ element.month) }} - {{ element.user_company_name }} </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('admin.AMOUNT') }} </th>
+                    <td mat-cell *matCellDef="let element">
+                      {{ element.subscription_amount }}€ </td>
+                  </ng-container>
+  
+                  <ng-container matColumnDef="pdf">
+                    <th mat-header-cell *matHeaderCellDef> {{ t('admin.PDF') }} </th>
+                    <td mat-cell *matCellDef="let element">
+                        <img src="./../../../assets/img/pdf_picto.svg" alt=""
+                        class="cursor-pointer" (click)="onDownloadFile(element.id, element.number)"> 
+                    </td>
+                  </ng-container>
+  
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 text-right" *ngIf="invoicesList">
+            <ul class="list-inline pagination d-inline-flex mt-3" *ngIf="invoicesList.last_page > 1">
+              <li class="list-inline">
+                <a class="secondary" [ngClass]="{'disabled': currentPage == 1}"
+                  (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                  <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </li>
+              <li class="list-inline" *ngFor="let page of pagination" [ngClass]="{'active': page==currentPage}">
+                <a class="secondary" (click)="navigateTo(page)">
+                  {{ page }}
+                </a>
+              </li>
+              <li class="list-inline mr-0">
+                <a class="secondary" [ngClass]="{'disabled': currentPage == invoicesList.last_page}"
+                  (click)="currentPage!=invoicesList.last_page ? navigateTo(currentPage+1) : null">
+                  <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                  </svg>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </ng-container>

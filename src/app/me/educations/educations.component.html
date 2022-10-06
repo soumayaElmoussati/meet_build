@@ -1,0 +1,219 @@
+<ng-container *transloco="let t">
+    <ng-container *ngIf="formations">
+        <div class="row py-4">
+            <div class="col-12 white-background-color px-4 border-raduis-15">
+                <table class="w-100" fxShow="false" fxShow.gt-sm="true">
+                    <tr *ngFor="let formation of formations; let i = index; let first = first; let last = last">
+                        <td class="position">
+                            <a class="primary mb-1 d-block" [ngClass]="{ 'disabled' : first }"
+                                (click)=" !first ? onChangePosition(i, -1) : null">
+                                <svg width="10" height="7" viewBox="0 0 10 7" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 5.5L5 1.5L1 5.5" class="stroke" stroke="#F39908" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                            <a class="primary" [ngClass]="{ 'disabled' : last }"
+                                (click)=" !last ? onChangePosition(i, 1) : null">
+                                <svg width="10" height="7" viewBox="0 0 10 7" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 1.5L5 5.5L9 1.5" class="stroke" stroke="#F39908" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </td>
+                        <td class="period"> {{ formation.period_start }} - {{ formation.period_end }}  </td>
+                        <td class="establishment"> {{ formation.establishment }} </td>
+                        <td class="description"> {{ formation.description }} </td>
+                        <td class="location"> {{ formation.location }} </td>
+                        <td class="actions">
+                            <a class="secondary mr-3" (click)="onEditFormation(formation)">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path class="fill"
+                                        d="M16.4234 0.224609C15.984 0.225674 15.5491 0.313742 15.1438 0.483734C14.7386 0.653726 14.371 0.902276 14.0623 1.21505L1.21423 14.0623L1.16386 14.3166L0.274984 18.7854L0.0214844 19.9781L1.21505 19.7246L5.6838 18.8357L5.9373 18.7845L18.7854 5.9373C19.0989 5.62913 19.348 5.2616 19.518 4.85614C19.6881 4.45069 19.7756 4.01543 19.7756 3.57577C19.7756 3.1361 19.6881 2.70084 19.518 2.29539C19.348 1.88993 19.0989 1.5224 18.7854 1.21423C18.4765 0.901513 18.1088 0.653057 17.7034 0.483203C17.298 0.313348 16.863 0.22546 16.4234 0.224609ZM16.4234 1.77323C16.8329 1.77323 17.2457 1.96011 17.6422 2.35742C18.4327 3.14717 18.4327 4.00436 17.6422 4.79492L17.0588 5.35311L14.6457 2.9408L15.2047 2.35742C15.602 1.96011 16.0139 1.77323 16.4234 1.77323ZM13.5041 4.08398L15.9156 6.4963L6.09005 16.321C5.55961 15.2832 4.71511 14.4393 3.67692 13.9095L13.5041 4.08398ZM2.63692 15.2307C3.11779 15.4241 3.5546 15.7128 3.92111 16.0793C4.28762 16.4458 4.57628 16.8826 4.76973 17.3635L2.10311 17.8965L2.63692 15.2307Z"
+                                        fill="#607D8B" />
+                                </svg>
+                            </a>
+                            <a class="secondary" (click)="onDeleteFormation(formation.id)">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="fill" d="M5.00391 20C5.00391 21.103 5.90091 22 7.00391 22H17.0039C18.1069 22 19.0039 21.103 19.0039 20V8H21.0039V6H17.0039V4C17.0039 2.897 16.1069 2 15.0039 2H9.00391C7.90091 2 7.00391 2.897 7.00391 4V6H3.00391V8H5.00391V20ZM9.00391 4H15.0039V6H9.00391V4ZM8.00391 8H17.0039L17.0049 20H7.00391V8H8.00391Z" fill="#607D8B"/>
+                                    <path class="fill" d="M9.00391 10H11.0039V18H9.00391V10ZM13.0039 10H15.0039V18H13.0039V10Z" fill="#607D8B"/>
+                                </svg>    
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="w-100" fxHide.gt-sm="true">
+                    <ng-container *ngFor="let formation of formations; let i = index; let first = first; let last = last">
+                        <tr>
+                            <td class="position" valign="top">
+                                <a class="primary mb-1 d-block" [ngClass]="{ 'disabled' : first }"
+                                    (click)=" !first ? onChangePosition(i, -1) : null">
+                                    <svg width="10" height="7" viewBox="0 0 10 7" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 5.5L5 1.5L1 5.5" class="stroke" stroke="#F39908" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                                <a class="primary" [ngClass]="{ 'disabled' : last }"
+                                    (click)=" !last ? onChangePosition(i, 1) : null">
+                                    <svg width="10" height="7" viewBox="0 0 10 7" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1.5L5 5.5L9 1.5" class="stroke" stroke="#F39908" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+                            </td>
+                            <td class="period">
+                                {{ formation.period_start }} - {{ formation.period_end }}
+                                <br>{{ formation.establishment }} - {{ formation.location }}
+                                <br>{{ formation.description }}
+                                <div class="action">
+                                    <a class="secondary mr-3" (click)="onEditFormation(formation)">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path class="fill"
+                                                d="M16.4234 0.224609C15.984 0.225674 15.5491 0.313742 15.1438 0.483734C14.7386 0.653726 14.371 0.902276 14.0623 1.21505L1.21423 14.0623L1.16386 14.3166L0.274984 18.7854L0.0214844 19.9781L1.21505 19.7246L5.6838 18.8357L5.9373 18.7845L18.7854 5.9373C19.0989 5.62913 19.348 5.2616 19.518 4.85614C19.6881 4.45069 19.7756 4.01543 19.7756 3.57577C19.7756 3.1361 19.6881 2.70084 19.518 2.29539C19.348 1.88993 19.0989 1.5224 18.7854 1.21423C18.4765 0.901513 18.1088 0.653057 17.7034 0.483203C17.298 0.313348 16.863 0.22546 16.4234 0.224609ZM16.4234 1.77323C16.8329 1.77323 17.2457 1.96011 17.6422 2.35742C18.4327 3.14717 18.4327 4.00436 17.6422 4.79492L17.0588 5.35311L14.6457 2.9408L15.2047 2.35742C15.602 1.96011 16.0139 1.77323 16.4234 1.77323ZM13.5041 4.08398L15.9156 6.4963L6.09005 16.321C5.55961 15.2832 4.71511 14.4393 3.67692 13.9095L13.5041 4.08398ZM2.63692 15.2307C3.11779 15.4241 3.5546 15.7128 3.92111 16.0793C4.28762 16.4458 4.57628 16.8826 4.76973 17.3635L2.10311 17.8965L2.63692 15.2307Z"
+                                                fill="#607D8B" />
+                                        </svg>
+                                    </a>
+                                    <a class="secondary" (click)="onDeleteFormation(formation.id)">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path class="fill" d="M5.00391 20C5.00391 21.103 5.90091 22 7.00391 22H17.0039C18.1069 22 19.0039 21.103 19.0039 20V8H21.0039V6H17.0039V4C17.0039 2.897 16.1069 2 15.0039 2H9.00391C7.90091 2 7.00391 2.897 7.00391 4V6H3.00391V8H5.00391V20ZM9.00391 4H15.0039V6H9.00391V4ZM8.00391 8H17.0039L17.0049 20H7.00391V8H8.00391Z" fill="#607D8B"/>
+                                            <path class="fill" d="M9.00391 10H11.0039V18H9.00391V10ZM13.0039 10H15.0039V18H13.0039V10Z" fill="#607D8B"/>
+                                        </svg>    
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </table>
+
+
+                <div class="row py-4" *ngIf="!formations.length && !addFirst">
+                    <div class="col-12 text-center p-5 white-background-color p-3 border-raduis-15 text-center ">
+                        <div class="row justify-content-center" *transloco="let t">
+                            <div class="col-sm-5 py-5 my-5 px-5 text-center">
+                                <img src="./../../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                                <p [innerHTML]="t('NO_TRAINING_ON_PROFILE')" class="pt-4 mb-4"></p>
+                                <a class="primary" (click)="addFirstFormation()">
+                                    <ng-container *ngIf="!showForm">
+                                        <svg class="mr-2" width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path class="stroke" d="M11 11H7M11 7V11V7ZM11 11V15V11ZM11 11H15H11Z"
+                                                stroke="#F39908" stroke-width="2" stroke-linecap="round" />
+                                            <path class="stroke"
+                                                d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z"
+                                                stroke="#F39908" stroke-width="2" />
+                                        </svg>
+                                        {{ t('ADD_TRAINING') }}
+                                    </ng-container>
+                                    <ng-container *ngIf="showForm">
+                                        <svg class="mr-2" width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path class="stroke" d="M15 11H7" stroke="#F39908" stroke-width="2"
+                                                stroke-linecap="round" />
+                                            <path
+                                                d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z"
+                                                class="stroke" stroke="#F39908" stroke-width="2" />
+                                        </svg>
+                                        {{ t('CLOSE') }}
+                                    </ng-container>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="py-4" *ngIf="formations.length || addFirst">
+                            <a class="primary" (click)="!showForm ? showForm = !showForm : resetForm()">
+                                <ng-container *ngIf="!showForm">
+                                    <svg class="mr-2" width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path class="stroke" d="M11 11H7M11 7V11V7ZM11 11V15V11ZM11 11H15H11Z"
+                                            stroke="#F39908" stroke-width="2" stroke-linecap="round" />
+                                        <path class="stroke"
+                                            d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z"
+                                            stroke="#F39908" stroke-width="2" />
+                                    </svg>
+                                    {{ t('ADD_TRAINING') }}
+                                </ng-container>
+                                <ng-container *ngIf="showForm">
+                                    <svg class="mr-2" width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path class="stroke" d="M15 11H7" stroke="#F39908" stroke-width="2"
+                                            stroke-linecap="round" />
+                                        <path
+                                            d="M11 21C16.5228 21 21 16.5228 21 11C21 5.47715 16.5228 1 11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21Z"
+                                            class="stroke" stroke="#F39908" stroke-width="2" />
+                                    </svg>
+                                    {{ t('CLOSE') }}
+                                </ng-container>
+                            </a>
+                        </div>
+
+                        <form [formGroup]="educationForm" class="row meduim pb-4" (ngSubmit)="onEducationFormSubmit()"
+                            *ngIf="showForm">
+                            <div class="col-sm-5">
+                                <label>{{ t('fields.PERIOD') }}</label>
+                                <div class="row">
+                                    <div class="col-6 mb-2">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput [max]="maxDate" [matDatepicker]="dp_start" [formControl]="period_start" (click)="dp_start.open()" readonly>
+                                            <mat-datepicker-toggle matSuffix [for]="dp_start"></mat-datepicker-toggle>
+                                            <mat-datepicker #dp_start
+                                                            startView="multi-year"
+                                                            (yearSelected)="chosenYearHandlerStart($event, dp_start)"
+                                                            (monthSelected)="chosenMonthHandlerStart($event, dp_start)"
+                                                            panelClass="example-month-picker">
+                                            </mat-datepicker>
+                                          </mat-form-field>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <mat-form-field appearance="outline">
+                                            <input matInput [max]="maxDate" [matDatepicker]="dp_end" [formControl]="period_end" (click)="dp_end.open()" readonly>
+                                            <mat-datepicker-toggle matSuffix [for]="dp_end"></mat-datepicker-toggle>
+                                            <mat-datepicker #dp_end
+                                                            startView="multi-year"
+                                                            (yearSelected)="chosenYearHandlerEnd($event, dp_end)"
+                                                            (monthSelected)="chosenMonthHandlerEnd($event, dp_end)"
+                                                            panelClass="example-month-picker">
+                                            </mat-datepicker>
+                                          </mat-form-field>
+                                    </div>
+                                </div>
+                                <label>{{ t('fields.ESTABLISHMENT') }}</label>
+                                <mat-form-field appearance="outline" class="mb-3">
+                                    <input matInput formControlName="establishment"
+                                        placeholder="{{ t('fields.ESTABLISHMENT') }}">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-5 textarea">
+                                <label>{{ t('fields.DESCRIPTION') }}</label>
+                                <mat-form-field appearance="outline" class="mb-3">
+                                <textarea matInput formControlName="description"
+                                    placeholder="{{ t('fields.DESCRIPTION') }}"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-sm-2">
+                                <label>{{ t('fields.PLACE') }}</label>
+                                <mat-form-field appearance="outline" class="mb-3">
+                                    <input matInput formControlName="location" placeholder="{{ t('fields.PLACE') }}">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit" class="btn primary px-4 "> {{ t('REGISTER') }} </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+ 
+</ng-container>

@@ -1,0 +1,44 @@
+<ng-container *transloco="let t">
+    <section class="py-5 links "  >
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm-4 my-3">
+                    <div class="shadow p-4 d-flex align-items-center justify-content-start cursor-pointer" (click)="setRouter('/abonnement')" >
+                        <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="19.5" cy="19.5" r="19.5" fill="#607D8B"/>
+                            <path d="M11.6667 19L17.1667 24.5L26.3333 13.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <p class="text-left mb-0 pl-4 color-secondary">
+                            <strong class="d-block size-18 mb-1"> {{ t('website.DISCOVER') }} </strong>
+                            {{ t('website.OUR_DIFFERENT_TARIFF_PLANS') }}
+                        </p>                    
+                    </div>
+                </div>
+                <div class="col-sm-4 my-3">
+                    <div class="shadow p-4 d-flex align-items-center justify-content-start cursor-pointer" (click)="setRouter('/assistance')" >
+                        <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="19.5" cy="19.5" r="19.5" fill="#607D8B"/>
+                            <path d="M11.6667 19L17.1667 24.5L26.3333 13.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>  
+                        <p class="text-left mb-0 pl-4 color-secondary">
+                            <strong class="d-block size-18 mb-1"> {{ t('website.A_QUESTION') }} </strong>
+                            {{ t('website.YOUR_SUPPORT_HELPS_YOU') }}
+                        </p>                             
+                    </div>
+                </div>
+                <div class="col-sm-4 my-3">
+                    <div class="shadow p-4 d-flex align-items-center justify-content-start cursor-pointer" (click)="setRouter('/politique-de-confidentialite')" >
+                        <svg width="39" height="39" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="19.5" cy="19.5" r="19.5" fill="#607D8B"/>
+                            <path d="M11.6667 19L17.1667 24.5L26.3333 13.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>  
+                        <p class="text-left mb-0 pl-4 color-secondary" >
+                            <strong class="d-block size-18 mb-1"> {{ t('website.CONFIDENTIALITY') }} </strong>
+                            {{ t('website.HOW_DO_WE_TREAT_YOUR_DATA') }}
+                        </p>                             
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-container>

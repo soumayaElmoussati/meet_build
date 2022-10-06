@@ -1,0 +1,76 @@
+<ng-container *transloco="let t" >
+    <div class="sticky_bloc dashboard">
+        <div class="row">
+            <div class="col-8 d-flex align-items-center pr-1">
+                <mat-form-field appearance="outline" class="search medium " style="height:30px">
+                    <input matInput class="w-100" [formControl]="search" placeholder="{{ t('RESEARCH') }}...">
+                    <mat-icon class="" matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="col-4">
+                <a class="primary" (click)="addNewPost()">
+                    <svg width="69" height="69" viewBox="0 0 69 69" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="fill" cx="34.5" cy="34.5" r="34.5" fill="#F39908" />
+                        <path d="M34 34H22M34 46V34V46ZM34 34V22V34ZM34 34H46H34Z" stroke="white" stroke-width="2"
+                            stroke-linecap="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="card w-100 mt-4">
+            <div class="header">
+                {{ t('LOGBOOK') }}
+            </div>
+            <div class="body">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item mb-2" *ngFor="let item of notifications">
+                        <span (click)="setRouter('/'+item.notification.like.user.slug)"
+                            class="cursor-pointer d-flex align-items-center" *ngIf="item.type=='like_user'">
+                            <div class="liker-profil mr-2"
+                                style="background-image: url('{{posteFileUrl+item.notification?.like?.user?.profile_picture}}')">
+                            </div> {{ t(item.type) }}
+                        </span>
+                        <span (click)="setRouter('/discuss/poste/'+item.notification.post_comment.post_id)"
+                            class="cursor-pointer d-flex align-items-center" *ngIf="item.type=='post_comment'">
+                            <div class="liker-profil mr-2"
+                                style="background-image: url('{{posteFileUrl+item.notification?.post_comment?.user?.profile_picture}}')">
+                            </div> {{ t(item.type) }}
+                        </span>
+                        <span (click)="setRouter('/discuss/poste/'+item.notification.post_comment_comment.post_id)"
+                            class="cursor-pointer d-flex align-items-center" *ngIf="item.type=='post_comment_comment'">
+                            <div class="liker-profil mr-2"
+                                style="background-image: url('{{posteFileUrl+item.notification?.post_comment_comment?.user?.profile_picture}}')">
+                            </div> {{ t(item.type) }}
+                        </span>
+                        <span (click)="setRouter('/discuss/poste/'+item.notification.post_like.post_id)"
+                            class="cursor-pointer d-flex align-items-center" *ngIf="item.type=='post_like'">
+                            <div class="liker-profil mr-2"
+                                style="background-image: url('{{posteFileUrl+item.notification?.post_like?.user?.profile_picture}}')">
+                            </div> {{ t(item.type) }}
+                        </span>
+                        <span (click)="setRouter('/'+item.notification.follow.user.slug)"
+                            class="cursor-pointer d-flex align-items-center" *ngIf="item.type=='follow_user'">
+                            <div class="liker-profil mr-2"
+                                style="background-image: url('{{posteFileUrl+item.notification?.follow?.user?.profile_picture}}')">
+                            </div> {{ t(item.type) }}
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
+        <div class="p-4 secondary-light-background-color mt-3 " *ngIf="nbrSubscriptions">
+            <a routerLink="/discuss/mes-abonnements">
+                <p class="color-primary size-16"> {{
+                    t('MY_SUBSCRIPTIONS') }} <span class="color-secondary">
+                        ({{nbrSubscriptions.subscriptions}}) </span>
+                </p>
+            </a>
+            <a routerLink="/discuss/mes-abonnes">
+                <p class="color-primary size-16 mb-0"> {{
+                    t('MY_SUBSCRIBERS') }} <span class="color-secondary">({{nbrSubscriptions.subscribers}})
+                    </span> </p>
+            </a>
+        </div>
+    </div>
+</ng-container>

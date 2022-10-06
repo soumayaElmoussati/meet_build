@@ -1,0 +1,220 @@
+
+
+.field_btn{
+    width: 67px !important;
+    width: auto;
+    position: absolute;
+    top: 2px;
+    right: 17px;
+    height: 35px;
+    border-radius: 6px;
+    &.promo{
+        width: 120px !important;
+    }
+}
+    .meet_inscription {
+        background: url('./../../../assets/img/auth_background.jpg') no-repeat fixed;
+        width: 100% !important;
+        height: 100% !important;
+        overflow-y: auto;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        .page_content {
+            background-color: #fff;
+            box-shadow: 0px 4px 18px 6px rgba(193, 216, 228, 0.25);
+            border-radius: 27px;
+            // margin-top: 248px !important;
+            max-width: 1111px;
+        }
+        .mat-toolbar-single-row {
+            background: none;
+        }
+        .page_content {
+            .stepper_header {
+                padding-left: 0;
+                li {
+                    display: flex;
+                    align-items: center;
+                    &:not(:last-child) {
+                        margin-right: 20px;
+                    }
+                    p {
+                        font-size: 12px;
+                        margin-bottom: 0;
+                        margin-right: 8px;
+                    }
+                    .number {
+                        width: 38px;
+                        height: 38px;
+                        background: #FFFFFF;
+                        box-shadow: 2px 4px 11px 7px #F2F5FA;
+                        color: #C1D8E4;
+                        display: block;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 50%;
+                        margin-right: 12px;
+                    }
+                    .statut {
+                        width: 55px;
+                        height: 8px;
+                        border-radius: 4px;
+                        background-color: rgba(17, 59, 58, 0.5);
+                    }
+                    &.active {
+                        p {
+                            color: var(--primary_color);
+                        }
+                        .number {
+                            background-color: var(--primary_color);
+                            color: #fff;
+                        }
+                    }
+                    &.checked {
+                        p {
+                            color: var(--primary_color);
+                        }
+                        .number {
+                            background-color: var(--primary_color);
+                            color: #fff;
+                        }
+                        .statut {
+                            background-color: var(--primary_color);
+                        }
+                    }
+                }
+            }
+        }
+        .information {
+            color: #C1D8E4;
+        }
+        .help {
+            padding-top: 10px;
+            color: #C4C4C4;
+        }
+        .step-3 {
+            ul.selected_competence {
+                list-style: none;
+                li {
+                    display: inline-block;
+                    background-color:rgba(243, 153, 8, 0.35);
+                    border: 1px solid rgba(243, 153, 8, 0.35);
+                    border-radius: 1px;
+                    font-size: 12px;
+                    padding: 3px 20px;
+                    color: #113B3A;
+                    &.selected {
+                        border-color: #113B3A;
+                    }
+                }
+                &.selected_sup_competence{
+                    li{
+                        background: rgba(243, 153, 8, 0.15);
+                        border-width: 0;
+                        &.new{
+                            background: rgba(87, 122, 160, 0.5);
+                        }
+                    }
+                    
+                }
+            }
+            ul.more-skills-option{
+                border: 1px solid rgba(119, 132, 157, 0.27);
+                border-radius: 12px;
+                li{
+                    padding: 5px;
+                    &:not(:last-child){
+                        border-bottom: 0.5px solid #607D8B;
+                    }
+                }
+            }
+        }
+        .step-4 {
+            .redirextion-message {
+                color: #113B3A;
+            }
+            .perso-data {
+                color: var(--primary_color);
+            }
+            .echec {
+                color: #E10000;
+                ;
+            }
+        }
+    }
+
+    h3{
+        font-size: 14px;
+    }
+    .selected_competence{
+        li{
+            font-size: 12px;
+        }
+    }
+
+
+::ng-deep .mat-slide-toggle .mat-slide-toggle-thumb {
+        background-color: #E10000;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb{
+    background-color: #699F00;
+}
+
+.promo_code_message{
+    p{
+        border: 1px solid var(--primary_color);
+        color: var(--primary_color);
+        background-color: #FDF0DA;
+        padding: 6px 12px;
+        border-radius: 10px;
+        padding-left: 35px;
+        background-image: url(./../../../assets/img/vs_party.svg);
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: 25px;
+        background-position-x: 6px;
+    }
+}
+
+.code_promo_not_valid{
+    p{
+        border: 1px solid #E10000;
+        color:  #E10000;
+        background-color: #fdeded;
+        padding: 6px 12px;
+        border-radius: 10px;
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: 25px;
+        background-position-x: 6px;
+    }
+}
+.error p {
+    font-size: 11px;
+    position: absolute;
+}
+
+@media only screen and (max-width: 600px) {
+    .logo{
+        width: 150px;
+    }
+    .meet_inscription {
+        .page_content {
+            .stepper_header {
+                li {
+                    display: none;
+                    &.active {
+                        display: flex;
+                    }
+                }
+            }
+        } 
+    }
+}
+
+
+

@@ -1,0 +1,48 @@
+<ng-container *transloco="let t">
+    <div class="row white-background-color custom-padding border-raduis-15 " *ngIf="projects" >
+        <div class="col-12" *ngFor="let project of projects.data ; let first = first">
+            <hr *ngIf="!first">
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                    <h3 class="mb-0">{{ project.name }}</h3>
+                </li>
+                <li class="list-inline-item">
+                    <p class="place color-primary mb-0"> {{ t('PLACE:') }} {{project.city}}, {{ t('FROM') }}
+                        {{this.helpersS.formatDate(project.startdate)}} -
+                        {{this.helpersS.formatDate(project.enddate)}} </p>
+                </li>
+                <li class="list-inline-item">
+                    <p class="date mb-0"> {{ this.helpersS.postedAt(project.filed_ago) }} </p>
+                </li>
+            </ul>
+            <span class="badge badge-project badge-{{project.status.name}}">{{
+                t('PROJECT_STATUS.'+project.status.name) }} </span>
+            <p class="pt-1 mb-0">{{ project.description }}</p>
+        </div>
+        <div class="col-12 pt-3 text-center" *ngIf="projects">
+            <ng-container *ngIf="projects.total > 3">
+                <a class="secondary" [ngClass]="{'disabled': currentPage == 1}"
+                    (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+                <a class="secondary" [ngClass]="{'disabled': currentPage == projects.last_page}"
+                    (click)="currentPage!=projects.last_page ? navigateTo(currentPage+1) : null">
+                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </ng-container>
+        </div>
+
+        
+
+
+
+    </div>
+</ng-container>

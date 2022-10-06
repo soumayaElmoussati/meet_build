@@ -1,0 +1,70 @@
+<div class="container">
+        <mat-toolbar *transloco="let t" class="px-0">
+          <div fxShow="true" fxHide.gt-sm="true">
+            <a class="mr-4" (click)="onPhoneMenuTogel()">
+              <svg width="27" height="20" viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="stroke" d="M2.45508 2H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="stroke" d="M2.45508 10H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="stroke" d="M2.45508 18H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>  
+            </a>
+          </div>
+          <a mat-button class="companyName mr-4" routerLink="/projets">
+            <img src="./../../../assets/img/logo/meet&build.svg" alt="" class="img-fuild">
+          </a>
+          <div fxShow="true" fxHide.lt-md="true" class="menu">
+            <a mat-button routerLink="/projets" [ngClass]="{'active': activeLink=='projets'}"  > {{ t('PROJECTS') }} </a>
+            <a mat-button routerLink="/prestataires" [ngClass]="{'active': activeLink=='prestataires'}"> {{ t('PRESTATAIRES') }} </a>
+            <a mat-button [matMenuTriggerFor]="jobboard" [ngClass]="{'active': activeLink=='jobboard'}" > {{ t('JOBBOARD') }} </a>
+            <mat-menu #jobboard="matMenu">
+              <button mat-menu-item routerLink="/jobs">{{ t('ALL_ADS') }}</button>
+              <button mat-menu-item routerLink="/jobs/list/mes-annonces">{{ t('MY_ADS') }}</button>
+              <button mat-menu-item (click)="createAd()" >{{ t('CREAT_AN_AD') }}</button>
+            </mat-menu>
+            <a mat-button routerLink="/discuss"  [ngClass]="{'active': activeLink=='disscution'}" > {{ t('BUILD_AND_DISCUSS') }} <img
+                src="./../../../assets/img/build_discuss.svg" class="pl-1 mb-3" alt=""> </a>
+          </div>
+          <span class="example-spacer"></span>
+          <div fxShow="true">
+            <div class="d-flex align-items-center">
+              <button class="btn secondary mr-2" (click)="createJob()"  fxHide.lt-md="true"> {{ t('CREAT_JOB') }} </button>
+              <button class="btn primary mr-3" (click)="createProject()"  fxHide.lt-md="true"> {{ t('CREAT_PROJECT') }} </button>
+              <a mat-button [matMenuTriggerFor]="projectMenu" class="light mr-3 notification">
+                <svg width="29" height="26" viewBox="0 0 29 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="fill"
+                    d="M5.777 25.1586C5.57958 25.3303 5.33728 25.4421 5.07855 25.4808C4.81982 25.5196 4.55539 25.4838 4.31632 25.3775C4.07725 25.2713 3.87345 25.099 3.72886 24.881C3.58426 24.663 3.50487 24.4082 3.5 24.1466V21.0625C2.77065 21.0625 2.07118 20.7728 1.55546 20.257C1.03973 19.7413 0.75 19.0418 0.75 18.3125V8.6875C0.75 7.95815 1.03973 7.25868 1.55546 6.74296C2.07118 6.22723 2.77065 5.9375 3.5 5.9375H18.625C19.3543 5.9375 20.0538 6.22723 20.5695 6.74296C21.0853 7.25868 21.375 7.95815 21.375 8.6875V18.3125C21.375 19.0418 21.0853 19.7413 20.5695 20.257C20.0538 20.7728 19.3543 21.0625 18.625 21.0625H11.7541L5.777 25.1586ZM6.9375 20.9057C7.0628 20.905 7.18584 20.8724 7.295 20.8109L10.5331 18.5586C10.7636 18.3984 11.0376 18.3125 11.3183 18.3125H17.25C17.6147 18.3125 17.9644 18.1676 18.2223 17.9098C18.4801 17.6519 18.625 17.3022 18.625 16.9375V10.0625C18.625 9.69783 18.4801 9.34809 18.2223 9.09023C17.9644 8.83237 17.6147 8.6875 17.25 8.6875H4.875C4.51033 8.6875 4.16059 8.83237 3.90273 9.09023C3.64487 9.34809 3.5 9.69783 3.5 10.0625V16.9375C3.5 17.68 4.08988 18.2877 4.875 18.3125C5.43875 18.3345 5.84713 18.4266 6.0355 18.6232C6.2115 18.8075 6.22113 19.1182 6.25 19.7095C6.25413 19.7961 6.25413 19.9529 6.25 20.2182C6.25 20.4006 6.32243 20.5755 6.45136 20.7044C6.5803 20.8333 6.75516 20.9057 6.9375 20.9057ZM22.75 14.2095C22.7456 14.3791 22.7456 14.5487 22.75 14.7182V14.2095C22.7775 13.6182 22.7885 13.3075 22.9645 13.1232C23.1529 12.9266 23.5613 12.8345 24.125 12.8125C24.9101 12.7877 25.5 12.18 25.5 11.4375V4.5625C25.5 4.19783 25.3551 3.84809 25.0973 3.59023C24.8394 3.33237 24.4897 3.1875 24.125 3.1875H11.75C11.3853 3.1875 11.0356 3.33237 10.7777 3.59023C10.5199 3.84809 10.375 4.19783 10.375 4.5625H7.625V3.1875C7.625 2.45815 7.91473 1.75868 8.43046 1.24296C8.94618 0.727231 9.64566 0.4375 10.375 0.4375H25.5C26.2293 0.4375 26.9288 0.727231 27.4445 1.24296C27.9603 1.75868 28.25 2.45815 28.25 3.1875V12.8125C28.25 13.5418 27.9603 14.2413 27.4445 14.757C26.9288 15.2728 26.2293 15.5625 25.5 15.5625V18.6466C25.4951 18.9082 25.4157 19.163 25.2711 19.381C25.1266 19.599 24.9228 19.7713 24.6837 19.8775C24.4446 19.9838 24.1802 20.0196 23.9215 19.9809C23.6627 19.9421 23.4204 19.8303 23.223 19.6586L22.75 19.3341V14.2109V14.2095Z"
+                    fill="#607D8B" />
+                </svg>
+                <div class="unread_message " *ngIf="notifications">
+                  {{ notifications }}
+                </div>
+              </a>
+              <mat-menu #projectMenu="matMenu">
+                <button mat-menu-item routerLink="/projets/mes-projets">{{ t('MY_PROJECTS') }}
+                  <div class="unread_message ml-2" *ngIf="notificationsProjet"> {{notificationsProjet}} </div>
+                </button>
+                <button mat-menu-item routerLink="/mes-postulations/conversations">{{ t('MY_APPLICATIONS') }}
+                  <div class="unread_message ml-2" *ngIf="notificationsPostulation"> {{notificationsPostulation}} </div>
+                </button>
+              </mat-menu>
+              <div *ngIf="profileId && profile && profile.profile_picture"
+                class="profile_picture background-center-cover cursor-pointer mr-2"
+                [ngStyle]="{'background-image': 'url(' +  profileImgUrl + profile.profile_picture + ')'}"
+                (click)="setRouter('/me')"></div>
+              <a class="light" (click)="onOpenMenu()">
+                <svg width="27" height="20" viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path class="stroke" d="M2.45508 2H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path class="stroke" d="M2.45508 10H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path class="stroke" d="M2.45508 18H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                
+              </a>
+            </div>
+          </div>
+        </mat-toolbar>
+  
+        
+  
+      </div>
+      
+  
+  <!-- https://stackblitz.com/edit/angular-v6xwte?file=src%2Fapp%2Fapp.component.html -->

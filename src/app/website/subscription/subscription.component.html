@@ -1,0 +1,24 @@
+<div *transloco="let t">
+    <app-navigation></app-navigation>
+    <mat-sidenav-container fxFlexFill class="example-container">
+        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+            <div fxLayout="column">
+                <a mat-button routerLink="/about-us">About us</a>
+                <a mat-button routerLink="/prices">Prices</a>
+                <a mat-button routerLink="/start-page">Start page</a>
+                <a mat-button routerLink="/offer">Offer</a>
+                <a mat-button routerLink="/contact">Contact</a>
+            </div>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlexFill>
+
+            <app-plans></app-plans>
+            <app-evolution></app-evolution>
+            <app-links></app-links>
+
+            <app-footer></app-footer>
+            <app-help-button></app-help-button>
+
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

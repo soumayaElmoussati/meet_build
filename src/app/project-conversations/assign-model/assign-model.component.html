@@ -1,0 +1,40 @@
+<ng-container *transloco="let t">
+    <div mat-dialog-title>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h5 class="dialog_title" [innerHTML]="t('ASSIGN_PROJECT_DIALOG.TITLE')"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm-12 text-center d-flex align-items-center flex-column">
+                    <p [innerHTML]="t('ASSIGN_PROJECT_DIALOG.FIRST_PARAGRAPHE')"></p>
+                    <div class="profile_picture_assign background-center-cover py-4 mb-2" [ngStyle]="{'background-image': 'url(' +  profileImgUrl + data.profile_picture + ')'}"></div>
+                    <p class="mb-1"> {{data.company_name}} </p>
+                    <p> {{data.vat}} </p>
+                    <p class="pt-3" [innerHTML]="t('ASSIGN_PROJECT_DIALOG.SECONDE_PARAGRAPHE')"></p>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="center">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-12 d-flex align-items-center justify-content-center">
+                    <button class="btn primary mt-3 px-4 mr-3" (click)="onConfirm()" >
+                        {{ t("ASSIGN_PROJECT_DIALOG.CONFIRM_BTN") }}
+                    </button>
+                    <button class="btn secondary mt-3 px-4" (click)="onCancel()">
+                        {{ t("ASSIGN_PROJECT_DIALOG.CANCEL_BTN") }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-actions>
+
+
+</ng-container>

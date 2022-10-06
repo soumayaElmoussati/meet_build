@@ -1,0 +1,28 @@
+<mat-sidenav-container class="example-container">
+
+    <mat-sidenav #sidemenu mode="over" [(opened)]="opened" position="end" class="right-menu">
+        <app-right-menu></app-right-menu>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-nav (menuStatusChanged)="menuStatusChange($event)"></app-nav>
+        <mat-sidenav-container fxFlexFill class="example-container">
+
+            <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+                <div fxLayout="column" *ngIf="false">
+                    <a mat-button routerLink="/about-us">About us</a>
+                    <a mat-button routerLink="/prices">Prices</a>
+                    <a mat-button routerLink="/start-page">Start page</a>
+                    <a mat-button routerLink="/offer">Offer</a>
+                    <a mat-button routerLink="/contact">Contact</a>
+                </div>
+            </mat-sidenav>
+            <mat-sidenav-content fxFlexFill>
+                <div class="gray-background-color main">
+                    <router-outlet></router-outlet>    
+                </div>
+                <app-footer></app-footer>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </mat-sidenav-content>
+</mat-sidenav-container>

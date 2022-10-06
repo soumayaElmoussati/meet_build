@@ -1,0 +1,8 @@
+<div class="icon">    
+    <img src="./../../../../assets/img/website/picto_promo.svg" alt="" srcset="" class="img-fluid"  >
+</div>
+<div class="content p-5" *transloco="let t">
+    <h5 class="pt-4"> {{t('website.WE_OFFER_THE_FIRST_MONTH_OF_SUBSCRIPTION')}}  </h5>
+    <p class="px-5 mb-4" [innerHTML]="t('website.WE_OFFER_THE_FIRST_MONTH_OF_SUBSCRIPTION_DESCRIPTION', { codePromo: 'WELCOME' } )" >  </p>
+    <button class="btn secondary px-4 center" (click)="goToRegister()" > {{ t('website.I_TAKE') }} </button>
+</div>

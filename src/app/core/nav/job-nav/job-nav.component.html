@@ -1,0 +1,49 @@
+<div class="container">
+    <mat-toolbar *transloco="let t" class="px-0">
+      <div fxShow="true" fxHide.gt-sm="true">
+        <a class="mr-4" (click)="onPhoneMenuTogel()">
+          <svg width="27" height="20" viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="stroke" d="M2.45508 2H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="stroke" d="M2.45508 10H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path class="stroke" d="M2.45508 18H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>  
+        </a>
+      </div>
+      <a mat-button class="companyName mr-4" routerLink="/projets">
+        <img src="./../../../assets/img/logo/meet&build.svg" alt="" class="img-fuild">
+      </a>
+      <div fxShow="true" fxHide.lt-md="true" class="menu">
+        <a mat-button routerLink="/projets" [ngClass]="{'active': activeLink=='projets'}"  > {{ t('PROJECTS') }} </a>
+        <a mat-button routerLink="/prestataires" [ngClass]="{'active': activeLink=='prestataires'}"> {{ t('PRESTATAIRES') }} </a>
+        <a mat-button [matMenuTriggerFor]="jobboard" [ngClass]="{'active': activeLink=='jobboard'}" > {{ t('JOBBOARD') }} </a>
+        <mat-menu #jobboard="matMenu">
+          <button mat-menu-item routerLink="/jobs">{{ t('ALL_ADS') }}</button>
+          <button mat-menu-item routerLink="/jobs/list/mes-annonces">{{ t('MY_ADS') }}</button>
+          <button mat-menu-item (click)="createAd()" >{{ t('CREAT_AN_AD') }}</button>
+        </mat-menu>
+      </div>
+      <span class="example-spacer"></span>
+      <div fxShow="true">
+        <div class="d-flex align-items-center">
+          <button class="btn secondary mr-3" (click)="createJob()"  fxHide.lt-md="true"> {{ t('CREAT_JOB') }} </button>
+          <div *ngIf="profileId && profile && profile.profile_picture"
+            class="profile_picture background-center-cover cursor-pointer mr-2"
+            [ngStyle]="{'background-image': 'url(' +  profileImgUrl + profile.profile_picture + ')'}"
+            (click)="setRouter('/me')"></div>
+          <a class="light" (click)="onOpenMenu()">
+            <svg width="27" height="20" viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path class="stroke" d="M2.45508 2H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="stroke" d="M2.45508 10H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path class="stroke" d="M2.45508 18H25.0005" stroke="#607D8B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
+          </a>
+        </div>
+      </div>
+    </mat-toolbar>
+
+    
+
+  </div>
+  
+
+<!-- https://stackblitz.com/edit/angular-v6xwte?file=src%2Fapp%2Fapp.component.html -->

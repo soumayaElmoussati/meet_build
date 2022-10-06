@@ -1,0 +1,66 @@
+.profile_picture{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin: auto;
+}
+.actions{
+    border-top: 1px solid #607D8B;
+    display: flex;
+    align-items: center;
+    
+    li{
+        padding: 0 5px;
+        height: 50px;
+        width: 50%;
+        margin-right: 0 !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:first-child{
+            border-right: 1px solid #607D8B;
+        }
+    }
+}
+
+ul.follow_like{
+    li{
+        &.active{
+            a{
+                background-color: var(--primary_color);
+                color: #fff;
+                svg{
+                    path{
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+        a{
+            color: #607D8B;
+            background-color: #F1F3F5;
+            font-size: 12px;
+            padding: 6px 9px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            letter-spacing: 0.13px;
+            transition: .3s;
+            svg{
+                margin-right: 8px;
+            }
+            &:hover{
+                background-color: var(--secondary_color);
+                color: #fff;
+                transition: .3s;
+                svg{
+                    path{
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

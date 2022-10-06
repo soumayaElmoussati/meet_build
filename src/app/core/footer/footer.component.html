@@ -1,0 +1,40 @@
+<footer *transloco="let t">
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-sm-3 pr-5">
+                <img src="./../../../assets/img/logo/meet&build_footer.svg" alt="" class="img-fluid mb-4 pr-4">
+                <p [innerHTML]="t('FOOTER_PRESENTATION')"></p>
+            </div>
+            <div class="col-sm-6 py-5">
+                <h3> {{ t('PRACTICAL_LINKS') }} </h3>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <ul class="list-inline">
+                            <li> <a routerLink>{{ t('ALL_CATEGORIES') }}</a> </li>
+                            <li> <a routerLink="/conditions-generales-d-utilisation"  >{{ t('TERMS_AND_CONDITIONS') }}</a> </li>
+                            <li> <a routerLink="/politique-de-confidentialite">{{ t('LEGAL_NOTICE') }}</a> </li>
+                        </ul>   
+                    </div>
+                    <div class="col-sm-6"> 
+                        <ul class="list-inline">
+                            <li> <a routerLink="/prestataires">{{ t('PROVIDERS_BY_CATEGORY') }}</a> </li>
+                            <li> <a routerLink="/prestataires">{{ t('PRESTATAIRES_BY_CITY') }}</a> </li>
+                            <li> <a routerLink="/projets">{{ t('PROJECTS_BY_CATEGORY') }}</a> </li>
+                            <li> <a routerLink="/presse">{{ t('ABOUT_MEET_AND_BUILD') }}</a> </li>
+                            <li> <a routerLink="/assistance">{{ t('CONTACT') }}</a> </li>
+                        </ul> 
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3"> 
+            </div>
+        </div>
+        <div class="row meet-copyright">
+            <div class="col-12 text-center">
+                <h4>{{ t('RIGHTTEAM') }}, <span>{{ t('GOODWORK') }}</span> </h4>
+                <p>
+                    <a href='https://devcom-media.com' target ='_blank' >Designed and developed by <img class='pl-3' src='./../../../assets/img/devcom-media-logo.png'></a></p>
+            </div>
+        </div>
+    </div>
+</footer>

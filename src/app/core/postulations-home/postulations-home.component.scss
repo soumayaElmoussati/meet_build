@@ -1,0 +1,18 @@
+.border-right{
+    border-right: 1px solid #DADADA;
+}
+
+a.active{
+    color: var(--primary_color) !important;
+    .stroke {
+        stroke: var(--primary_color) !important;
+    }
+    .fill {
+        fill: var(--primary_color) !important;
+    }
+}
+
+
+.main{
+    min-height: 450px;
+}

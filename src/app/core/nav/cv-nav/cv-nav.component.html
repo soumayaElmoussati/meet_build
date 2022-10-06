@@ -1,0 +1,33 @@
+<div class="container">
+    <mat-toolbar *transloco="let t" class="px-0">
+        <div fxShow="true" fxHide.gt-sm="true">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+        </div>
+        <a mat-button class="companyName mr-4" routerLink="/projets">
+            <img src="./../../../assets/img/logo/meet&build.svg" alt="" class="img-fuild">
+        </a>
+        <span class="example-spacer"></span>
+        <div fxShow="true" fxHide.lt-md="true">
+            <div class="d-flex align-items-center">
+                <a routerLink="/" class="secondary mr-3 text-uppercase"> 
+                    <svg class="mr-2" width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="stroke" d="M8.125 2.16602L3.79167 6.49935L8.125 10.8327" stroke="#113B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    {{ t('BACK_TO_WEBSITE') }}
+                </a>
+                <div [matMenuTriggerFor]="jobMenu" *ngIf="profileId && profile && profile.profile_picture"
+                    class="profile_picture background-center-cover cursor-pointer mr-2"
+                    [ngStyle]="{'background-image': 'url(' +  profileImgUrl + profile.profile_picture + ')'}"></div>
+                <mat-menu #jobMenu="matMenu">
+                    <button mat-menu-item routerLink="/cv">{{ t('MY_CV') }}</button>
+                    <button mat-menu-item (click)=logout()>{{ t('SIGN_OUT') }}</button>
+                </mat-menu>
+            </div>
+        </div>
+    </mat-toolbar>
+</div>
+
+
+<!-- https://stackblitz.com/edit/angular-v6xwte?file=src%2Fapp%2Fapp.component.html -->

@@ -1,0 +1,36 @@
+.mat-toolbar{
+    font-size: 14px;
+    background: transparent !important;
+}
+
+.meet_inscription {
+    background: url('./../../../../assets/img/auth_background.jpg') no-repeat fixed;
+    width: 100% !important;
+    height: 100% !important;
+    overflow-y: auto;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.rate_title{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 0;
+    padding: 1.2rem;
+    text-align: center;
+    border-bottom: 1px solid #607D8B;
+    font-size: 16px;
+    font-weight: 600;
+    color: #113B3A;
+}
+.profile_picture{
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    border-radius: 50%;
+}
+.rate{
+    font-size: 30px;
+}

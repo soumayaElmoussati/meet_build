@@ -1,0 +1,52 @@
+<ng-container *transloco="let t">
+    <section class="gray-background-color">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row py-3">
+                        <div class="col-12 py-3">
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 col-lg-3 col-sm-12 dashboard pl-sm-0">
+                                    <app-discuss-notifications></app-discuss-notifications>
+                                </div>
+                                <div class="col-md-7 col-lg-7 col-sm-12 liste-poste">
+                                    <a routerLink="/discuss" class="mb-3 d-inline-block">
+                                        <svg class="mr-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path class="stroke" d="M2.33317 7L11.6665 7" stroke="#607D8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path class="stroke" d="M6.4165 2.91797L2.33317 7.0013L6.4165 11.0846" stroke="#607D8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        {{ t('RETURN') }}
+                                    </a>
+                                    <div class="row" >
+                                        <div class="col-sm-6 mb-3" *ngFor="let subscription of subscriptionsList" >
+                                            <div class="border-raduis-15 white-background-color d-flex p-4">
+                                                <div class="profile_picture background-center-cover" 
+                                                [ngStyle]="{'background-image': 'url(' +  profileImgUrl + subscription.picture + ')'}" ></div>
+                                                <div class="w-100">
+                                                    <h3 class="mb-0">{{ subscription.company_name }}</h3>
+                                                    <ngb-rating class="rate" [(rate)]="subscription.value" [readonly]="true" [max]=5></ngb-rating>
+                                                    <button class="btn light w-100 mt-3 py-2 h-auto" (click)="likeProfile(subscription.id)" >
+                                                        <svg class="mr-2" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path class="fill" d="M2.96699 10.5355C2.60606 11.0125 2.40625 11.5969 2.40625 12.2049C2.40625 13.1695 2.94551 14.0826 3.81348 14.5918C4.03693 14.7228 4.29134 14.7918 4.55039 14.7916L9.70234 14.7916L9.57344 17.432C9.54336 18.0701 9.76894 18.676 10.2072 19.1379C10.4223 19.3655 10.6818 19.5467 10.9697 19.6701C11.2575 19.7935 11.5677 19.8566 11.8809 19.8555C12.998 19.8555 13.9863 19.1035 14.2828 18.0271L16.1283 11.3455L18.9063 11.3455C19.2865 11.3455 19.5938 11.0383 19.5938 10.658L19.5938 2.83768C19.5938 2.4574 19.2865 2.15018 18.9063 2.15018L5.9877 2.15018C5.79004 2.15018 5.59668 2.18885 5.41836 2.26619C4.3957 2.70232 3.73613 3.70135 3.73613 4.80994C3.73613 5.08064 3.77481 5.34705 3.85215 5.60486C3.49121 6.08182 3.29141 6.66619 3.29141 7.2742C3.29141 7.5449 3.33008 7.81131 3.40742 8.06912C3.04648 8.54608 2.84668 9.13045 2.84668 9.73846C2.85098 10.0092 2.88965 10.2777 2.96699 10.5355ZM18.0469 3.69705L18.0469 9.79862L16.3066 9.79862L16.3066 3.69705L18.0469 3.69705ZM4.37422 11.281L4.84473 10.8728L4.54609 10.3271C4.44771 10.1474 4.39669 9.94553 4.39785 9.74061C4.39785 9.38611 4.55254 9.04881 4.81895 8.81678L5.28945 8.40857L4.99082 7.86287C4.89244 7.68311 4.84142 7.48127 4.84258 7.27635C4.84258 6.92186 4.99727 6.58455 5.26367 6.35252L5.73418 5.94432L5.43555 5.39861C5.33716 5.21885 5.28615 5.01701 5.28731 4.81209C5.28731 4.33084 5.5709 3.89686 6.00918 3.6992L14.9316 3.6992L14.9316 9.86737L12.7939 17.6125C12.7388 17.811 12.6205 17.9861 12.4569 18.1114C12.2933 18.2366 12.0933 18.3051 11.8873 18.3064C11.724 18.3064 11.5629 18.2592 11.434 18.1625C11.2213 18.0035 11.1074 17.7629 11.1203 17.5072L11.3266 13.2447L4.57188 13.2447C4.18945 13.0105 3.95313 12.6152 3.95313 12.2049C3.95313 11.8504 4.10781 11.5152 4.37422 11.281Z" fill="#607D8B"/>
+                                                        </svg>
+                                                         {{ t('I_NO_LOUNGER_LOVE') }} </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 pt-3">
+                                            <button class="btn primary center px-4" routerLink="/prestataires"> {{ t('TO_THE_DIRECTORY')}} </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-lg-2 col-sm-12">
+                                    <app-suggestions-list></app-suggestions-list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-container>
+ 

@@ -1,0 +1,31 @@
+<section  *transloco="let t">
+    <div class="container" *ngIf="profile">
+        <div class="row justify-content-end">
+            <div class="col-sm-9 d-flex align-items-center justify-content-between">
+                <ul class="profile_nav list-inline mb-0">
+                    <li class="list-inline-item" [ngClass]="{'active': activeLink=='profile' }"> <a routerLink="/{{profile.slug}}"  (click)="activeLink='profile'" > {{ t('ABOUT') }} </a> </li>
+                    <li class="list-inline-item" [ngClass]="{'active': activeLink=='projets' }"> <a routerLink="/{{profile.slug}}/projets" (click)="activeLink='projets'"> {{ t('CREATED_PROJECTS') }} </a> </li>
+                    <li class="list-inline-item" [ngClass]="{'active': activeLink=='jobs' }"> <a routerLink="/{{profile.slug}}/jobs" (click)="activeLink='jobs'"> {{ t('CREATED_JOBS') }} </a> </li>
+                    <li class="list-inline-item" [ngClass]="{'active': activeLink=='agenda' }"> <a routerLink="/{{profile.slug}}/agenda" (click)="activeLink='agenda'"> {{ t('CALENDAR') }} </a> </li>
+                    <li class="list-inline-item" [ngClass]="{'active': activeLink=='evaluation' }"> <a routerLink="/{{profile.slug}}/evaluations" (click)="activeLink='evaluation'"> {{ t('EVALUATIONS') }} </a> </li>
+                </ul>
+                <ul class="list-inline follow_like mb-0">
+                    <li class="list-inline-item" [ngClass]="{'active' : profile.follow}"> <a (click)="followProfile()"> 
+                        <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 0H2C0.897 0 0 0.897 0 2V20L8 15.428L16 20V2C16 0.897 15.103 0 14 0ZM14 16.553L8 13.125L2 16.553V2H14V16.553Z" fill="#607D8B"/>
+                        </svg>
+                        <ng-container *ngIf="profile.follow">{{ t('ALREADY_FAVORED') }}</ng-container>
+                        <ng-container *ngIf="!profile.follow">{{ t('FAVORITES') }}</ng-container>
+                         </a> </li>
+                    <li class="list-inline-item" [ngClass]="{'active' : profile.like}" > <a (click)="likeProfile()">
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.033 9.46594C17.3939 8.98898 17.5938 8.40461 17.5938 7.7966C17.5938 6.83195 17.0545 5.91886 16.1865 5.40968C15.9631 5.27862 15.7087 5.20964 15.4496 5.20988H10.2977L10.4266 2.56945C10.4566 1.93136 10.2311 1.3255 9.79277 0.86359C9.57768 0.635916 9.31819 0.45477 9.03033 0.331347C8.74246 0.207925 8.43235 0.144847 8.11914 0.146012C7.00195 0.146012 6.01367 0.897965 5.71719 1.97433L3.87168 8.65597H1.09375C0.713477 8.65597 0.40625 8.9632 0.40625 9.34347V17.1638C0.40625 17.5441 0.713477 17.8513 1.09375 17.8513H14.0123C14.21 17.8513 14.4033 17.8126 14.5816 17.7353C15.6043 17.2991 16.2639 16.3001 16.2639 15.1915C16.2639 14.9208 16.2252 14.6544 16.1479 14.3966C16.5088 13.9196 16.7086 13.3353 16.7086 12.7273C16.7086 12.4566 16.6699 12.1902 16.5926 11.9323C16.9535 11.4554 17.1533 10.871 17.1533 10.263C17.149 9.9923 17.1104 9.72375 17.033 9.46594ZM1.95312 16.3044V10.2028H3.69336V16.3044H1.95312ZM15.6258 8.72043L15.1553 9.12863L15.4539 9.67433C15.5523 9.85409 15.6033 10.0559 15.6021 10.2609C15.6021 10.6153 15.4475 10.9527 15.1811 11.1847L14.7105 11.5929L15.0092 12.1386C15.1076 12.3184 15.1586 12.5202 15.1574 12.7251C15.1574 13.0796 15.0027 13.4169 14.7363 13.6489L14.2658 14.0571L14.5645 14.6028C14.6628 14.7826 14.7139 14.9845 14.7127 15.1894C14.7127 15.6706 14.4291 16.1046 13.9908 16.3023H5.06836V10.1341L7.20605 2.38898C7.26118 2.19047 7.37951 2.01533 7.54311 1.89011C7.70671 1.76488 7.90667 1.6964 8.1127 1.69504C8.27598 1.69504 8.43711 1.7423 8.56602 1.83898C8.77871 1.99797 8.89258 2.23859 8.87969 2.49425L8.67344 6.75676H15.4281C15.8105 6.99094 16.0469 7.38625 16.0469 7.7966C16.0469 8.15109 15.8922 8.48625 15.6258 8.72043Z" fill="#607D8B"/>
+                        </svg>        
+                        <ng-container *ngIf="profile.like">{{ t('ALREADY_LIKED') }}</ng-container>
+                        <ng-container *ngIf="!profile.like">{{ t('LIKE') }}</ng-container>
+                     </a> </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

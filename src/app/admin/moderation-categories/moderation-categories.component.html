@@ -1,0 +1,80 @@
+<ng-container *transloco="let t">
+    <section class="">
+      <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-4 mb-3">
+                <button class="btn primary w-100" (click)="addCategory('category', null, 'add')" >
+                    {{ t('admin.ADD_A_MOTHER_CATEGORY') }}
+                </button>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <button class="btn primary w-100"
+                (click)="addCategory('subcategory', null, 'add')"
+                *ngIf="selectedCategory">
+                    {{ t('admin.ADD_A_SUB_CATEGORY') }}
+                </button>
+            </div>
+            <div class="col-sm-4 mb-3">
+                <button class="btn primary w-100"
+                (click)="addCategory('skill', null, 'add')"
+                *ngIf="selectedSubCategory">
+                    {{ t('admin.ADD_A_SKILL') }}
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="categories_list">
+                    <div class="category"*ngFor="let category of categoriesList; let index = index" (click)="getSubCategories(category.id)" >
+                        <p [ngClass]="{'active' : selectedCategory == category.id }"  >
+                            {{ category.name }}
+                            <a class="light" (click)="addCategory('category', category, index, 'edit')">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="fill" d="M16.6764 0.101562C16.2538 0.102586 15.8356 0.187267 15.446 0.350721C15.0563 0.514174 14.7029 0.753165 14.4061 1.05391L2.05215 13.407L2.00371 13.6516L1.14902 17.9484L0.905273 19.0953L2.05293 18.8516L6.3498 17.9969L6.59355 17.9477L18.9475 5.59453C19.249 5.29822 19.4885 4.94482 19.652 4.55496C19.8155 4.1651 19.8996 3.74658 19.8996 3.32383C19.8996 2.90108 19.8155 2.48256 19.652 2.0927C19.4885 1.70283 19.249 1.34944 18.9475 1.05312C18.6505 0.752432 18.2969 0.513531 17.9071 0.35021C17.5173 0.186888 17.099 0.10238 16.6764 0.101562ZM16.6764 1.59062C17.0701 1.59062 17.467 1.77031 17.8482 2.15234C18.6084 2.91172 18.6084 3.73594 17.8482 4.49609L17.2873 5.03281L14.967 2.71328L15.5045 2.15234C15.8865 1.77031 16.2826 1.59062 16.6764 1.59062ZM13.8693 3.8125L16.1881 6.13203L6.74043 15.5789C6.23039 14.581 5.41838 13.7695 4.42012 13.2602L13.8693 3.8125ZM3.42012 14.5305C3.88249 14.7165 4.3025 14.994 4.65491 15.3465C5.00733 15.6989 5.28488 16.1189 5.4709 16.5812L2.90684 17.0938L3.42012 14.5305Z" fill="#607D8B"/>
+                                </svg>                                    
+                            </a>
+                        </p>
+                    </div>
+                </div>  
+            </div>
+            <div class="col-sm-4">
+                <div class="categories_list">
+                    <p class="select_category" *ngIf="!selectedCategory">
+                        {{ t('admin.PLEASE_SELECT_A_CATEGORY') }}
+                    </p>
+                    <div class="category"  *ngFor="let category of subCategoriesList; let index = index" (click)="getcompetences(category.id)">
+                        <p [ngClass]="{'active' : selectedSubCategory == category.id }">
+                            {{ category.name }}
+                            <a class="light" (click)="addCategory('subcategory', category, index, 'edit')">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="fill" d="M16.6764 0.101562C16.2538 0.102586 15.8356 0.187267 15.446 0.350721C15.0563 0.514174 14.7029 0.753165 14.4061 1.05391L2.05215 13.407L2.00371 13.6516L1.14902 17.9484L0.905273 19.0953L2.05293 18.8516L6.3498 17.9969L6.59355 17.9477L18.9475 5.59453C19.249 5.29822 19.4885 4.94482 19.652 4.55496C19.8155 4.1651 19.8996 3.74658 19.8996 3.32383C19.8996 2.90108 19.8155 2.48256 19.652 2.0927C19.4885 1.70283 19.249 1.34944 18.9475 1.05312C18.6505 0.752432 18.2969 0.513531 17.9071 0.35021C17.5173 0.186888 17.099 0.10238 16.6764 0.101562ZM16.6764 1.59062C17.0701 1.59062 17.467 1.77031 17.8482 2.15234C18.6084 2.91172 18.6084 3.73594 17.8482 4.49609L17.2873 5.03281L14.967 2.71328L15.5045 2.15234C15.8865 1.77031 16.2826 1.59062 16.6764 1.59062ZM13.8693 3.8125L16.1881 6.13203L6.74043 15.5789C6.23039 14.581 5.41838 13.7695 4.42012 13.2602L13.8693 3.8125ZM3.42012 14.5305C3.88249 14.7165 4.3025 14.994 4.65491 15.3465C5.00733 15.6989 5.28488 16.1189 5.4709 16.5812L2.90684 17.0938L3.42012 14.5305Z" fill="#607D8B"/>
+                                </svg>                                    
+                            </a>
+                        </p>
+                    </div>
+                </div>  
+            </div>
+            <div class="col-sm-4">
+                <div class="categories_list">
+                    <p class="select_category" *ngIf="!selectedCategory">
+                        {{ t('admin.PLEASE_SELECT_A_CATEGORY') }}
+                    </p>
+                    <p class="select_category"  *ngIf="selectedCategory && !selectedSubCategory">
+                        {{ t('admin.PLEASE_SELECT_A_SUBCATEGORY') }}
+                    </p>
+                    <div class="category" *ngFor="let category of competencesList; let index = index">
+                        <p>
+                            {{ category.name }}
+                            <a class="light" (click)="addCategory('skill', category, index, 'edit')">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="fill" d="M16.6764 0.101562C16.2538 0.102586 15.8356 0.187267 15.446 0.350721C15.0563 0.514174 14.7029 0.753165 14.4061 1.05391L2.05215 13.407L2.00371 13.6516L1.14902 17.9484L0.905273 19.0953L2.05293 18.8516L6.3498 17.9969L6.59355 17.9477L18.9475 5.59453C19.249 5.29822 19.4885 4.94482 19.652 4.55496C19.8155 4.1651 19.8996 3.74658 19.8996 3.32383C19.8996 2.90108 19.8155 2.48256 19.652 2.0927C19.4885 1.70283 19.249 1.34944 18.9475 1.05312C18.6505 0.752432 18.2969 0.513531 17.9071 0.35021C17.5173 0.186888 17.099 0.10238 16.6764 0.101562ZM16.6764 1.59062C17.0701 1.59062 17.467 1.77031 17.8482 2.15234C18.6084 2.91172 18.6084 3.73594 17.8482 4.49609L17.2873 5.03281L14.967 2.71328L15.5045 2.15234C15.8865 1.77031 16.2826 1.59062 16.6764 1.59062ZM13.8693 3.8125L16.1881 6.13203L6.74043 15.5789C6.23039 14.581 5.41838 13.7695 4.42012 13.2602L13.8693 3.8125ZM3.42012 14.5305C3.88249 14.7165 4.3025 14.994 4.65491 15.3465C5.00733 15.6989 5.28488 16.1189 5.4709 16.5812L2.90684 17.0938L3.42012 14.5305Z" fill="#607D8B"/>
+                                </svg>                                    
+                            </a>
+                        </p>
+                    </div>
+                </div>  
+            </div>
+        </div>
+      </div>
+    </section>
+</ng-container>

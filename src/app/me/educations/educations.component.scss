@@ -1,0 +1,59 @@
+table{
+    font-size: 13px;
+    tr{
+        td{
+            height: 85px;
+        }
+        .position{
+            width: 35px;
+        }
+        .period{
+            width: 110px;
+        }
+        .establishment{
+            
+        }
+        .description{
+            
+        }
+        .location{
+            width: 130px;
+        }
+        .actions{
+            width: 90px;
+            text-align: right;
+        }
+        &:not(:last-child){
+            border-bottom: 1px solid #DADADA;
+        }
+    }
+}
+
+.example-month-picker .mat-calendar-period-button {
+    pointer-events: none;
+  }
+  
+  .example-month-picker .mat-calendar-arrow {
+    display: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    table{
+        font-size: 12px;
+        tr{
+            td{
+                min-height: 100px;
+            }
+            .position{
+                width: 12px;
+            }
+            .action{
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 6px
+            }
+        }
+    }
+    
+  }

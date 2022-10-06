@@ -1,0 +1,33 @@
+.profile_picture{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 20px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+ul{
+    padding: 0px 15px;
+    li{
+        margin-bottom: 5px;
+        a{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 5px 5px;
+            margin-right: 10px;
+            div{
+                width: 35px;
+                text-align: center;
+                svg{
+                    margin-right: 8px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,50 @@
+<ng-container *ngIf="favoriteProfiles">
+<div class="row py-4" *ngIf="favoriteProfiles.data.length">
+    <div class="col-6 col-sm-3 cursor-pointer my-3" *ngFor="let favorite of favoriteProfiles.data">
+        <div class="white-background-color p-3 border-raduis-15 d-sm-flex align-items-center flex-column flex-sm-row">
+            <div class="profile_image background-center-cover" style="background-image: url('{{ favorite.picture ? this.profileImgUrl + favorite.picture : noPicture }}');"></div>
+            <div class="text-center text-sm-left">
+                <a class="mb-0 secondary d-block" routerLink="/{{ favorite.slug }}"> {{ favorite.company_name }} </a>
+                <ngb-rating class="rate" [(rate)]="favorite.value" [readonly]="true" [max]=5></ngb-rating>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 text-center"  *transloco="let t">
+        <button class="btn primary px-4 center" (click)="setRouter('/prestataires')" >  {{ t('TO_THE_DIRECTORY') }} </button>
+    </div>
+    <div class="col-12 text-center pt-4" *ngIf="favoriteProfiles.total > perPage">
+            <a class="secondary" [ngClass]="{'disabled': currentPage == 1}"
+                (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+            <a class="secondary" [ngClass]="{'disabled': currentPage == favoriteProfiles.last_page}"
+                (click)="currentPage!=favoriteProfiles.last_page ? navigateTo(currentPage+1) : null">
+                <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+    </div>
+</div>
+</ng-container>
+
+
+<ng-container *ngIf="favoriteProfiles">
+    <div class="row py-4"  *ngIf="favoriteProfiles.data && !favoriteProfiles.data.length">
+        <div class="col-12 text-center p-5 white-background-color p-3 border-raduis-15 text-center ">
+            <div class="row justify-content-center" *transloco="let t">
+                <div class="col-sm-5 py-5 my-5 px-5 text-center">
+                    <img src="./../../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                    <p [innerHTML]="t('NO_FAVORITE_PROFILES_ON_PRORILE')" class="pt-4 mb-4"></p>
+                    <button class="btn primary px-4 center" (click)="setRouter('/prestataires')" >  {{ t('TO_THE_DIRECTORY') }} </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ng-container>

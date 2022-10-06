@@ -1,0 +1,64 @@
+<ng-container  *ngIf="profile">
+    <div class="row white-background-color custom-padding border-raduis-15" *transloco="let t">
+        <div class="col-12">
+            <ng-container *ngIf="profile.presentation">
+                <h3>{{ t('PRESENTATION') }}</h3>
+                <p> {{ profile.presentation }} </p>
+            </ng-container>
+            <ng-container *ngIf="profile.competenceUser">
+                <h3>{{ t('SKILLS') }}</h3>
+                <ul class="skills_list list-inline" >
+                    <li class="list-inline-item" *ngFor="let item of profile.competenceUser.principalCompetences" > {{ item.nom }} </li>
+                    <ng-container *ngFor="let item of profile.competenceUser.additionalCompetences">
+                        <li class="list-inline-item additionalCompetences"
+                        *ngFor="let compt of item.competences"
+                        [ngClass]="{'d-none' : !compt.selected }" > {{ compt.name }} </li>
+                    </ng-container>
+                </ul>
+            </ng-container>
+        </div>
+
+        <div class="col-sm-8">
+            <div class="row">
+                <div class="col-sm-6" *ngIf="profile.vat">
+                    <h3> {{ t('VAT_NUMBER') }} </h3>
+                    <p> {{ profile.vat }} </p>
+                </div>
+                <div class="col-sm-6" *ngIf="profile.experience_years">
+                    <h3> {{ t('YEARS_OF_EXPERIENCES') }} </h3>
+                    <p> {{ profile.experience_years }} </p>
+                </div>
+                <div class="col-sm-6" *ngIf="profile.company_address">
+                    <h3> {{ t('HEAD_OFFICE') }} </h3>
+                    <p> {{ profile.company_address }} </p>
+                </div>
+                <div class="col-sm-6" *ngIf="profile.tel">
+                    <h3> {{ t('PHONE_NUMBER') }} </h3>
+                    <a href="mailto:{{ profile.tel }}">{{ profile.tel }}</a>
+                </div>
+                <div class="col-sm-6" *ngIf="profile.contact_email">
+                    <h3> {{ t('ADDRESS_MAIL') }} </h3>
+                    <a href="mailto:{{ profile.contact_email }}">{{ profile.contact_email }}</a>
+                </div>
+                <div class="col-sm-6" *ngIf="profile.website">
+                    <h3> {{ t('WEB_SITE') }} </h3>
+                    <p> {{ profile.website }} </p>
+                </div>
+    
+     
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="profile.educationalBackgrounds">
+        <div class="row white-background-color custom-padding border-raduis-15 mt-3" *transloco="let t">
+            <div class="col-12">
+                <h3>{{ t('TRAINING') }}</h3>
+                <ng-container *ngFor="let item of profile.educationalBackgrounds" class="mb-3">
+                    <p class="mb-0"> {{ item.period }} </p>
+                    <p> {{ item.establishment }} - {{ item.description }} </p>
+                </ng-container>
+            </div> 
+        </div>
+    </ng-container>
+</ng-container>

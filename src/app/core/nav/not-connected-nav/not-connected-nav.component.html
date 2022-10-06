@@ -1,0 +1,32 @@
+<div class="container">
+    <mat-toolbar *transloco="let t" class="px-0">
+      <div fxShow="true" fxHide.gt-sm="true">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+      <a mat-button class="companyName mr-4" routerLink="/">
+        <img src="./../../../assets/img/logo/meet&build.svg" alt="" class="img-fuild">
+      </a>
+      <div fxShow="true" fxHide.lt-md="true" class="menu">
+        <a mat-button routerLink="/projets"> {{ t('PROJECTS') }} </a>
+        <a mat-button routerLink="/prestataires"> {{ t('PRESTATAIRES') }} </a>
+        <a mat-button [matMenuTriggerFor]="jobboard"> {{ t('JOBBOARD') }} </a>
+        <mat-menu #jobboard="matMenu">
+          <button mat-menu-item routerLink="/jobs">{{ t('ALL_ADS') }}</button>
+          <button mat-menu-item routerLink="/jobs/list/mes-annonces">{{ t('MY_ADS') }}</button>
+          <button mat-menu-item (click)="createAd()" >{{ t('CREAT_AN_AD') }}</button>
+        </mat-menu>
+        <a mat-button routerLink="/discuss"> {{ t('BUILD_AND_DISCUSS') }} <img
+            src="./../../../assets/img/build_discuss.svg" class="pl-1 mb-3" alt=""> </a>
+      </div>
+      <span class="example-spacer"></span>
+      
+    </mat-toolbar>
+
+    
+
+  </div>
+  
+
+<!-- https://stackblitz.com/edit/angular-v6xwte?file=src%2Fapp%2Fapp.component.html -->

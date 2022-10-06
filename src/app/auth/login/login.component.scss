@@ -1,0 +1,35 @@
+section {
+    background-image: url(../../../assets/img/auth_background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    .slogon {
+        h4 {
+            font-weight: 900;
+            color: #113B3A;
+            font-size: 30px;
+            span {
+                font-weight: 500;
+            }
+        }
+    }
+    .shadow {
+        background-color: #fff;
+        border-radius: 20px;
+    }
+    .send-request {
+        .return {
+            position: absolute;
+            color: var(--primary_color);
+            z-index: 10;
+            top: 17px;
+            left: 17px;
+        }
+    }
+    .reset-password {
+        .max-length {
+            font-size: 11px;
+            color: #BECDE2;
+        }
+    }
+}

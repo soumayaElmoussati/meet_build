@@ -1,0 +1,5 @@
+<app-mission-nav (menuStatusChange) = "menuStatusChange($event)" (phoneMenuStatus)="onPhoneMenuTogel($event)" *ngIf="role=='mission'" ></app-mission-nav>
+<app-job-nav (menuStatusChange) = "menuStatusChange($event)" (phoneMenuStatus)="onPhoneMenuTogel($event)" *ngIf="role=='job'" ></app-job-nav>
+<app-cv-nav (menuStatusChange) = "menuStatusChange($event)" (phoneMenuStatus)="onPhoneMenuTogel($event)"  *ngIf="role=='cv'" ></app-cv-nav>
+<app-navigation *ngIf="!role" ></app-navigation>
+

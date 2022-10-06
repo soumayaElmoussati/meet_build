@@ -1,0 +1,50 @@
+@import '~@angular/material/theming';
+@include mat-core();
+  
+    $meetandbuild_secondary : (
+        50 : #F39908,
+        100 : #113B3A,
+        200 : #f44336,
+        300 : #F39908,
+        400 : #eda7bb,
+        500 : #F39908,
+        600 : #F39908,
+        700 : #F39908,
+        800 : #F39908,
+        900 : #F39908,
+        A100 : #F39908,
+        A200 : #F39908,
+        A400 : #F39908,
+        A700 : #F39908,
+        contrast: (
+          50 : #F39908,
+          100 : #F39908,
+          200 : #F39908,
+          300 : #F39908,
+          400 : #F39908,
+          500 : #F39908,
+          600 : #F39908,
+          700 : #F39908,
+          800 : #F39908,
+          900 : #F39908,
+          A100 : #F39908,
+          A200 : #F39908,
+          A400 : #F39908,
+          A700 : #F39908,
+        )
+      );
+    $my-app-primary:  mat-palette($meetandbuild_secondary, 100);
+    $my-app-accent:  mat-palette($meetandbuild_secondary, 300);
+    $my-app-warn:    mat-palette($meetandbuild_secondary, 200);
+
+    $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+    @include angular-material-theme($my-app-theme);
+  
+    .result_per_page{
+      $my-app-primary:  mat-palette($meetandbuild_secondary, 100);
+      $my-app-accent:  mat-palette($meetandbuild_secondary, 100);
+      $my-app-warn:    mat-palette($meetandbuild_secondary, 100);
+  
+      $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+      @include angular-material-theme($my-app-theme);
+    }

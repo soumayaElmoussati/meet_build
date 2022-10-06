@@ -1,0 +1,22 @@
+<section class="primary-background-color" *transloco="let t">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item" [ngClass]="{'active' : activeLink=='postulations'}">
+                        <a mat-button routerLink="/mes-postulations/conversations">
+                            {{ t('MY_APPLICATIONS') }}
+                            <div class="unread_message" *ngIf="notificationsPostulation" >{{ notificationsPostulation }}</div>
+                        </a>
+                    </li>
+                    <li class="list-inline-item" [ngClass]="{'active' : activeLink=='projects'}">
+                        <a mat-button routerLink="/projets/mes-projets">
+                            {{ t('MY_PROJECTS') }}
+                            <div class="unread_message" *ngIf="notificationsProjet" >{{ notificationsProjet }}</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

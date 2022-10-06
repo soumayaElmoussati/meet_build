@@ -1,0 +1,62 @@
+<div class="row " *transloco="let t">
+    <div class="col-sm-9 " *ngIf="!noEvaluations && evaluations">
+        <div class="row" >
+            <div class="col-12">
+                <div class="row white-background-color custom-padding border-raduis-15">
+                    <div class="col-12" *ngFor="let rate of evaluations.data ; let first = first">
+                        <hr *ngIf="!first">
+                        <ngb-rating class="rate" [(rate)]="rate.evaluation.value" [readonly]="true" [max]=5></ngb-rating>
+                        <app-rate [rate]="rate" [first]="first" ></app-rate>     
+                    </div>
+                    <div class=" col-12 text-center " *ngIf="evaluations">
+                        <div class="pt-4" *ngIf="evaluations.total > perPage">
+                            <a class="secondary" [ngClass]="{'disabled': currentPage == 1}"
+                                (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                                <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                            <a class="secondary" [ngClass]="{'disabled': currentPage == evaluations.last_page}"
+                                (click)="currentPage!=evaluations.last_page ? navigateTo(currentPage+1) : null">
+                                <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-3 text-center" *ngIf="!noEvaluations && evaluations">
+        <div class=" white-background-color custom-padding border-raduis-15 profile_score mb-3">
+            <p class="size-12 text-left"><strong>{{ t('MY_REVIEWS') }}</strong></p>
+            <div *ngIf="profile" class="px-3 pt-4">
+                <p class="mb-4"> {{ t('THE_PROVIDERS_GAVE_YOU_AN_AVERAGE_SCORE_OF') }} </p>
+                <ngb-rating class="rate" [(rate)]="profile.score" [readonly]="true" [max]=5></ngb-rating>
+                <h3>{{profile.score}}/5</h3>
+            </div>
+        </div>
+        <p class="size-12"><strong>{{ t('MORE_REVIEWS') }}</strong></p>
+        <button class="btn primary px-4 center" (click)="onSendInvitation()" > {{ t('SEND_AN_INVITATION') }} </button>
+    </div>
+    <div class="col-12 white-background-color custom-padding border-raduis-15 p-sm-5" *ngIf="noEvaluations" >
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-5 text-center p-3" >
+                <img src="./../../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                <p [innerHTML]="t('NO_EVALUATION_ON_PRORILE')" class="pt-4 mb-4 mx-3"> </p>
+                <div class="d-flex">
+                    <button class="btn primary px-3 center mr-3" (click)="onSendInvitation()" > {{ t('SEND_AN_INVITATION') }} </button>
+                    <button class="btn secondary px-3 center" (click)="setRouter('/projets')" > {{ t('FIND_A_PROJECT') }} </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

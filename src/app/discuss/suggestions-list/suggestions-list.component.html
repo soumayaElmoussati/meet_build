@@ -1,0 +1,14 @@
+<div class="card w-100" *transloco="let t">
+    <div class="header">
+        {{ t('SUGGESTIONS') }}
+    </div>
+    <div class="body">
+        <ul class="list-inline text-center">
+            <li *ngFor="let profile of suggestionsList text-center">
+                <div class="profile_picture background-center-cover pr-4" [ngStyle]="{'background-image': 'url(' +  profileImgUrl + profile.profile_picture + ')'}" ></div>
+                <p>{{ profile.company_name }}</p>
+                <button class="btn primary center text-unset" (click)="likeProfile(profile.id)" > {{ t('FOLLOW') }} </button>
+            </li>
+        </ul>
+    </div>
+</div>

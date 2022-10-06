@@ -1,0 +1,32 @@
+<ng-container *transloco="let t">
+    <ng-container *ngIf="rate.type == 'project_evaluation'" >
+        <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+                <h3 class="mb-0">{{ rate.evaluation.name }}</h3>
+            </li>
+            <li class="list-inline-item">
+                <p class="place color-primary mb-0"> {{ t('PLACE:') }} {{rate.evaluation.city}}, {{ t('FROM') }}
+                    {{this.helpersS.formatDate(rate.evaluation.startdate)}} - {{this.helpersS.formatDate(rate.evaluation.enddate)}} </p>
+            </li>
+            <li>
+                <p class="date mb-0"> {{ t('POSTED_BY', { name: rate.evaluation.project_creator.company_name }) }} </p>
+            </li>
+        </ul>
+        <div class="d-flex mt-2">
+            <div class="profile_picture background-center-cover mr-2" *ngIf="rate.evaluation.project_creator.profile_picture"
+                [ngStyle]="{'background-image': 'url(' +  profileImgUrl + rate.evaluation.project_creator.profile_picture + ')'}">
+            </div>
+            <p class="pt-1 mb-0">{{ rate.evaluation.description }}</p>
+        </div> 
+    </ng-container>
+    <ng-container *ngIf="rate.type == 'user_evaluations'" >
+        <ul class="list-inline mb-0">
+            <li>
+                <p class="date mb-0"> {{ t('POSTED_BY', { name: rate.evaluation.evaluator_name }) }} </p>
+            </li>
+        </ul>
+        <div class="d-flex mt-2">
+            <p class="pt-1 mb-0">{{ rate.evaluation.description }}</p>
+        </div> 
+    </ng-container>
+</ng-container>

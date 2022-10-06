@@ -1,0 +1,125 @@
+<ng-container *transloco="let t">
+    <section class="primary-background-color filter_menu">
+        <div class="container">
+            <div class="row justify-content-end py-2">
+                <div class="col-sm-10 d-flex align-items-center justify-content-end result_per_page pr-0">
+                    <p class="mr-3 mb-0 color-white">{{ t('SHOW') }}: </p>
+                    <mat-form-field appearance="outline" class="mr-2">
+                      <mat-select disableOptionCentering [formControl]="resultPerPage">
+                        <mat-option *ngFor="let result of results" [value]="result"> {{ result }} {{ t( 'RESULTS') | lowercase
+                          }} </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    
+                    <mat-form-field  appearance="outline" *ngIf="projectStatus" class="mr-2" >
+                        <mat-select disableOptionCentering [formControl]="selectedStatus" placeholder="{{ t('STATUS_OF_THE_PROJECT') }}" >
+                            <mat-option [value]="all"> {{ t('PROJECT_STATUS.ALL') }} </mat-option>
+                            <mat-option *ngFor="let status of projectStatus.data" [value]="status"> {{ t('PROJECT_STATUS.'+status.name) }} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline" class="mr-2" *ngIf="provincesList">
+                        <mat-select disableOptionCentering [formControl]="province" placeholder="{{ t('PROVINCES') }}">
+                            <mat-option [value]="null"> {{ t('ALL') }}  </mat-option>
+                            <mat-option *ngFor="let province of provincesList" [value]="province.id"> {{ province.name }}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <mat-form-field  appearance="outline" class="mr-2"  >
+                        <mat-select disableOptionCentering [formControl]="month" placeholder="{{ t('MONTH') }}"  >
+                            <mat-option [value]="null"> {{ t('ALL') }} </mat-option>
+                            <mat-option *ngFor="let month of months" [value]="month"> {{ t( 'MONTH_'+month+'_' ) }} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div class="d-flex align-items-center">
+                        <label> {{ t('ORDER_BY:') }} </label>
+                        <mat-form-field  appearance="outline" *ngIf="projectStatus" class="width_label" >
+                            <mat-select disableOptionCentering [formControl]="orderBy" >
+                              <mat-option *ngFor="let item of orderByOptions" [value]="item"> {{ t( item ) }} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+    </section>
+    <div class="container pt-3">
+        <div class="row">    
+            <div class="col-sm-3 categories_list">
+                <div class="filter_sidebar">
+                    <button class="btn primary w-100 mb-4" (click)="createProject()" >
+                        <svg class="mr-3" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M14 1.16699C6.91246 1.16699 1.16663 6.91283 1.16663 14.0003C1.16663 21.0878 6.91246 26.8337 14 26.8337C21.0875 26.8337 26.8333 21.0878 26.8333 14.0003C26.8333 6.91283 21.0875 1.16699 14 1.16699ZM15.1666 18.667C15.1666 18.9764 15.0437 19.2732 14.8249 19.4919C14.6061 19.7107 14.3094 19.8337 14 19.8337C13.6905 19.8337 13.3938 19.7107 13.175 19.4919C12.9562 19.2732 12.8333 18.9764 12.8333 18.667V15.167H9.33329C9.02387 15.167 8.72713 15.0441 8.50833 14.8253C8.28954 14.6065 8.16663 14.3097 8.16663 14.0003C8.16663 13.6909 8.28954 13.3942 8.50833 13.1754C8.72713 12.9566 9.02387 12.8337 9.33329 12.8337H12.8333V9.33366C12.8333 9.02424 12.9562 8.72749 13.175 8.5087C13.3938 8.28991 13.6905 8.16699 14 8.16699C14.3094 8.16699 14.6061 8.28991 14.8249 8.5087C15.0437 8.72749 15.1666 9.02424 15.1666 9.33366V12.8337H18.6666C18.976 12.8337 19.2728 12.9566 19.4916 13.1754C19.7104 13.3942 19.8333 13.6909 19.8333 14.0003C19.8333 14.3097 19.7104 14.6065 19.4916 14.8253C19.2728 15.0441 18.976 15.167 18.6666 15.167H15.1666V18.667Z" fill="white"/>
+                            </svg>
+                             {{ t('CREAT_PROJECT') }} 
+                    </button>
+                    <h3> {{ t('CATEGORIES') }} </h3>
+                    <ul class="list-inline pr-3" *ngIf="projectCategories">
+                        <li [ngClass]="{ 'active' : selectedCategory == 'all' }">
+                            <a (click)="onSelectedCategorieValueChanged('all')">{{ t('ALL_CATEGORIES')}}</a>
+                        </li>
+                        <li *ngFor="let category of projectCategories.data" [ngClass]="{ 'active' : selectedCategory==category.id }">
+                            <a (click)="onSelectedCategorieValueChanged(category.id)">{{ category.name }}
+                                <span>({{ category.nbrProject}})</span>
+                            </a>
+                            <a class="secondary submenu_btn"
+                            (click)="onSelectedCategorieValueChanged(category.id)"
+                            *ngIf="category.subCategories.length"
+                            [ngClass]="{'active': selectedCategory==category.id && showSubMenu }" >
+                                <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path class="stroke" d="M2.16663 4.875L6.49996 9.20833L10.8333 4.875" stroke="#113B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>  
+                            </a>  
+                            <ul class="list-inline" *ngIf="category.subCategories.length && selectedCategory==category.id && showSubMenu "   >
+                                <li *ngFor="let subcategory of category.subCategories"  [ngClass]="{ 'active' : selectedSubCategory==subcategory.id }">
+                                    <a (click)="onSelectedSubCategorieValueChanged(subcategory.id) " >{{ subcategory.name }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>    
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row" *ngIf="projectsList">
+                    <a class="col-12 white-background-color border-raduis-15 mb-3 py-4 cursor-pointer"
+                    *ngFor="let project of projectsList.data ; let first = first"
+                    routerLink="/projets/{{project.slug}}">
+                        <app-project [project]="project" ></app-project>
+                    </a>
+                    <div class="col-12 text-right" *ngIf="projectsList" >
+                        <ul class="list-inline pagination d-inline-flex" *ngIf="projectsList.last_page > 1" >
+                            <li class="list-inline">
+                                <a class="secondary" [ngClass]="{'disabled': currentPage == 1}"
+                                [routerLink]="['/projets']" [queryParams]="{page: prevPage()}">
+                                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="list-inline" *ngFor="let page of pagination"  [ngClass]="{'active': page==currentPage}">
+                                <a class="secondary" 
+                                [routerLink]="['/projets']" [queryParams]="{page: page}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                            <li class="list-inline mr-0">
+                                <a class="secondary"
+                                [ngClass]="{'disabled': currentPage == projectsList.last_page}"
+                                [routerLink]="['/projets']" [queryParams]="{page: nextPage() }" 
+                                >
+                                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg> 
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</ng-container> 

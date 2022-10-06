@@ -1,0 +1,43 @@
+<ng-container *transloco="let t">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-inline" *ngIf="conversationsList">
+                    <li class="cursor-pointer" *ngFor="let conversation of conversationsList;let index = index ; let last = last">
+                        <app-conversation 
+                        [conversation]="conversation"
+                        [index]="index"
+                        [last]="last"
+                        (archiveStatusChange) = "archiveStatusChange($event)"
+                        (favoriteStatusChange) = "favoriteStatusChange($event)"
+                        ></app-conversation>
+                    </li>
+                    <li class="no_postulation" *ngIf="state=='conversations' && conversationsList.length==0 " >
+                        <div class="text-center">
+                            <img src="./../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                            <p [innerHTML]="t('NO_CONVERSATION')" class="pt-4 mb-4"></p>
+                        </div>
+                    </li>
+                    <li class="no_postulation" *ngIf="state=='non-lus' && conversationsList.length==0 " >
+                        <div class="text-center">
+                            <img src="./../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                            <p [innerHTML]="t('NO_CONVERSATION_UNREAD')" class="pt-4 mb-4"></p>
+                        </div>
+                    </li>
+                    <li class="no_postulation" *ngIf="state=='favoris' && conversationsList.length==0 " >
+                        <div class="text-center">
+                            <img src="./../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                            <p [innerHTML]="t('NO_CONVERSATION_FAVORITES')" class="pt-4 mb-4"></p>
+                        </div>
+                    </li>
+                    <li class="no_postulation" *ngIf="state=='archives' && conversationsList.length==0 " >
+                        <div class="text-center">
+                            <img src="./../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                            <p [innerHTML]="t('NO_CONVERSATION_ARCHIVED')" class="pt-4 mb-4"></p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</ng-container>

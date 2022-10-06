@@ -1,0 +1,107 @@
+<ng-container *transloco="let t">
+    <section class="primary-background-color filter_menu">
+        <div class="container">
+            <div class="row justify-content-end py-2">
+                <div class="col-sm-3  d-flex align-items-center">
+                    <mat-form-field appearance="outline" class="transparant medium pt-1"  *ngIf="mine=='tous-jobs'" >
+                        <input matInput class="w-100" [formControl]="function_name" placeholder="{{ t('fields.WHAT_ARE_YOU_LOOKING_FOR') }}">
+                        <mat-icon class="color-white" matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </div>
+                <div class="col-sm-9 d-flex align-items-center justify-content-end result_per_page pr-0">
+                    <p class="mr-3 mb-0 color-white">{{ t('SHOW') }}: </p>
+                    <mat-form-field appearance="outline" class="mr-2">
+                      <mat-select disableOptionCentering [formControl]="resultPerPage">
+                        <mat-option *ngFor="let result of results" [value]="result"> {{ result }} {{ t( 'RESULTS') | lowercase}} </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field  appearance="outline" *ngIf="jobContractTypes && mine=='tous-jobs'" class="mr-2" >
+                        <mat-select disableOptionCentering [formControl]="selectedContractType" placeholder="{{ t('CONTRACT_TYPE') }}" >
+                          <mat-option> {{ t('ALL') }}  </mat-option>
+                          <mat-option *ngFor="let contractType of jobContractTypes.data" [value]="contractType"> {{contractType.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field  appearance="outline" *ngIf="provincesList && mine=='tous-jobs'" class="mr-2" >
+                        <mat-select disableOptionCentering [formControl]="selectedProvince" placeholder="{{ t('PROVINCE') }}" >
+                            <mat-option> {{ t('ALL') }}  </mat-option>
+                            <mat-option *ngFor="let province of provincesList" [value]="province"> {{province.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <div class="d-flex align-items-center">
+                        <label> {{ t('ORDER_BY:') }} </label>
+                        <mat-form-field  appearance="outline" *ngIf="jobContractTypes" class="width_label" >
+                            <mat-select disableOptionCentering [formControl]="orderBy" >
+                              <mat-option *ngFor="let item of orderByOptions" [value]="item"> {{ t( item ) }} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                  </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container pt-3">
+        <div class="row">    
+            <div class="col-sm-3 categories_list">
+                <div class="filter_sidebar">
+                    <h3> {{ t('FIND_A_JOB_BY_CATEGORY') }} </h3>
+                    <ul class="list-inline pr-3" *ngIf="jobCategories">
+                        <li [ngClass]="{ 'active' : selectedCategoryName == 'all' }">
+                            <a (click)="selectedCategoryName='all';selectedCategory='all'; onSelectedCategorieValueChanged()">{{ t('ALL_CATEGORIES')}}</a>
+                        </li>
+                        <li *ngFor="let category of jobCategories.data" [ngClass]="{ 'active' : selectedCategoryName==category.name }">
+                            <a *ngIf="mine=='tous-jobs'" (click)="selectedCategoryName=category.name;selectedCategory=category.id; onSelectedCategorieValueChanged()" >{{ category.name }} ({{ category.nbrJob }})</a>
+                            <a *ngIf="mine=='mes-annonces'" (click)="selectedCategoryName=category.name;selectedCategory=category.id; onSelectedCategorieValueChanged()" >{{ category.name }} ({{ category.nbrMyJobs }})</a>
+                        </li>
+                    </ul>    
+                </div>
+            </div>
+            <div class="row col-9 justify-content-center" *ngIf="noJobs" >
+                <div class="col-11 col-sm-5 text-center p-5" >
+                    <img src="./../../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                    <p [innerHTML]="t('YOU_HAVE_NOT_CREATED_ANY_ADS_YET')" class="pt-4 mb-4"> </p>
+                </div>
+            </div> 
+            <div class="col-sm-9">
+                <div class="row" *ngIf="jobsList">
+                    <div class="col-12 white-background-color border-raduis-15 mb-3 py-4 cursor-pointer" *ngFor="let job of jobsList.data ; let first = first" (click)="navigateToJob(job.slug)">
+                        <app-job [job]="job" [display]="display" [mine] ="mine" [showPicture]="true"></app-job>
+                    </div>
+                    <div class="col-12 text-right" >
+                        <ul class="list-inline pagination d-inline-flex" *ngIf="jobsList.last_page > 1" >
+                            <li class="list-inline">
+                                <a class="secondary" [ngClass]="{'disabled': currentPage == 1}" (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="list-inline" *ngFor="let page of pagination" [ngClass]="{'active': page==currentPage}">
+                                <a class="secondary" (click)="navigateTo(page)">
+                                    {{ page }}
+                                </a>
+                            </li>
+                            <li class="list-inline mr-0">
+                                <a class="secondary"
+                                [ngClass]="{'disabled': currentPage == jobsList.last_page}"
+                                (click)="currentPage!=jobsList.last_page ? navigateTo(currentPage+1) : null">
+                                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg> 
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row justify-content-center" *ngIf="noJobs" >
+            <div class="col-11 col-sm-5 text-center p-5" >
+                <img src="./../../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                <p [innerHTML]="t('YOU_HAVE_NOT_CREATED_ANY_ADS_YET')" class="pt-4 mb-4"> </p>
+            </div>
+        </div> -->
+    </div>
+</ng-container>

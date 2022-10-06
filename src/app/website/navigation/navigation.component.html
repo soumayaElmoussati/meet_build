@@ -1,0 +1,25 @@
+<mat-toolbar class="section top-header" *transloco="let t">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p>Right team, good work.</p>
+            </div>
+        </div>
+    </div>
+</mat-toolbar>
+<mat-toolbar class="container" *transloco="let t">
+    <a mat-button class="companyName mr-4" routerLink="/">
+        <img src="./../../../assets/img/logo/meet&build.svg" alt="" class="img-fuild">
+    </a>
+    <div fxShow="true" fxHide.lt-md="true" class="menu">
+        <a mat-button routerLink="/prestataires"> {{ t('website.SUBCONTRACTING') }} </a>
+        <a mat-button routerLink="/jobs">{{ t('website.BUILDJOBS') }}</a>
+    </div>
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+        <div class="d-flex align-items-center">
+            <button class="btn secondary mr-2 px-4" (click)="setRouter('/register')"> {{ t('website.REGISTRATION') }} </button>
+            <button class="btn primary px-4" (click)="setRouter('/login')"> {{ t('website.CONNECTION') }} </button>
+        </div>
+    </div>
+</mat-toolbar>

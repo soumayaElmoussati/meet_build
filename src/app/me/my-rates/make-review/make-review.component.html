@@ -1,0 +1,83 @@
+<section class="meet_inscription h-100" *transloco="let t">
+    <div class="container  py-5">
+        <div class="row">
+            <div class="col-12 px-0">
+                <mat-toolbar class="d-flex align-items-center justify-content-between ">
+                    <a href="/">
+                        <img src="./../../../assets/img/logo/meet&build.svg" alt="meet and build logo">
+                    </a>
+                    <p>{{ t('ALREADY_REGISTERED')}} <a class="secondary" routerLink="/login">{{t('LOG_IN')}}</a></p>
+                </mat-toolbar>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" *ngIf="profile">
+        <div class="row justify-content-center ">
+            <div
+                class="col-12 col-sm-8 white-background-color custom-padding border-raduis-15 my-4 position-relative pt-5 px-5 text-center">
+                <h4 class="rate_title">{{ t('RATE_PROFILE', { name: profile.company_name } ) }} </h4>
+                <div class="row justify-content-center"  *ngIf="!success">
+                    <div class="col-sm-8">
+                        <div class="profile_picture background-center-cover mt-5" *ngIf="profile.profile_picture"
+                            [ngStyle]="{'background-image': 'url(' +  profileImgUrl + profile.profile_picture + ')'}">
+                        </div>
+                        <p class="mb-0"> {{ profile.company_name }} </p>
+                        <p class="mb-4"> {{ profile.vat }} </p>
+
+                        <form [formGroup]="contactForm" class="w-100 meduim text-center "
+                            (ngSubmit)="onContactFormSubmit()" *ngIf="!alreadyRated">
+
+                            <ngb-rating class="rate" formControlName="score" [max]=5></ngb-rating>
+                            <p class="pt-3"> {{ t('RATE_PROFILE_DESCRIPTION') }} </p>
+
+                            <mat-form-field appearance="outline" class="mb-3">
+                                <input matInput formControlName="name" placeholder="{{ t('fields.LASTNAME') }}">
+                            </mat-form-field>
+                            <div class="mb-4 textarea">
+                                <mat-form-field appearance="outline">
+                                    <textarea matInput formControlName="review" class="" placeholder="{{ t('fields.COMMENT') }}" ></textarea>
+                                </mat-form-field>
+                            </div>
+                            <button class="btn primary px-5 mb-3 center" type="submit">
+                                {{ t('FINISH') }}
+                                <ng-container *ngIf="contactFormSubmitting">
+                                    <svg class="loader" width="60px" height="60px" version="1.1" id="L9"
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0"
+                                        xml:space="preserve">
+                                        <path fill="#fff"
+                                            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                            <animateTransform attributeName="transform" attributeType="XML"
+                                                type="rotate" dur="1s" from="0 50 50" to="360 50 50"
+                                                repeatCount="indefinite" />
+                                        </path>
+                                    </svg>
+                                </ng-container>
+                            </button>
+                        </form>
+                        <div class="row justify-content-center" *ngIf="alreadyRated">
+                            <div class="col-sm-8 py-3">
+                                <p class="mt-2">
+                                    {{ t('YOU_HAVE_ALREADY_RATED_', {profile: profile.company_name}) }}
+                                </p>
+                                <button class="btn primary px-4 center" routerLink="/" > {{ t('TO_DISCOVER') }} </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center" *ngIf="success">
+                    <div class="col-sm-8 py-5">
+                        <p class="mt-5">
+                            {{ t('RATE_THANKS') }}
+                        </p>
+                        <button class="btn primary px-4 center" routerLink="/" > {{ t('TO_DISCOVER') }} </button>
+                    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+
+</section>

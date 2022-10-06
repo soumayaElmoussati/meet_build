@@ -1,0 +1,17 @@
+<div class="row white-background-color custom-padding border-raduis-15 " *transloco="let t">
+    <div class="col-12">
+        <div class="row" *ngIf="showAgenda" >
+            <div class="col-sm-5">
+                <mat-calendar [dateClass]="dateClass()" (selectedChange)="selectDate($event)" ></mat-calendar>
+            </div>
+            <div class="col-sm-7 d-flex align-items-center pl-5">
+                <ul class="list-inline agenda_status mb-0 pl-5">
+                    <li class="UNSPECIFIED"> {{ t('UNSPECIFIED') }} </li>
+                    <li class="SEMI_AVAILABLE"> {{ t('SEMI_AVAILABLE') }} </li>
+                    <li class="AVAILABLE"> {{ t('AVAILABLE') }} </li>
+                    <li class="NOT_AVAILABLE"> {{ t('NOT_AVAILABLE') }} </li>
+                </ul>
+            </div>
+        </div>        
+    </div>
+</div> 

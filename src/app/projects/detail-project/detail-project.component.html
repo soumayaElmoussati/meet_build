@@ -1,0 +1,172 @@
+<ng-container *transloco="let t">
+    <section class="primary-background-color pt-4 pb-1" *ngIf="project">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9">
+                    <h1 class="mb-0"> {{ project.name }} </h1>
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <p class="place color-white mb-0"> {{ t('PLACE:') }} {{project.city}}, {{ t('FROM') }}
+                                {{this.helpersS.formatDate(project.startdate)}} -
+                                {{this.helpersS.formatDate(project.enddate)}} </p>
+                        </li>
+                        <li class="list-inline-item">
+                            <p class="date mb-0"> {{ this.helpersS.postedAt(project.filed_ago) }} </p>
+                        </li>
+                    </ul>
+                    <p class="days_left text-uppercase mb-0" *ngIf="project.days_left.mounths > 0 || project.days_left.days > 0">
+                        
+                        <ng-container *ngIf="project.days_left.mounths > 0"> {{ project.days_left.mounths }} {{ t('MONTH') }} {{ t('DAYS_LEFT') }} !</ng-container>
+                        <ng-container *ngIf="project.days_left.days > 0"> {{ project.days_left.days }} {{ t('DAY') }}(s) {{ t('DAYS_LEFT') }} !</ng-container>
+                    </p>
+                </div>
+                <div class="col-sm-3 d-flex align-items-end pl-0">
+                    <button *ngIf="project.isMine && project.status.name!='ENDED' "
+                    class="btn primary w-100 px-4 mb-3"
+                    [ngClass]=" {
+                        'black': project.status.name=='OPEN',
+                        'red': project.status.name=='ASSIGNED',
+                        'green': project.status.name=='CLOSED'
+                    } "
+                    (click)="onChangeProjectStatus()">
+                    <ng-container *ngIf="project.status.name=='OPEN'" > {{ t('CLOSE_THIS_PROJECT') }} </ng-container>
+                    <ng-container *ngIf="project.status.name=='ASSIGNED'" > {{ t('IS_THIS_PROJECT_FINISHED') }} </ng-container>
+                    <ng-container *ngIf="project.status.name=='CLOSED'" > {{ t('REOPEN_THIS_PROJECT') }} </ng-container>
+                        <ng-container *ngIf="changingStatus">
+                            <svg class="loader" width="60px" height="60px" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                enable-background="new 0 0 0 0" xml:space="preserve">
+                                <path fill="#fff"
+                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                    <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                                        from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                </path>
+                            </svg>
+                        </ng-container>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section  *ngIf="project" class="background-before">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="white-background-color border-raduis-15 mb-3 p-5 pt-5 px-5 position-relative ">
+                        <div class="project_status {{ project.status.name }}"> {{ t('PROJECT_STATUS.'+project.status.name) }} </div>
+                        <p [innerHTML]="project.description_br" ></p>
+                        <a *ngIf="!project.isMine" routerLink="{{project.project_creator.company_name}}/signaler" class="primary float-right" >
+                            <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="fill" d="M10.4833 3.26744L15.2298 11.1732C15.912 12.3086 15.5769 13.8025 14.4811 14.5094C14.1133 14.7475 13.6846 14.8745 13.2465 14.8749H3.75271C2.46283 14.8749 1.41663 13.7912 1.41663 12.4531C1.41663 12.0005 1.53917 11.5578 1.76938 11.1732L6.51663 3.26744C7.19804 2.13198 8.63879 1.78419 9.73458 2.49111C10.0378 2.68661 10.2942 2.95223 10.4833 3.26744ZM8.91079 3.86173C8.82408 3.80596 8.72695 3.76834 8.62529 3.75115C8.52363 3.73396 8.41954 3.73755 8.31931 3.76172C8.21907 3.78588 8.12478 3.83011 8.04212 3.89174C7.95946 3.95337 7.89015 4.03111 7.83838 4.12027L3.09183 12.0274C3.01473 12.1563 2.97409 12.3037 2.97425 12.4538C2.97425 12.9001 3.32275 13.2613 3.75342 13.2613H13.2458C13.3917 13.2613 13.5341 13.2188 13.6573 13.1395C13.8342 13.022 13.9589 12.8408 14.0055 12.6336C14.0521 12.4264 14.0169 12.2093 13.9074 12.0274L9.16083 4.12027C9.09858 4.01617 9.01328 3.92772 8.9115 3.86173H8.91079ZM8.49996 12.0416C8.3121 12.0416 8.13193 11.9669 7.99909 11.8341C7.86625 11.7013 7.79163 11.5211 7.79163 11.3332C7.79163 11.1454 7.86625 10.9652 7.99909 10.8324C8.13193 10.6995 8.3121 10.6249 8.49996 10.6249C8.68782 10.6249 8.86799 10.6995 9.00083 10.8324C9.13366 10.9652 9.20829 11.1454 9.20829 11.3332C9.20829 11.5211 9.13366 11.7013 9.00083 11.8341C8.86799 11.9669 8.68782 12.0416 8.49996 12.0416ZM8.49996 5.66657C8.68782 5.66657 8.86799 5.74119 9.00083 5.87403C9.13366 6.00687 9.20829 6.18704 9.20829 6.3749V9.20823C9.20829 9.3961 9.13366 9.57626 9.00083 9.7091C8.86799 9.84194 8.68782 9.91657 8.49996 9.91657C8.3121 9.91657 8.13193 9.84194 7.99909 9.7091C7.86625 9.57626 7.79163 9.3961 7.79163 9.20823V6.3749C7.79163 6.18704 7.86625 6.00687 7.99909 5.87403C8.13193 5.74119 8.3121 5.66657 8.49996 5.66657Z" fill="#F39908"/>
+                            </svg>    
+                             {{ t('REPORT_ABUSE') }} </a>
+                        <a *ngIf="project.isMine" (click)="editDescription()" class="secondary link_edit bottom">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="fill" d="M16.6764 0.100586C16.2538 0.101609 15.8356 0.18629 15.446 0.349744C15.0563 0.513198 14.7029 0.752189 14.4061 1.05293L2.05215 13.4061L2.00371 13.6506L1.14902 17.9475L0.905273 19.0943L2.05293 18.8506L6.3498 17.9959L6.59355 17.9467L18.9475 5.59355C19.249 5.29724 19.4885 4.94385 19.652 4.55398C19.8155 4.16412 19.8996 3.7456 19.8996 3.32285C19.8996 2.9001 19.8155 2.48158 19.652 2.09172C19.4885 1.70186 19.249 1.34846 18.9475 1.05215C18.6505 0.751455 18.2969 0.512555 17.9071 0.349233C17.5173 0.185912 17.099 0.101404 16.6764 0.100586ZM16.6764 1.58965C17.0701 1.58965 17.467 1.76934 17.8482 2.15137C18.6084 2.91074 18.6084 3.73496 17.8482 4.49512L17.2873 5.03184L14.967 2.7123L15.5045 2.15137C15.8865 1.76934 16.2826 1.58965 16.6764 1.58965ZM13.8693 3.81152L16.1881 6.13105L6.74043 15.5779C6.23039 14.58 5.41838 13.7685 4.42012 13.2592L13.8693 3.81152ZM3.42012 14.5295C3.88249 14.7155 4.3025 14.9931 4.65491 15.3455C5.00733 15.6979 5.28488 16.1179 5.4709 16.5803L2.90684 17.0928L3.42012 14.5295Z" fill="#607D8B"/>
+                            </svg>                                
+                        </a>
+                    </div>
+                    <div class="white-background-color border-raduis-15 mb-3 pt-1">
+                        <h4> {{ t('PROJECT_DETAILS') }} </h4>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th> {{ t('PLACE:') }} </th>
+                                    <td>{{ project.address }}</td>
+                                </tr>
+                                <tr>
+                                    <th> {{ t('REQUIRED_SKILLS') }} </th>
+                                    <td>
+                                        {{ projectcompetances }}
+                                        <ng-container *ngFor="let skill of project.competances; let last = last ">
+                                            {{ skill.name }}{{ last ? '' : ','  }}
+                                        </ng-container>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th> {{ t('DURATION_OF_THE_MISSION') }} </th>
+                                    <td>{{this.helpersS.formatDate(project.startdate)}} {{ t('TO') }}
+                                        {{this.helpersS.formatDate(project.enddate)}}</td>
+                                </tr>
+                                <tr>
+                                    <th> {{ t('LANGUAGES') }} </th>
+                                    <td>
+                                        <ng-container *ngFor="let language of project.languages">
+                                            {{ language.name }}
+                                        </ng-container>
+                                    </td>
+                                </tr>    
+                            </tbody>
+                        </table>
+                        <a *ngIf="project.isMine" (click)="editDetails()" class="secondary link_edit">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="fill" d="M16.6764 0.100586C16.2538 0.101609 15.8356 0.18629 15.446 0.349744C15.0563 0.513198 14.7029 0.752189 14.4061 1.05293L2.05215 13.4061L2.00371 13.6506L1.14902 17.9475L0.905273 19.0943L2.05293 18.8506L6.3498 17.9959L6.59355 17.9467L18.9475 5.59355C19.249 5.29724 19.4885 4.94385 19.652 4.55398C19.8155 4.16412 19.8996 3.7456 19.8996 3.32285C19.8996 2.9001 19.8155 2.48158 19.652 2.09172C19.4885 1.70186 19.249 1.34846 18.9475 1.05215C18.6505 0.751455 18.2969 0.512555 17.9071 0.349233C17.5173 0.185912 17.099 0.101404 16.6764 0.100586ZM16.6764 1.58965C17.0701 1.58965 17.467 1.76934 17.8482 2.15137C18.6084 2.91074 18.6084 3.73496 17.8482 4.49512L17.2873 5.03184L14.967 2.7123L15.5045 2.15137C15.8865 1.76934 16.2826 1.58965 16.6764 1.58965ZM13.8693 3.81152L16.1881 6.13105L6.74043 15.5779C6.23039 14.58 5.41838 13.7685 4.42012 13.2592L13.8693 3.81152ZM3.42012 14.5295C3.88249 14.7155 4.3025 14.9931 4.65491 15.3455C5.00733 15.6979 5.28488 16.1179 5.4709 16.5803L2.90684 17.0928L3.42012 14.5295Z" fill="#607D8B"/>
+                            </svg>                                
+                        </a>
+                    </div>
+                    <div class="row pr-3">
+                        <div class="col-sm-5 mb-3" *ngIf="project.files.length" >
+                            <div class="white-background-color border-raduis-15 p-3 pt-5">
+                                <h4> {{ t('PROJECT_ATTACHEMENTS') }} </h4>
+                                <a class="secondary mb-2 d-block" *ngFor="let file of project.files" (click)="downloadFile(file.name, file.path)">
+                                    {{ file.name }}
+                                </a>
+                                <button class="btn primary px-4 center" (click)="downloadFiles(project.id)" > {{ t('DOWNLOAD_ALL') }} </button>
+                                <a *ngIf="project.isMine" (click)="editFiles()" class="secondary link_edit">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path class="fill" d="M16.6764 0.100586C16.2538 0.101609 15.8356 0.18629 15.446 0.349744C15.0563 0.513198 14.7029 0.752189 14.4061 1.05293L2.05215 13.4061L2.00371 13.6506L1.14902 17.9475L0.905273 19.0943L2.05293 18.8506L6.3498 17.9959L6.59355 17.9467L18.9475 5.59355C19.249 5.29724 19.4885 4.94385 19.652 4.55398C19.8155 4.16412 19.8996 3.7456 19.8996 3.32285C19.8996 2.9001 19.8155 2.48158 19.652 2.09172C19.4885 1.70186 19.249 1.34846 18.9475 1.05215C18.6505 0.751455 18.2969 0.512555 17.9071 0.349233C17.5173 0.185912 17.099 0.101404 16.6764 0.100586ZM16.6764 1.58965C17.0701 1.58965 17.467 1.76934 17.8482 2.15137C18.6084 2.91074 18.6084 3.73496 17.8482 4.49512L17.2873 5.03184L14.967 2.7123L15.5045 2.15137C15.8865 1.76934 16.2826 1.58965 16.6764 1.58965ZM13.8693 3.81152L16.1881 6.13105L6.74043 15.5779C6.23039 14.58 5.41838 13.7685 4.42012 13.2592L13.8693 3.81152ZM3.42012 14.5295C3.88249 14.7155 4.3025 14.9931 4.65491 15.3455C5.00733 15.6979 5.28488 16.1179 5.4709 16.5803L2.90684 17.0928L3.42012 14.5295Z" fill="#607D8B"/>
+                                    </svg>                                
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <p class="nbr_conversations" [innerHTML]="t('PROFILES_APPLIED_FOR_THIS_PROJECT', { count: project.nbrConversations })"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-3" *ngIf="project.assigned_to_user" >
+                        <div class="col-12">
+                            <p class="pl-4 mb-4 font-size-16"> {{ t('PROFILE_THAT_WON_THIS_PROJECT') }} </p>
+                            <div class="pl-4 d-flex">
+                                <div class="profile_picture background-center-cover pr-4" [ngStyle]="{'background-image': 'url(' +  profileImgUrl + project.assigned_to_user.profile_picture + ')'}" >
+                                    <div class="svg">
+                                        <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M23.5003 43.0837C31.0575 43.0837 37.2087 36.9325 37.2087 29.3753C37.2087 21.8181 31.0575 15.667 23.5003 15.667C15.9412 15.667 9.79199 21.8181 9.79199 29.3753C9.79199 36.9325 15.9412 43.0837 23.5003 43.0837ZM23.5003 19.5837C28.8995 19.5837 33.292 23.9762 33.292 29.3753C33.292 34.7745 28.8995 39.167 23.5003 39.167C18.1012 39.167 13.7087 34.7745 13.7087 29.3753C13.7087 23.9762 18.1012 19.5837 23.5003 19.5837ZM21.542 3.91699H13.7087V14.7231C16.0522 13.1549 18.7392 12.1748 21.542 11.8659V3.91699ZM33.292 3.91699H25.4587V11.8659C28.2615 12.1748 30.9485 13.1549 33.292 14.7231V3.91699Z" fill="#113B3A"/>
+                                            <path d="M19.6207 30.9635L18.7042 36.302L23.5001 33.7816L28.2961 36.302L27.3796 30.9635L31.261 27.18L25.8991 26.4006L23.5001 21.542L21.1012 26.4006L15.7393 27.18L19.6207 30.9635Z" fill="#113B3A"/>
+                                        </svg>  
+                                    </div>                                                                           
+                                </div>
+                                <p class="pl-3"> {{ project.assigned_to_user.company_name }} <br> {{ project.assigned_to_user.vat }}  </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 pl-0 mb-4">
+                    <div class="white-background-color border-raduis-15 p-3 pt-5">
+                        <h4> {{ t('ABOUT_THE_AUTHOR') }} </h4>
+                        <div class="d-flex">
+                            <div class="profile_picture background-center-cover" [ngStyle]="{'background-image': 'url(' +  profileImgUrl + project.project_creator.profile_picture + ')'}" ></div>
+                            <div>
+                                <p class="size-13">
+                                    {{ project.project_creator.company_name }}
+                                    <br> {{ project.project_creator.vat }}
+                                    <br> {{ project.project_creator.company_address }}
+                                </p>
+                                <ngb-rating class="rate" [(rate)]="project.project_creator.score" [readonly]="true" [max]=5></ngb-rating>
+                            </div>
+                        </div>
+                        <p> {{ project.project_creator.presentation }} </p>
+                        <button class="btn primary px-4" (click)="setRouter('/'+project.project_creator.slug)" > {{ t('MORE_INFORMATIONS') }} </button>
+                        <a *ngIf="project.isMine" routerLink="/me" class="secondary link_edit">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="fill" d="M16.6764 0.100586C16.2538 0.101609 15.8356 0.18629 15.446 0.349744C15.0563 0.513198 14.7029 0.752189 14.4061 1.05293L2.05215 13.4061L2.00371 13.6506L1.14902 17.9475L0.905273 19.0943L2.05293 18.8506L6.3498 17.9959L6.59355 17.9467L18.9475 5.59355C19.249 5.29724 19.4885 4.94385 19.652 4.55398C19.8155 4.16412 19.8996 3.7456 19.8996 3.32285C19.8996 2.9001 19.8155 2.48158 19.652 2.09172C19.4885 1.70186 19.249 1.34846 18.9475 1.05215C18.6505 0.751455 18.2969 0.512555 17.9071 0.349233C17.5173 0.185912 17.099 0.101404 16.6764 0.100586ZM16.6764 1.58965C17.0701 1.58965 17.467 1.76934 17.8482 2.15137C18.6084 2.91074 18.6084 3.73496 17.8482 4.49512L17.2873 5.03184L14.967 2.7123L15.5045 2.15137C15.8865 1.76934 16.2826 1.58965 16.6764 1.58965ZM13.8693 3.81152L16.1881 6.13105L6.74043 15.5779C6.23039 14.58 5.41838 13.7685 4.42012 13.2592L13.8693 3.81152ZM3.42012 14.5295C3.88249 14.7155 4.3025 14.9931 4.65491 15.3455C5.00733 15.6979 5.28488 16.1179 5.4709 16.5803L2.90684 17.0928L3.42012 14.5295Z" fill="#607D8B"/>
+                            </svg>                                
+                        </a>
+                    </div>
+                    <button class="btn secondary py-4 w-100 mt-3" *ngIf="project.status.name == 'OPEN' && !project.isMine" (click)="apply()" > {{ t('APPLY_TO_THIS_AD')}} </button>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </section>
+</ng-container>

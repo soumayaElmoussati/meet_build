@@ -1,0 +1,52 @@
+<ng-container *transloco="let t">
+    <div mat-dialog-title>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h5 class="dialog_title" [innerHTML]="t('LOGIN_TO_YOUR_ACCOUNT')"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div class="container">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="row">
+                <div class="col-12">
+                    <ngb-alert class="alert alert-failed" *ngIf="loginError" type="success "> {{ t(loginError) }}</ngb-alert>
+                </div>
+                <label class="col-5 mb-4 size-12 pr-0 d-flex align-items-center"
+                    for="first_name">{{t('fields.EMAIL_ADDRESS')}} * </label>
+                <div class="col-7 mb-4">
+                    <p class="mb-0">{{loginForm.controls['email'].value}}</p>
+                </div>
+                <label class="col-5 mb-4 size-12 pr-0 d-flex align-items-center"
+                    for="first_name">{{t('fields.PASSWORD')}} * </label>
+                <div class="col-7 mb-4">
+                    <mat-form-field appearance="outline">
+                        <input [type]="show ? 'text' : 'password'" placeholder="{{ t('fields.PASSWORD') }}" matInput
+                            formControlName="password">
+                        <mat-icon matSuffix (click)="show = !show">{{show ? 'visibility' :
+                            'visibility_off'}}</mat-icon>
+                    </mat-form-field>
+                </div>
+                <button type="submit" #submitbtn class="d-none" > </button>
+            </form>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="left">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-12 d-flex">
+                    <button class="btn primary mt-3 px-4 mr-3" (click)="submitbtn.click()">
+                        {{ t('LOGIN') }}
+                    </button>
+                    <button class="btn secondary mt-3 px-4" (click)="onCancel()">
+                        {{ t('CANCEL') }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-actions>
+
+
+</ng-container>

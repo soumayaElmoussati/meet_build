@@ -1,0 +1,90 @@
+<section #mySection class="w-100"></section>
+<div *transloco="let t">
+    <app-navigation></app-navigation>
+    <mat-sidenav-container fxFlexFill class="example-container">
+        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+            <div fxLayout="column">
+                <a mat-button routerLink="/about-us">About us</a>
+                <a mat-button routerLink="/prices">Prices</a>
+                <a mat-button routerLink="/start-page">Start page</a>
+                <a mat-button routerLink="/offer">Offer</a>
+                <a mat-button routerLink="/contact">Contact</a>
+            </div>
+        </mat-sidenav>
+        <mat-sidenav-content fxFlexFill>
+
+            <section class="header py-5 background-center-cover text-center "
+                style="background-image: url('./../../../assets/img/website/background-parallax-job.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1 class="color-white mb-0" [innerHTML]="t('website.OUR_HISTORY')"></h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 pr-4">
+                            <h2 class="color-secondary pr-3" [innerHTML]="t('website.IT_IS_THE_INDUSTRY_REVOLUTION_BUILGIND_AND_RENOVATION')" ></h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6 py-3">
+                            <p [innerHTML]="t('website.IT_IS_THE_INDUSTRY_REVOLUTION_BUILGIND_AND_RENOVATION_DESCRIPTION')" ></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-6 py-3">
+                            <img src="./../../../assets/img/website/meet-and-build-notre-histoire.jpg" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-sm-6 py-3 d-flex align-items-center justify-content-center flex-column">
+                            <img src="./../../../assets/img/logo/meet&build.svg" alt="" class="img-fluid mb-4">
+                            <div class="d-flex align-items-start px-5 pt-3">
+                                <img src="./../../../assets/img/website/quotes.svg" alt="" class="img-fluid pr-3">
+                                <h2 class="color-secondary mb-0" [innerHTML]="t('website.IT_IS_THE_INDUSTRY_REVOLUTION_BUILGIND_AND_RENOVATION')" ></h2>
+                            </div>
+                        </div>
+                        <div class="col-12 py-4 text-center">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea asperiores voluptas explicabo saepe eaque neque, quidem quasi fugit assumenda vero nisi harum, et numquam hic deleniti rem mollitia inventore cupiditate cum esse aspernatur quod soluta officia! Commodi distinctio reiciendis ipsum eveniet, repellat animi eius aut asperiores maxime laboriosam quo iure veritatis sed ex! Harum, ab. Quasi numquam reiciendis deserunt itaque debitis aperiam veritatis animi ullam! Nemo porro ut optio minima temporibus a quos ea veritatis nostrum similique velit magnam, error consequuntur repellendus laboriosam recusandae perferendis, odio nobis omnis provident aliquid! Aut vitae sapiente ipsa dolore quam, quasi sed amet facilis eius soluta aliquid, id beatae? Sed repudiandae pariatur velit alias earum soluta quidem corrupti quibusdam possimus, hic excepturi laborum, blanditiis tempora. Eaque ab doloribus nam assumenda modi quam quas, sequi quae non officia eveniet soluta accusantium adipisci aliquam commodi animi quo natus quasi quod placeat corporis et error! Nemo voluptatum deserunt reprehenderit nostrum cupiditate libero vel saepe ipsam facere quisquam, voluptates laborum autem quas quibusdam nulla ut. Voluptates magni nesciunt iure commodi quam, neque ut eveniet error soluta quos ipsam adipisci nisi perferendis ea tempora iusto fuga! Similique aut architecto animi tempore. Ipsam eum maiores reprehenderit, consectetur inventore pariatur eligendi.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="our_values mb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 px-sm-5 text-center">
+                            <img src="./../../../assets/img/website/plan-entrepreneur.png" alt="" class="img-fluid">
+                            <h3 class="pt-4">{{ t('website.INNOVATION') }}</h3>
+                            <p class="py-4 px-4" > {{ t('website.ADAPT_TO_THE_CURRENT_ENVIRONEMENT_TO_CREATE_PRODUCTS_AND_SERVICES_THAT_IMPROVE_OUR_LIVES') }} </p>
+                        </div>
+                        <div class="col-sm-4 px-sm-5 text-center">
+                            <img src="./../../../assets/img/website/plan-entrepreneur.png" alt="" class="img-fluid">
+                            <h3 class="pt-4">{{ t('website.EFFICIENCY') }}</h3>
+                            <p class="py-4 px-4" > {{ t('website.TO_BE_BETTER_EVERY_DAY_THAN_THE_DAY_BEFORE') }} </p>
+                        </div>
+                        <div class="col-sm-4 px-sm-5 text-center">
+                            <img src="./../../../assets/img/website/plan-entrepreneur.png" alt="" class="img-fluid">
+                            <h3 class="pt-4">{{ t('website.KINDNESS') }}</h3>
+                            <p class="py-4 px-4" > {{ t('website.WE_DO_OUR_UTMOST_FOR_THE_GOOD_OF_OUR_COMPANY') }} </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <app-evolution></app-evolution>
+            <app-links></app-links>
+            <app-footer></app-footer>
+            <app-help-button></app-help-button>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

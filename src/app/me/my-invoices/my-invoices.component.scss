@@ -1,0 +1,16 @@
+tr.mat-header-row{
+    height: 30px !important;
+}
+th.mat-header-cell {
+    background-color: #f39908;
+    color: #fff;
+    padding: 0 !important;
+}
+.mat-cell, .mat-footer-cell {
+    color: unset;
+    font-size: 12px;
+}
+
+.mat-column-action, .mat-column-pdf{
+    width: 70px;
+}

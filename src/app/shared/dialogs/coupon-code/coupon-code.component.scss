@@ -1,0 +1,43 @@
+
+.field_btn{
+    width: 67px !important;
+    width: auto;
+    position: absolute;
+    top: 2px;
+    right: 17px;
+    height: 35px;
+    border-radius: 6px;
+    &.promo{
+        width: 120px !important;
+    }
+}
+
+.promo_code_message{
+    p{
+        border: 1px solid var(--primary_color);
+        color: var(--primary_color);
+        background-color: #FDF0DA;
+        padding: 6px 12px;
+        border-radius: 10px;
+        padding-left: 35px;
+        background-image: url(./../../../../assets/img/vs_party.svg);
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: 25px;
+        background-position-x: 6px;
+    }
+}
+
+.code_promo_not_valid{
+    p{
+        border: 1px solid #E10000;
+        color:  #E10000;
+        background-color: #fdeded;
+        padding: 6px 12px;
+        border-radius: 10px;
+        background-repeat: no-repeat;
+        background-position: left;
+        background-size: 25px;
+        background-position-x: 6px;
+    }
+}

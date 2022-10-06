@@ -1,0 +1,75 @@
+
+h1{
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.btn{
+    &.black{
+        background-color: var(--secondary_color);
+        &:hover{
+            background-color: var(--secondary_color);
+        }
+    }
+    &.red{
+        background-color: #E10000;
+        &:hover{
+            background-color: #E10000;
+        }
+    }
+    &.green{
+        background-color: #699F00;
+        &:hover{
+            background-color: #699F00;
+        }
+    }
+}
+.min-height-500{
+    min-height: 500px;
+}
+
+ul{
+    li{
+        &:not(:last-child){
+            border-bottom: .5px solid var(--default_color);
+        }
+        & > div{
+            position: relative;
+            padding: 20px 15px;
+            display: flex;
+            border: 1.5px solid #FFFFFF;
+            border-radius: 20px;
+        }
+        &:hover > div, &.active > div{
+            border: 1.5px solid var(--primary_color);
+        }
+        .notif{
+            position: absolute;
+            right: 10px;
+            top: 10px;   
+        }
+        
+        .heure{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            font-size: 8px;
+        }
+    }
+}
+
+.profile_picture{
+    width: 65px;
+    height: 65px;
+    min-width: 65px;
+    min-height: 65px;
+    max-width: 65px;
+    max-height: 65px;
+    margin-right: 8px;
+    position: relative;
+    .svg{
+        position: absolute;
+        right: -6px;
+        top: -6px;
+    }
+}

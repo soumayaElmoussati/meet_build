@@ -1,0 +1,134 @@
+<mat-sidenav-container class="example-container" *transloco="let t" >
+
+
+    <mat-sidenav #sidemenu mode="over" [(opened)]="opened" position="end" class="right-menu">
+        <app-right-menu></app-right-menu>
+    </mat-sidenav>
+    
+    <mat-sidenav-content>
+        <app-nav (menuStatusChanged)="menuStatusChange($event)" (phoneMenuStatus)="phoneMenuStatus($event)"></app-nav>
+<mat-sidenav-container fxFlexFill class="example-container">
+
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over" opened="false" fxHide.gt-sm="true">
+        <div fxLayout="column" *ngIf="false" >
+            <a mat-button routerLink="/about-us">About us</a>
+            <a mat-button routerLink="/prices">Prices</a>
+            <a mat-button routerLink="/start-page">Start page</a>
+            <a mat-button routerLink="/offer">Offer</a>
+            <a mat-button routerLink="/contact">Contact</a>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+
+        <section class="profile_header" *transloco="let t">
+            <div class="container py-4">
+                <div class="row">
+                    <div class="col-12 d-flex align-items-center">
+                        <h1 class="mb-0">{{ t('FIND_THE_PROVIDER') }}</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gray-background-color filter_menu" *transloco="let t">
+            <div class="container">
+                <div class="row justify-content-end py-2">
+                    <div class="col-sm-3">
+                        <mat-form-field appearance="outline" class="orange medium pt-1">
+                            <input matInput class="w-100" [formControl]="company_name" placeholder="{{ t('fields.WHAT_ARE_YOU_LOOKING_FOR') }}">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-9 d-sm-flex align-items-center justify-content-end result_per_page">
+                        <div class="d-flex align-items-center mb-2 mb-sm-0">
+                            <p class="mr-3 mb-0">{{ t('SHOW') }}: </p>
+                        <mat-form-field appearance="outline" class="mr-sm-2">
+                            <mat-select disableOptionCentering [formControl]="resultPerPage">
+                                <mat-option *ngFor="let result of results" [value]="result"> {{ result }} {{ t( 'RESULTS') | lowercase
+                                }} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        </div>
+                        <mat-form-field appearance="outline" class="mr-sm-2 mb-2 mb-sm-0" *ngIf="false">
+                            <mat-select disableOptionCentering [formControl]="competence" placeholder="{{ t('SKILLS') }}">
+                                <mat-option *ngFor="let comp of competences" [value]="comp"> {{ comp.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="mr-sm-2 mb-2 mb-sm-0" *ngIf="competences">
+                            <mat-select disableOptionCentering [formControl]="competence" placeholder="{{ t('SKILLS') }}">
+                                <mat-option>
+                                    <ngx-mat-select-search placeholderLabel="Rechercher" [formControl]="competenceFilter"></ngx-mat-select-search>
+                                </mat-option>
+                                <mat-option [value]="null"> {{ t('ALL') }}  </mat-option>
+                                <mat-option *ngFor="let comp of filteredCompetences" [value]="comp"> {{ comp.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="mr-sm-2 mb-2 mb-sm-0" *ngIf="provinces">
+                            <mat-select disableOptionCentering [formControl]="province" placeholder="{{ t('PROVINCES') }}">
+                                <mat-option [value]="null"> {{ t('ALL') }}  </mat-option>
+                                <mat-option *ngFor="let province of provinces" [value]="province"> {{ province.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="d-flex align-items-center mb-2 mb-sm-0">
+                            <label> {{ t('ORDER_BY:') }} </label>
+                            <mat-form-field  appearance="outline"  class="width_label" >
+                                <mat-select disableOptionCentering [formControl]="orderBy" >
+                                <mat-option *ngFor="let item of orderByOptions" [value]="item"> {{ t( item ) }} </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="gray-background-color main"  *transloco="let t">
+            <div class="container">
+                <div class="row pb-4" *ngIf="serviceProviders">
+                    <div class="col-sm-3 my-sm-3 my-1" *ngFor="let provider of serviceProviders.data" >
+                        <app-provider [provider]="provider" ></app-provider>  
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-right" *ngIf="serviceProviders" >
+                        <ul class="list-inline pagination d-inline-flex" *ngIf="serviceProviders.last_page > 1" >
+                            <li class="list-inline">
+                                <a class="secondary" [ngClass]="{'disabled': currentPage == 1}"
+                                [routerLink]="['/prestataires']" [queryParams]="{page: prevPage()}">
+                                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </li>
+                            <li class="list-inline" *ngFor="let page of pagination" [ngClass]="{'active': page==currentPage}">
+                                <a class="secondary" [routerLink]="['/prestataires']" [queryParams]="{page: page}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                            <li class="list-inline mr-0">
+                                <a class="secondary"
+                                [ngClass]="{'disabled': currentPage == serviceProviders.last_page}"
+                                [routerLink]="['/prestataires']" [queryParams]="{page: nextPage()}">
+                                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg> 
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                
+            </div>
+        </section>
+
+
+
+        <app-footer></app-footer>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>
+</mat-sidenav-content>
+
+</mat-sidenav-container>

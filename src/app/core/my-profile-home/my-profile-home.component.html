@@ -1,0 +1,87 @@
+<div class="loader-page" *ngIf="false" >
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="30px"
+                        viewBox="0 0 24 30" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+                        <rect x="0" y="13" width="4" height="5" fill="#333">
+                            <animate attributeName="height" attributeType="XML" values="5;21;5" begin="0s" dur="0.6s"
+                                repeatCount="indefinite" />
+                            <animate attributeName="y" attributeType="XML" values="13; 5; 13" begin="0s" dur="0.6s"
+                                repeatCount="indefinite" />
+                        </rect>
+                        <rect x="10" y="13" width="4" height="5" fill="#333">
+                            <animate attributeName="height" attributeType="XML" values="5;21;5" begin="0.15s" dur="0.6s"
+                                repeatCount="indefinite" />
+                            <animate attributeName="y" attributeType="XML" values="13; 5; 13" begin="0.15s" dur="0.6s"
+                                repeatCount="indefinite" />
+                        </rect>
+                        <rect x="20" y="13" width="4" height="5" fill="#333">
+                            <animate attributeName="height" attributeType="XML" values="5;21;5" begin="0.3s" dur="0.6s"
+                                repeatCount="indefinite" />
+                            <animate attributeName="y" attributeType="XML" values="13; 5; 13" begin="0.3s" dur="0.6s"
+                                repeatCount="indefinite" />
+                        </rect>
+                    </svg>
+</div>
+<mat-sidenav-container class="example-container" *transloco="let t" >
+    <mat-sidenav #sidemenu mode="over" [(opened)]="opened" position="end" class="right-menu">
+        <app-right-menu></app-right-menu>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-nav (menuStatusChanged)="menuStatusChange($event)" (phoneMenuStatus)="phoneMenuStatus($event)" ></app-nav>
+        <mat-sidenav-container fxFlexFill class="example-container">
+            <mat-sidenav fxLayout="column" mode="over" [opened]="phoneMenu" position="start" class="right-menu" fxHide.gt-sm="true">
+                <div fxLayout="column">
+                    <a mat-button routerLink="/projets"> {{ t('PROJECTS') }} </a>
+                    <a mat-button routerLink="/prestataires"> {{ t('PRESTATAIRES') }} </a>
+                    <a mat-button (click)="jobboard.toggle()"> {{ t('JOBBOARD') }} </a>
+                    <div #jobboard >
+                        <button mat-menu-item routerLink="/jobs">{{ t('ALL_ADS') }}</button>
+                        <button mat-menu-item routerLink="/jobs/list/mes-annonces">{{ t('MY_ADS') }}</button>
+                        <button mat-menu-item (click)="createAd()" >{{ t('CREAT_AN_AD') }}</button>
+                    </div>
+                    <a mat-button routerLink="/discuss"> {{ t('BUILD_AND_DISCUSS') }} <img
+                        src="./../../../assets/img/build_discuss.svg" class="pl-1 mb-3" alt=""> </a>
+                </div>
+            </mat-sidenav>
+            <mat-sidenav-content fxFlexFill>
+                <section class="profile_header" *transloco="let t">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 pt-5 pt-sm-0" *ngIf="profile">
+                                <h1 class="mr-sm-2 mb-0">{{ profile.company_name }}</h1>
+                                <div class="d-flex align-items-center justify-content-center justify-content-sm-start"
+                                *ngIf="role=='mission'">
+                                    <ngb-rating class="rate" [(rate)]="profile.score" [readonly]="true" [max]=5>
+                                    </ngb-rating>
+                                    <p class="mb-0"> {{ t('PROFILE_RATES', { count: profile.nbrEvaluations }) }} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <app-my-profile-menu [profile]="profile"></app-my-profile-menu>
+                <section class="gray-background-color main" *transloco="let t">
+                    <div class="container " *ngIf="profile">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row py-sm-3">
+                                    <div class="col-12 py-sm-3 main">
+                                        <div style="width: 60px; left:0; right:0; margin:auto; position:absolute"
+                                            class="d-none">
+                                            <mat-spinner style="margin:0 auto;" strokeWidth="2" color="warn"
+                                                [diameter]="30">
+                                            </mat-spinner>
+                                        </div>
+                                        <router-outlet>
+                                        </router-outlet>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <app-footer *ngIf="!isLoading"></app-footer>
+            </mat-sidenav-content>
+        </mat-sidenav-container>
+    </mat-sidenav-content>
+</mat-sidenav-container>

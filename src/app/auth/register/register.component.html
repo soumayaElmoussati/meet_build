@@ -1,0 +1,461 @@
+<section class="meet_inscription h-100" *transloco="let t; lang: 'fr'">
+    <div class="container py-3 py-sm-5">
+        <div class="row">
+            <div class="col-12 px-0">
+                <mat-toolbar class="d-flex align-items-center justify-content-between ">
+                    <a href="/">
+                        <img src="./../../../assets/img/logo/meet&build.svg" alt="meet and build logo" class="logo img-fluid">
+                    </a>
+                    <p class="mb-0" >{{ t('ALREADY_REGISTERED')}} <a class="secondary" routerLink="/login">{{t('LOG_IN')}}</a></p>
+                </mat-toolbar>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 mt-sm-4  mx-auto">
+        <div class="row px-3 ">
+            <div class="col-sm-7 col-md-10 page_content p-4 p-sm-5 mx-auto my-4 ">
+                <ul class="stepper_header list-inline d-flex justify-content-center">
+                    <li class="step_1 cursor-pointer" [ngClass]="etap_1" (click)="toFirstForm()">
+                        <div class="number" *ngIf="etap_1=='checked'">
+                            <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.33301 6L6.33301 11L14.6663 1" stroke="white" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="number" *ngIf="etap_1!='checked'">1</div>
+                        <p [innerHTML]="t('INSCRIPTION_ACCOUNT')"></p>
+                        <div class="statut"></div>
+                    </li>
+                    <li class="step_2 {{etap_2}}" [ngClass]="{'cursor-pointer': checkForms[0].submitted }" (click)="checkForms[0].submitted ? toSecondeForm() : null" >
+                        <div class="number" *ngIf="etap_2=='checked'">
+                            <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.33301 6L6.33301 11L14.6663 1" stroke="white" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="number" *ngIf="etap_2!='checked'">2</div>
+                        <p [innerHTML]="t('INSCRIPTION_COMPANY')"></p>
+                        <div class="statut"></div>
+                    </li>
+                    <li class="step_2 {{etap_3}}"
+                    [ngClass]="{'cursor-pointer': checkForms[1].submitted }"
+                    (click)="checkForms[1].submitted ? tothirdForm() : null"
+                    *ngIf="subscriptionType == 'mission'"
+                    >
+                        <div class="number" *ngIf="etap_3=='checked'">
+                            <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.33301 6L6.33301 11L14.6663 1" stroke="white" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="number" *ngIf="etap_3!='checked'">3</div>
+                        <p [innerHTML]="t('INSCRIPTION_KNOWLEDGE')"></p>
+                        <div class="statut"></div>
+                    </li>
+                    <li class="step_2 {{etap_4}}"
+                    [ngClass]="{ 'cursor-pointer': checkForms[2].submitted}"
+                    (click)="checkForms[2].submitted ? tofourthForm() : null"
+                    *ngIf="subscriptionType == 'mission'"
+                    >
+                        <div class="number" *ngIf="etap_4=='checked'">
+                            <svg width="16" height="12" viewBox="0 0 16 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.33301 6L6.33301 11L14.6663 1" stroke="white" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </div>
+                        <div class="number" *ngIf="etap_4!='checked'">4</div>
+                        <p [innerHTML]="t('INSCRIPTION_DONE')"></p>
+                    </li>
+                </ul>
+
+ 
+
+                <!-- Step 1 -->
+                <form [formGroup]="firstFormGroup" class="row pt-4 pt-sm-5 justify-content-center"
+                    (ngSubmit)='firstFormSubmit()' *ngIf="etap_1=='active'">
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.LASTNAME') }} *" required
+                                formControlName="lastname" required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.FIRSTNAME') }} *" formControlName="firstname"
+                                required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.INSCRIPTION_JOB') }} *" formControlName="function"
+                                required>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput type="email" placeholder="{{t('fields.EMAIL')}} *" formControlName="email"
+                                required>
+                            <mat-error *ngIf="firstFormGroup.controls['email'].invalid">
+                                <mat-error *ngIf="firstFormGroup.controls['email'].errors.emailNotAvailable">
+                                    {{ t('EMAILEXIST')}}
+                                </mat-error>
+                            </mat-error>
+                        </mat-form-field>
+                        
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput [type]="show ? 'text' : 'password'"
+                                placeholder="{{t('fields.INSCRIPTION_PASSWORD')}} *" formControlName="password"
+                                required>
+                            <mat-icon matSuffix (click)="show = !show">{{show ? 'visibility' : 'visibility_off'}}
+                            </mat-icon>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-7">
+                        <button mat-button type="submit" class="btn mx-auto primary px-5">{{t('SUIVANT') }}</button>
+                    </div>
+                </form>
+                <!-- End step 1 -->
+
+
+                <!-- Step 2 -->
+                <form [formGroup]="secondFormGroup" (keydown.enter)="$event.preventDefault()"
+                    class="row pt-4 pt-sm-5 justify-content-center step-2 mt-2 position-relative"
+                    (ngSubmit)='secondeFormSubmit()' *ngIf="etap_2=='active'">
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.VAT_NUMBER')}}" formControlName="vat" required>
+                            <span matPrefix>BE0 &nbsp;</span>
+                        </mat-form-field>
+                        
+                        <span class="error" *ngIf="!vatNumberData" > <p class="mb-0 error-color">{{t('NO_DATA_RECOVERED_FOR_VAT')}}</p> </span>
+
+                        <button type="button" class="btn primary field_btn" (click)="getInfo(true)">
+                            <ng-container *ngIf="!showLoader">
+                                {{t('GO')}}
+                            </ng-container>
+                            <ng-container *ngIf="showLoader">
+                                <svg width="60px" height="60px" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                    enable-background="new 0 0 0 0" xml:space="preserve">
+                                    <path fill="#fff"
+                                        d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                        <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                                            dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                    </path>
+                                </svg>
+                            </ng-container>
+                        </button>
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.COMERCIAL_NAME_OF_COMPANY')}} *"
+                                formControlName="company_name" required>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.SOCIAL_ADRESS')}} *" type="texte"
+                                formControlName="company_address" required #company_address
+                                (focus)="autoCompleteAddress()">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-sm-7 mb-3 mb-sm-4" *ngIf="false">
+                        <div class="row mx-0">
+                            <div class="col-8 pl-0 ">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <input matInput placeholder="{{t('fields.CITY')}} *" formControlName="city"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4 pr-0">
+                                <mat-form-field appearance="outline">
+                                    <input matInput placeholder="{{t('fields.ZIPCODE')  }} *" formControlName="cp"
+                                        required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-7 mb-3 mb-sm-4" *ngIf="false">
+                        <mat-form-field appearance="outline">
+                            <mat-select formControlName="country" placeholder="{{t('fields.COUNTRY')}}">
+                                <mat-option *ngFor="let country of listCountries" [value]="country">
+                                    {{country.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.WEBSITE')  }}" formControlName="website">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.CONTACT_EMAIL')  }}"
+                                formControlName="contact_email">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.PHONE_NUMBER')  }}" formControlName="tel">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-7 mb-sm-4 mb-3">
+                        <mat-form-field appearance="outline">
+                            <input matInput placeholder="{{t('fields.EXPERIENCE_YEARS') }}"
+                                formControlName="experience_years" type="number" min="0">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-7 mb-3 mb-sm-4">
+                        <mat-checkbox formControlName="checkBilling">
+                            <span class="size-12 font-weight-400 text-pre-line" [innerHTML]="t( 'CONSENT_1')"></span>
+                        </mat-checkbox>
+                    </div>
+                    <div class="col-sm-7 mb-3 mb-sm-4" *ngIf="!secondFormGroup.value.checkBilling">
+                        <div class="row mx-0 mb-3 ">
+                            <div class="col-12 px-0 mb-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <input matInput placeholder="{{t('fields.INVOICE_ADRESS') }}"
+                                        formControlName="billing_address" #billing_address  (focus)="autoCompleteBillingAddress()">
+                                </mat-form-field>
+                            </div>
+                            <div class="row mx-0 w-100" *ngIf="false" >
+                                <div class="col-8 pl-0 ">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <input matInput placeholder="{{t('fields.CITY')  }} *"
+                                            formControlName="billing_city" required>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-4 pr-0">
+                                    <mat-form-field appearance="outline">
+                                        <input matInput placeholder="{{t('fields.ZIPCODE')  }} *"
+                                            formControlName="billing_cp" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="col-12 px-0 my-3"  *ngIf="false">
+                                <mat-form-field appearance="outline">
+                                    <mat-select formControlName="billing_country" placeholder="{{t('fields.COUNTRY')}}">
+                                        <mat-option *ngFor="let country of listCountries" [value]="country">
+                                            {{country.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7" *ngIf="subscriptionType == 'mission'" >
+                        <button mat-button class="btn primary mx-auto px-5 " type="submit">{{t('SUIVANT') }}</button>
+                    </div>
+                    <div class="col-7" *ngIf="subscriptionType == 'job'">
+                        <button mat-button class="btn primary mx-auto px-5 " type="submit">{{t('CONNECT_ACCOUNT') }}</button>
+                    </div>
+                </form>
+                <!-- End step 2 -->
+
+                <!-- Step 3 -->
+                <form [formGroup]="thirdFormGroup" (ngSubmit)='thirdFormSubmit()'
+                    class="row pt-4 pt-sm-5 justify-content-center step-3" *ngIf="etap_3=='active'">
+                    <div class="col-sm-7">
+                        <p class="mb-3 text-center" [innerHTML]="t('SKILLS_REGISTER')"></p>
+                        <h3 [innerHTML]="t('NACE' )"></h3>
+                        <ul class="p-0 selected_competence ">
+                            <li class=" mr-2 mb-2 cursor-pointer"
+                            *ngFor="let skill of defaultSkills; let i = index"
+                            (click)="currentSkill=i"
+                            [ngClass]="{'selected': currentSkill == i }">
+                                {{skill.codeNace}}
+                            </li>
+                        </ul>
+                        <ul class="list-inline more-skills-option">
+                            <li *ngFor="let cmpt of defaultSkills[currentSkill]?.competences; let i = index">
+                                <mat-checkbox [checked]="cmpt.selected"  (change)="cmpt.selected = !cmpt.selected" >
+                                    <span class="size-12 font-weight-400"> {{ cmpt.name  }} </span>
+                                </mat-checkbox>
+                            </li>
+                        </ul>    
+                        <h3 [innerHTML]="t('SUPP_SKILLS')"></h3>
+                        <ul class="selected_competence selected_sup_competence px-0" *ngIf="competencesList" >
+                            <ng-container *ngFor="let cmpt of competencesList; let i = index">
+                                <li class="mr-2 mb-2">
+                                    {{cmpt.name}}
+                                    <a class="cursor-pointer ml-1" (click)="remove(cmpt, index)">
+                                        <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.77156 5.79406C5.62813 5.92372 5.4336 5.99656 5.23076 5.99656C5.02793 5.99656 4.8334 5.92372 4.68996 5.79406L3.00032 4.04813L1.31068 5.79348C1.23987 5.85855 1.15551 5.91029 1.06247 5.94574C0.969429 5.98118 0.869547 5.99962 0.768585 5.99999C0.667622 6.00037 0.567577 5.98266 0.474221 5.9479C0.380864 5.91315 0.296044 5.86202 0.224652 5.79748C0.15326 5.73294 0.0967095 5.65625 0.0582624 5.57185C0.0198154 5.48745 0.000232546 5.39701 0.000643656 5.30573C0.00105477 5.21445 0.0214516 5.12415 0.0606576 5.04004C0.0998636 4.95593 0.157103 4.87966 0.229074 4.81565L1.98692 3.00058L0.228437 1.18435C0.156466 1.12034 0.0992263 1.04407 0.0600203 0.959961C0.0208143 0.875847 0.000417451 0.785547 6.34107e-06 0.694271C-0.000404769 0.602995 0.0191781 0.512548 0.0576251 0.428148C0.0960722 0.343748 0.152622 0.267065 0.224014 0.202523C0.295406 0.13798 0.380227 0.086855 0.473583 0.0520966C0.56694 0.0173381 0.666985 -0.000365936 0.767947 5.73272e-06C0.86891 0.000377401 0.968792 0.0188174 1.06183 0.054262C1.15487 0.0897066 1.23923 0.141455 1.31004 0.206521L3.00032 1.95302L4.68996 0.206521C4.76077 0.141455 4.84513 0.0897066 4.93817 0.054262C5.03121 0.0188174 5.13109 0.000377401 5.23205 5.73272e-06C5.33302 -0.000365936 5.43306 0.0173381 5.52642 0.0520966C5.61977 0.086855 5.70459 0.13798 5.77599 0.202523C5.84738 0.267065 5.90393 0.343748 5.94238 0.428148C5.98082 0.512548 6.00041 0.602995 5.99999 0.694271C5.99958 0.785547 5.97919 0.875847 5.93998 0.959961C5.90077 1.04407 5.84353 1.12034 5.77156 1.18435L4.01372 3.00058L5.77156 4.81565C5.84268 4.87986 5.89909 4.95612 5.93758 5.04007C5.97607 5.12401 5.99588 5.21398 5.99588 5.30485C5.99588 5.39572 5.97607 5.4857 5.93758 5.56964C5.89909 5.65358 5.84268 5.72984 5.77156 5.79406Z" fill="#113B3A"/>
+                                        </svg>                                            
+                                    </a>
+                                </li>
+                            </ng-container>
+                        </ul>
+
+                        <div class="min-height mb-3">
+                            <mat-form-field class="example-chip-list "  appearance="outline" >
+                                <mat-chip-list #competenceList>
+                                    <input placeholder="{{ t('fields.DO_YOU_HAVE_OTHERS_SKILLS') }}" #competenceInput [formControl]="competenceCtrl" [matAutocomplete]="auto" [matChipInputFor]="competenceList"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                    <mat-option *ngFor="let competence of filteredCompetences | async" [value]="competence">
+                                        {{competence.name}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </div>
+                        
+                        
+                        
+                        <div class="row">
+                            <div class="col-12 d-flex align-items-center mb-2" >
+                                <p class="color-primary mb-0 mr-2">
+                                    {{ t('DO_YOU_HAVE_A_PROMO_CODE') }}
+                                </p>
+                                <mat-slide-toggle formControlName="hasPromoCode"></mat-slide-toggle>
+                            </div>
+                            <div class="col-12" *ngIf="thirdFormGroup.value.hasPromoCode" >
+                                <mat-form-field appearance="outline" class="mb-3">
+                                    <input matInput formControlName="codePromo" placeholder="{{ t('fields.ENTER_IT_HERE') }}" >    
+                                </mat-form-field> 
+                                <button type="button" class="btn primary field_btn promo" (click)="verifyCodePromo(true)">
+                                    <ng-container *ngIf="!showLoader">
+                                        {{t('APPLY_CODE')}}
+                                    </ng-container>
+                                    <ng-container *ngIf="showLoader">
+                                        <svg width="60px" height="60px" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                            enable-background="new 0 0 0 0" xml:space="preserve">
+                                            <path fill="#fff"
+                                                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                                                    dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                            </path>
+                                        </svg>
+                                    </ng-container>
+                                </button>
+                            </div>
+                            
+                            <div class="col-12 promo_code_message" *ngIf="codePromoDetails?.promoCode" >
+                                <p *ngIf="codePromoDetails.promoCode.gratuity_duration == 0"> {{ t('WELL_DONE_YOUR_ACCOUNT_IS_FREE_FOR_LIFE') }}  </p>
+                                <p *ngIf="codePromoDetails.promoCode.gratuity_duration == 1"> {{ t('WELL_DONE_YOUR_ACCOUNT_IS_FREE_FOR_MONTH') }}  </p>
+                                <p *ngIf="codePromoDetails.promoCode.gratuity_duration == 6"> {{ t('WELL_DONE_YOUR_ACCOUNT_IS_FREE_FOR_SIX_MONTH') }}  </p>
+                                <p *ngIf="codePromoDetails.promoCode.gratuity_duration == 12"> {{ t('WELL_DONE_YOUR_ACCOUNT_IS_FREE_FOR_ONE_YEAR') }}  </p>
+                            </div>
+                            <div class="col-12" *ngIf="codePromoInvalid">
+                                <div class="code_promo_not_valid">
+                                    <p> {{ t('THIS_CODE_IS_INVALID_TRY_AGAIN') }} </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <button mat-button class="btn primary mx-auto mt-1 px-5" type="submit">{{t('SUIVANT') }}</button>
+                    </div>
+                </form>
+                <!-- End step 3 -->
+
+
+                <!-- Step 4 -->
+                <div class="row step-4 pt-4 justify-content-center" *ngIf="etap_4=='active'">
+                    <div class="col-sm-7 text-center" *ngIf="!paymentStatus">
+                        <p class="mb-0"> <strong>{{t('INSCRIPTION_END' ) }}</strong> </p>
+                        <p class="redirextion-message  mb-0 ">{{ t('REGIRECTION_MESSAGE') }}</p>
+                        <svg class="d-block mx-auto my-4" width="109" height="109" viewBox="0 0 109 109" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M69.9617 0.000141854C69.1233 0.0336803 68.3141 0.184603 67.4715 0.394219L10.4813 14.2791C3.74002 15.9309 -0.477439 22.7308 1.17852 29.4763L9.16906 62.1008C9.65327 64.0441 10.596 65.8431 11.9185 67.3471C13.2409 68.8511 14.9044 70.0164 16.7697 70.7453V62.8848C16.7697 51.3266 26.1731 41.9232 37.7313 41.9232H90.5292L82.6686 9.56279C81.9734 6.74984 80.3294 4.26267 78.0139 2.52069C75.6984 0.778711 72.853 -0.111509 69.9575 0.000141854H69.9617ZM75.068 18.0816L78.4763 32.3606L64.3273 35.7647L60.789 21.6157L75.068 18.0816ZM37.7313 50.3078C30.7888 50.3078 25.1543 55.9423 25.1543 62.8848V96.4232C25.1543 103.366 30.7888 109 37.7313 109H96.4236C103.366 109 109 103.366 109 96.4232V62.8848C109 55.9423 103.366 50.3078 96.4236 50.3078H37.7313ZM37.7313 56.9904H96.4236C99.6558 56.9904 102.318 59.6525 102.318 62.8848V67.0771H31.8369V62.8848C31.8369 59.6525 34.499 56.9904 37.7313 56.9904ZM31.8369 79.654H102.318V96.4232C102.318 99.6555 99.6558 102.318 96.4236 102.318H37.7313C36.1707 102.309 34.6765 101.685 33.573 100.581C32.4695 99.4779 31.8457 97.9838 31.8369 96.4232V79.654Z"
+                                fill="#F39908" />
+                        </svg>
+
+                        <p class="mb-0">{{t('SECURITY_MENTION') }} </p>
+                        <p class="perso-data mb-3 mb-sm-5 "> <a href="/politique-de-confidentialite" target="_blank">{{ t('PERSO_DATA_MEET&BUILD') }}</a> </p>
+                        <a class="btn primary text-uppercase px-4" style="display: inline-flex;"
+                            (click)="connectAccount()"> {{ t('CONNECT_ACCOUNT') }}</a>
+                    </div>
+
+                    <div class="col-sm-7 text-center" *ngIf="paymentStatus == 'paid'"  >
+                        <p class="mb-0"> <strong>{{t('YOU_INSCRIPTION_END' ) }}</strong> </p>
+                        <p class="redirextion-message  mb-0 ">
+                            <a href="/politique-de-confidentialite" target="_blank"  [innerHTML]="t('YOUR_REGIRECTION_MESSAGE')"> </a>
+                        </p>
+
+                        <svg class="d-block mx-auto my-4" width="109" height="109" viewBox="0 0 109 109" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g filter="url(#filter0_d)">
+                                <circle cx="52.5" cy="50.5" r="36.5" transform="rotate(90 52.5 50.5)" fill="white" />
+                                <circle cx="52.5" cy="50.5" r="35" transform="rotate(90 52.5 50.5)" stroke="#F39908"
+                                    stroke-width="3" />
+                            </g>
+                            <path d="M38 50L50 62L70 38" stroke="#F39908" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <defs>
+                                <filter id="filter0_d" x="0" y="0" width="109" height="109" filterUnits="userSpaceOnUse"
+                                    color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feMorphology radius="7" operator="dilate" in="SourceAlpha"
+                                        result="effect1_dropShadow" />
+                                    <feOffset dx="2" dy="4" />
+                                    <feGaussianBlur stdDeviation="5.5" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.952941 0 0 0 0 0.6 0 0 0 0 0.0313726 0 0 0 0.05 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
+
+                        <a href="" class="btn primary text-uppercase px-4" style="display: inline-flex;"
+                            routerLink="/me"> {{ t('MY_PROFILE') }}</a>
+                    </div>
+                    <div class="col-sm-7 text-center" *ngIf="paymentStatus && paymentStatus != 'paid'" >
+                        <p class="mb-0 echec"> <strong>{{t('ECHECK_PAYMENT') }}</strong> </p>
+                        <a href="" class=" mb-0 echec " routerLink='/{{company.slug}}'>
+                            <strong>{{t('TRAY_PAYMENT')}}</strong></a>
+
+                        <svg class="d-block mx-auto my-4" xmlns="http://www.w3.org/2000/svg" width="109" height="109"
+                            viewBox="0 0 109 109" fill="none">
+                            <g filter="url(#filter0_d)">
+                                <circle cx="52.5" cy="50.5" r="35" transform="rotate(90 52.5 50.5)" stroke="#E10000"
+                                    stroke-width="3" />
+                            </g>
+                            <path
+                                d="M41.9843 36.8787L53.0003 47.8947L63.971 36.924C64.1632 36.7194 64.3948 36.5557 64.6519 36.4427C64.909 36.3297 65.1862 36.2699 65.467 36.2667C66.0681 36.2667 66.6447 36.5055 67.0697 36.9306C67.4948 37.3556 67.7336 37.9322 67.7336 38.5333C67.7389 38.8112 67.6874 39.0873 67.5821 39.3445C67.4769 39.6018 67.3202 39.8348 67.1216 40.0293L56.0376 51L67.1216 62.084C67.4952 62.4495 67.7143 62.9444 67.7336 63.4667C67.7336 64.0678 67.4948 64.6444 67.0697 65.0694C66.6447 65.4945 66.0681 65.7333 65.467 65.7333C65.1781 65.7453 64.8899 65.6971 64.6206 65.5917C64.3514 65.4864 64.107 65.3262 63.903 65.1213L53.0003 54.1053L42.007 65.0987C41.8154 65.2965 41.5866 65.4544 41.3338 65.5633C41.0809 65.6723 40.809 65.73 40.5336 65.7333C39.9325 65.7333 39.3559 65.4945 38.9309 65.0694C38.5058 64.6444 38.267 64.0678 38.267 63.4667C38.2617 63.1888 38.3132 62.9127 38.4185 62.6555C38.5237 62.3982 38.6804 62.1652 38.879 61.9707L49.963 51L38.879 39.916C38.5054 39.5505 38.2863 39.0556 38.267 38.5333C38.267 37.9322 38.5058 37.3556 38.9309 36.9306C39.3559 36.5055 39.9325 36.2667 40.5336 36.2667C41.0776 36.2735 41.599 36.4933 41.9843 36.8787Z"
+                                fill="#E10000" />
+                            <defs>
+                                <filter id="filter0_d" x="0" y="0" width="109" height="109" filterUnits="userSpaceOnUse"
+                                    color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                                    <feColorMatrix in="SourceAlpha" type="matrix"
+                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                    <feMorphology radius="7" operator="dilate" in="SourceAlpha"
+                                        result="effect1_dropShadow" />
+                                    <feOffset dx="2" dy="4" />
+                                    <feGaussianBlur stdDeviation="5.5" />
+                                    <feColorMatrix type="matrix"
+                                        values="0 0 0 0 0.952941 0 0 0 0 0.6 0 0 0 0 0.0313726 0 0 0 0.05 0" />
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+                                </filter>
+                            </defs>
+                        </svg>
+
+                        <a href="" class="btn primary text-uppercase px-5" style="display: inline-flex;" routerLink='/'>
+                            {{ t('TRAY') }}</a>
+                    </div>
+                </div>
+                <!-- End step 4 -->
+
+            </div>
+        </div>
+    </div>
+
+</section>

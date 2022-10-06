@@ -1,0 +1,114 @@
+<ng-container *transloco="let t">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-12 text-center">
+                <h5 class="dialog_title" [innerHTML]="t('EDIT_PROJECT_DETAILS')"></h5>
+            </div>
+            <div class="close_pop_up">
+                <a class="secondary" (click)="close(null)">
+                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="fill"
+                            d="M13.1303 14.5803C12.804 14.9066 12.3615 15.0899 11.9 15.0899C11.4386 15.0899 10.996 14.9066 10.6697 14.5803L6.82574 10.1868L2.98179 14.5789C2.82071 14.7426 2.62879 14.8728 2.41712 14.962C2.20546 15.0512 1.97823 15.0976 1.74853 15.0986C1.51884 15.0995 1.29124 15.055 1.07886 14.9675C0.866468 14.88 0.673501 14.7514 0.511084 14.589C0.348667 14.4265 0.220015 14.2336 0.132547 14.0212C0.0450801 13.8088 0.000529043 13.5812 0.00146432 13.3515C0.0023996 13.1218 0.0488025 12.8946 0.137996 12.6829C0.22719 12.4712 0.35741 12.2793 0.521145 12.1182L4.52024 7.55075L0.519695 2.98035C0.355961 2.81926 0.22574 2.62734 0.136547 2.41568C0.0473526 2.20401 0.000949704 1.97678 1.4426e-05 1.74709C-0.000920852 1.51739 0.0436302 1.28979 0.131097 1.07741C0.218565 0.865019 0.347217 0.672051 0.509634 0.509634C0.672051 0.347217 0.865019 0.218565 1.07741 0.131098C1.28979 0.0436302 1.51739 -0.000920852 1.74708 1.4426e-05C1.97678 0.000949704 2.20401 0.0473526 2.41568 0.136547C2.62734 0.225741 2.81926 0.355961 2.98034 0.519695L6.82574 4.91464L10.6697 0.519695C10.8308 0.355961 11.0227 0.225741 11.2344 0.136547C11.446 0.0473526 11.6733 0.000949704 11.903 1.4426e-05C12.1326 -0.000920852 12.3602 0.0436302 12.5726 0.131098C12.785 0.218565 12.978 0.347217 13.1404 0.509634C13.3028 0.672051 13.4315 0.865019 13.5189 1.07741C13.6064 1.28979 13.651 1.51739 13.65 1.74709C13.6491 1.97678 13.6027 2.20401 13.5135 2.41568C13.4243 2.62734 13.2941 2.81926 13.1303 2.98035L9.13124 7.55075L13.1303 12.1182C13.2921 12.2798 13.4205 12.4717 13.508 12.683C13.5956 12.8942 13.6407 13.1206 13.6407 13.3493C13.6407 13.578 13.5956 13.8044 13.508 14.0156C13.4205 14.2268 13.2921 14.4187 13.1303 14.5803Z"
+                            fill="#113B3A" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <form [formGroup]="projectForm"
+                class="row custom-padding meduim white-background-color border-raduis-15 px-5" >
+                <label class="col-12"> {{ t('WHAT_SKILLS_MUST_THE_PROFILE_YOU_ARE_LOOKING_FOR') }} </label>
+                <div class="col-12">
+                    <ul class="skills_list list-inline mb-0" >
+                        <ng-container *ngFor="let cmpt of selectedCompetences; let index = index">
+                            <li class="mb-2 list-inline-item additionalCompetences" > {{ cmpt.name }} 
+                                <a class="cursor-pointer ml-1" (click)="removeSkill(cmpt, index)">
+                                    <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.77156 5.79406C5.62813 5.92372 5.4336 5.99656 5.23076 5.99656C5.02793 5.99656 4.8334 5.92372 4.68996 5.79406L3.00032 4.04813L1.31068 5.79348C1.23987 5.85855 1.15551 5.91029 1.06247 5.94574C0.969429 5.98118 0.869547 5.99962 0.768585 5.99999C0.667622 6.00037 0.567577 5.98266 0.474221 5.9479C0.380864 5.91315 0.296044 5.86202 0.224652 5.79748C0.15326 5.73294 0.0967095 5.65625 0.0582624 5.57185C0.0198154 5.48745 0.000232546 5.39701 0.000643656 5.30573C0.00105477 5.21445 0.0214516 5.12415 0.0606576 5.04004C0.0998636 4.95593 0.157103 4.87966 0.229074 4.81565L1.98692 3.00058L0.228437 1.18435C0.156466 1.12034 0.0992263 1.04407 0.0600203 0.959961C0.0208143 0.875847 0.000417451 0.785547 6.34107e-06 0.694271C-0.000404769 0.602995 0.0191781 0.512548 0.0576251 0.428148C0.0960722 0.343748 0.152622 0.267065 0.224014 0.202523C0.295406 0.13798 0.380227 0.086855 0.473583 0.0520966C0.56694 0.0173381 0.666985 -0.000365936 0.767947 5.73272e-06C0.86891 0.000377401 0.968792 0.0188174 1.06183 0.054262C1.15487 0.0897066 1.23923 0.141455 1.31004 0.206521L3.00032 1.95302L4.68996 0.206521C4.76077 0.141455 4.84513 0.0897066 4.93817 0.054262C5.03121 0.0188174 5.13109 0.000377401 5.23205 5.73272e-06C5.33302 -0.000365936 5.43306 0.0173381 5.52642 0.0520966C5.61977 0.086855 5.70459 0.13798 5.77599 0.202523C5.84738 0.267065 5.90393 0.343748 5.94238 0.428148C5.98082 0.512548 6.00041 0.602995 5.99999 0.694271C5.99958 0.785547 5.97919 0.875847 5.93998 0.959961C5.90077 1.04407 5.84353 1.12034 5.77156 1.18435L4.01372 3.00058L5.77156 4.81565C5.84268 4.87986 5.89909 4.95612 5.93758 5.04007C5.97607 5.12401 5.99588 5.21398 5.99588 5.30485C5.99588 5.39572 5.97607 5.4857 5.93758 5.56964C5.89909 5.65358 5.84268 5.72984 5.77156 5.79406Z" fill="#113B3A"/>
+                                    </svg>       
+                                </a> 
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="col-12 min-height">
+                    <mat-form-field appearance="outline">
+                        <mat-chip-list #chipList>
+                            <input placeholder="{{ t('fields.SEARCH_FOR_SKILLS') }}" #fruitInput formControlName="skillCtrl"
+                                [matAutocomplete]="auto" [matChipInputFor]="chipList"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                                (matChipInputTokenEnd)="addSkill($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedSkill($event)">
+                            <mat-option *ngFor="let item of filteredSkills | async" [value]="item">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <label class="col-12"> {{ t('WHERE_WILL_THE_THE_MISSION_TAKE_PLACE') }} </label>
+                <div class="col-12 mb-3">
+                    <mat-form-field appearance="outline">
+                        <input matInput placeholder="{{t('fields.ADDRESS')}} *" formControlName="address" required
+                            #project_address (focus)="autoCompleteAddress()">
+                    </mat-form-field>
+                </div>
+                <label class="col-12"> {{ t('HOW_FAR_FROM_MY_SITE_MUST_THE_SERVICE_PROVIDER_BE') }} </label>
+                <div class="col-12 mb-3">
+                    <mat-form-field appearance="outline">
+                        <mat-select  matInput placeholder="{{t('fields.DISTANCE_IN_KM')}} *"
+                        formControlName="distance">
+                        <mat-option *ngFor="let distance of distances" [value]="distance.value" > {{ distance.name }}  </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <label class="col-12"> {{ t('WHENE_SHOULD_THE_DATE_OF_THE_MISSION') }} </label>
+                <div class="col-12 mb-3">
+                    <mat-form-field appearance="outline">
+                        <mat-date-range-input [rangePicker]="picker">
+                            <input matStartDate placeholder="{{ t('FROM') }}" [min]="minDate"
+                                formControlName="startDate" (click)="picker.open()" readonly>
+                            <input matEndDate placeholder="{{ t('TO') }}" formControlName="endDate" (click)="picker.open()" readonly >
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                    </mat-form-field>
+                </div>
+                <label class="col-12"> {{ t('WHATE_LANGUAGES_MUST_THE_PROVIDER_SPEAK') }} </label>
+                <div class="col-12">
+                    <ul class="skills_list list-inline mb-0" >
+                        <ng-container *ngFor="let lang of selectedLanguage; let index = index">
+                            <li class="mb-2 list-inline-item additionalCompetences" > {{ lang.name }} 
+                                <a class="cursor-pointer ml-1" (click)="removeLanguage(lang, index)">
+                                    <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.77156 5.79406C5.62813 5.92372 5.4336 5.99656 5.23076 5.99656C5.02793 5.99656 4.8334 5.92372 4.68996 5.79406L3.00032 4.04813L1.31068 5.79348C1.23987 5.85855 1.15551 5.91029 1.06247 5.94574C0.969429 5.98118 0.869547 5.99962 0.768585 5.99999C0.667622 6.00037 0.567577 5.98266 0.474221 5.9479C0.380864 5.91315 0.296044 5.86202 0.224652 5.79748C0.15326 5.73294 0.0967095 5.65625 0.0582624 5.57185C0.0198154 5.48745 0.000232546 5.39701 0.000643656 5.30573C0.00105477 5.21445 0.0214516 5.12415 0.0606576 5.04004C0.0998636 4.95593 0.157103 4.87966 0.229074 4.81565L1.98692 3.00058L0.228437 1.18435C0.156466 1.12034 0.0992263 1.04407 0.0600203 0.959961C0.0208143 0.875847 0.000417451 0.785547 6.34107e-06 0.694271C-0.000404769 0.602995 0.0191781 0.512548 0.0576251 0.428148C0.0960722 0.343748 0.152622 0.267065 0.224014 0.202523C0.295406 0.13798 0.380227 0.086855 0.473583 0.0520966C0.56694 0.0173381 0.666985 -0.000365936 0.767947 5.73272e-06C0.86891 0.000377401 0.968792 0.0188174 1.06183 0.054262C1.15487 0.0897066 1.23923 0.141455 1.31004 0.206521L3.00032 1.95302L4.68996 0.206521C4.76077 0.141455 4.84513 0.0897066 4.93817 0.054262C5.03121 0.0188174 5.13109 0.000377401 5.23205 5.73272e-06C5.33302 -0.000365936 5.43306 0.0173381 5.52642 0.0520966C5.61977 0.086855 5.70459 0.13798 5.77599 0.202523C5.84738 0.267065 5.90393 0.343748 5.94238 0.428148C5.98082 0.512548 6.00041 0.602995 5.99999 0.694271C5.99958 0.785547 5.97919 0.875847 5.93998 0.959961C5.90077 1.04407 5.84353 1.12034 5.77156 1.18435L4.01372 3.00058L5.77156 4.81565C5.84268 4.87986 5.89909 4.95612 5.93758 5.04007C5.97607 5.12401 5.99588 5.21398 5.99588 5.30485C5.99588 5.39572 5.97607 5.4857 5.93758 5.56964C5.89909 5.65358 5.84268 5.72984 5.77156 5.79406Z" fill="#113B3A"/>
+                                    </svg>       
+                                </a> 
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+                <div class="col-12 min-height">
+                    <mat-form-field class="mb-3" appearance="outline">
+                        <mat-chip-list #chipListLang>
+                            <input placeholder="{{ t('fields.SEARCH_FOR_LANGUAGES') }}" #languageInput formControlName="languageCtrl"
+                                [matAutocomplete]="autoLang" [matChipInputFor]="chipListLang"
+                                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                                (matChipInputTokenEnd)="addLanguage($event)">
+                        </mat-chip-list>
+                        <mat-autocomplete #autoLang="matAutocomplete" (optionSelected)="selectedLang($event)">
+                            <mat-option *ngFor="let item of filteredLanguages | async" [value]="item">
+                                {{item.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+                <div class="col-12">
+                    <button class="btn primary px-4 center mt-3" type="button" (click)="onProjectFormSubmit()" >
+                        {{ t('SAVE') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-container>

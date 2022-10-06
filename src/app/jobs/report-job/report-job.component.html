@@ -1,0 +1,59 @@
+<ng-container *transloco="let t">
+    <section class="background-before pt-4 pb-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="color-white" >
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19.7332 6.15048L28.6678 21.0318C29.9518 23.1691 29.3212 25.9811 27.2585 27.3118C26.5662 27.7601 25.7592 27.999 24.9345 27.9998H7.06384C4.63584 27.9998 2.6665 25.9598 2.6665 23.4411C2.6665 22.5891 2.89717 21.7558 3.3305 21.0318L12.2665 6.15048C13.5492 4.01314 16.2612 3.35848 18.3238 4.68914C18.8945 5.05714 19.3772 5.55714 19.7332 6.15048ZM16.7732 7.26914C16.6099 7.16415 16.4271 7.09334 16.2358 7.06098C16.0444 7.02862 15.8485 7.03539 15.6598 7.08088C15.4711 7.12636 15.2936 7.20962 15.138 7.32563C14.9824 7.44163 14.852 7.58797 14.7545 7.75581L5.81984 22.6398C5.6747 22.8824 5.5982 23.1598 5.5985 23.4425C5.5985 24.2825 6.2545 24.9625 7.06517 24.9625H24.9332C25.2078 24.9625 25.4758 24.8825 25.7078 24.7331C26.0407 24.512 26.2755 24.1709 26.3632 23.7809C26.4508 23.391 26.3847 22.9822 26.1785 22.6398L17.2438 7.75581C17.1267 7.55984 16.9661 7.39335 16.7745 7.26914H16.7732ZM15.9998 22.6665C15.6462 22.6665 15.3071 22.526 15.057 22.276C14.807 22.0259 14.6665 21.6868 14.6665 21.3331C14.6665 20.9795 14.807 20.6404 15.057 20.3903C15.3071 20.1403 15.6462 19.9998 15.9998 19.9998C16.3535 19.9998 16.6926 20.1403 16.9426 20.3903C17.1927 20.6404 17.3332 20.9795 17.3332 21.3331C17.3332 21.6868 17.1927 22.0259 16.9426 22.276C16.6926 22.526 16.3535 22.6665 15.9998 22.6665ZM15.9998 10.6665C16.3535 10.6665 16.6926 10.807 16.9426 11.057C17.1927 11.3071 17.3332 11.6462 17.3332 11.9998V17.3331C17.3332 17.6868 17.1927 18.0259 16.9426 18.276C16.6926 18.526 16.3535 18.6665 15.9998 18.6665C15.6462 18.6665 15.3071 18.526 15.057 18.276C14.807 18.0259 14.6665 17.6868 14.6665 17.3331V11.9998C14.6665 11.6462 14.807 11.3071 15.057 11.057C15.3071 10.807 15.6462 10.6665 15.9998 10.6665Z" fill="white"/>
+                        </svg>
+                        {{ t('REPORT_ABUSE') }}
+                    </h2>
+                </div>
+            </div>
+            <div class="row px-3 pt-4"> 
+                <div class="col-sm-12 white-background-color border-raduis-15 p-5 mb-3">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <form [formGroup]="reportForm" (ngSubmit)="onReportFormSubmit()" >
+                                <p class="size-16"><strong> {{ t('HAVE_YOU_NOTICED_AN_ABUSE_PLEASE_EXPALIN_IT_TO_US_BELOW') }} </strong></p>
+                                <h3 class="pt-4"> {{ t('USER') }}: </h3>
+                                <p> {{ reportForm.value.user }} </p>
+                                <h3 class="pt-4"> {{ t('PROJECT_URL') }}: </h3>
+                                <p> {{ baseUrl + '/' + reportForm.value.url }} </p>
+                                <h3 class="pt-4"> {{ t('REASON_FOR_THE_REPORT') }}: </h3>
+                                <mat-radio-group formControlName="reason">
+                                    <mat-radio-button class="d-block" [value]="reason" *ngFor="let reason of reportReasonsList " >
+                                        {{ reason.reason }}
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                                <h3 class="pt-4"> {{ t('MESSAGE') }}: </h3>
+                                <div class="textarea">
+                                    <mat-form-field appearance="outline">
+                                        <textarea matInput formControlName="message" class="w-100"></textarea>    
+                                    </mat-form-field>
+                                </div>
+                                <div class="d-flex pt-3" >
+                                    <button type="submit" class="btn primary px-5 mr-3" > {{ t('REPORT') }}
+                                        <ng-container *ngIf="reportFormSubmitting">
+                                            <svg class="loader" width="60px" height="60px" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                                enable-background="new 0 0 0 0" xml:space="preserve">
+                                                <path fill="#fff"
+                                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                    <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                                                        from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                                </path>
+                                            </svg>
+                                        </ng-container>
+                                    </button>
+                                    <button type="button" class="btn secondary px-5" (click)="cancel()" > {{ t('CANCEL') }} </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-container>

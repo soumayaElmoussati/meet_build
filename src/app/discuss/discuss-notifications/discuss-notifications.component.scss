@@ -1,0 +1,78 @@
+.card {
+    .body {
+        padding: 1rem;
+        max-height: 384px;
+        overflow-y: auto;
+    }
+}
+.dashboard {
+    ul li {
+        font-size: 11px;
+    }
+    .liker-profil {
+        width: 33px;
+        height: 33px;
+        border-radius: 50%;
+        background-size: cover;
+        display: inline-block;
+        filter: drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.15));
+    }
+}
+ ::ng-deep .mat-form-field {
+    display: inline;
+    &.search {
+        .mat-form-field-outline {
+            top: 0 !important;
+            height: 50px;
+        }
+        .mat-form-field-flex {
+            box-shadow: unset;
+            border-radius: 3px;
+            height: 50px;
+            background-color: rgba(243, 153, 8, 0.15) !important;
+            ;
+            display: flex;
+            align-items: center;
+        }
+         ::placeholder {
+            color: #607D8B !important;
+        }
+        .mat-input-element {
+            color: #607D8B !important;
+        }
+        .mat-form-field-outline-end {
+            border-radius: 0px !important;
+        }
+        .mat-form-field-outline-start {
+            border-radius: 0px !important;
+        }
+        .mat-form-field-outline-start,
+        .mat-form-field-outline-end {
+            min-width: 3px!important;
+        }
+        &.medium {
+            .mat-form-field-outline {
+                height: 30px;
+            }
+            .mat-form-field-flex {
+                height: 30px;
+            }
+            .mat-form-field.comment .mat-form-field-outline-end {
+                border-radius: 0 !important;
+            }
+            .mat-form-field-appearance-outline .mat-form-field-outline-end {
+                border: unset !important;
+                min-width: 5px;
+            }
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline-start,
+        .mat-form-field-appearance-outline .mat-form-field-outline-end {
+            border: 0px !important;
+            min-width: 5px;
+        }
+    }
+}
+.sticky_bloc{
+position: sticky;
+top: 32px;
+}

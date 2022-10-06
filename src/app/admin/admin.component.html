@@ -1,0 +1,166 @@
+<ng-container *transloco="let t">
+    <section class="admin-dashboard" #adminDashboard>
+        <div class="container-fluid h-100">
+            <div class="row h-100">
+                <div class="col-12 px-0">
+                    <div style="height: 25%; margin-bottom: 0;" >
+                        <ul class="list-inline statistics">
+                            <li class="list-inline-item">
+                                <h4>
+                                    {{ t('admin.PROJECTS') }}
+                                    <svg width="35" height="37" viewBox="0 0 35 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M32.2812 7.39062C32.9047 7.38991 33.5024 7.14193 33.9433 6.70108C34.3841 6.26023 34.6321 5.66252 34.6328 5.03906V2.35156C34.6321 1.72811 34.3841 1.13039 33.9433 0.689542C33.5024 0.248693 32.9047 0.000711301 32.2812 0H2.71875C2.0953 0.000711301 1.49758 0.248693 1.05673 0.689542C0.61588 1.13039 0.367899 1.72811 0.367188 2.35156V5.03906C0.367899 5.66252 0.61588 6.26023 1.05673 6.70108C1.49758 7.14193 2.0953 7.38991 2.71875 7.39062H3.05469V24.1875H1.375C1.10771 24.1875 0.85137 24.2937 0.662369 24.4827C0.473367 24.6717 0.367188 24.928 0.367188 25.1953C0.367188 25.4626 0.473367 25.7189 0.662369 25.9079C0.85137 26.0969 1.10771 26.2031 1.375 26.2031H16.4922V29.7033C15.6341 29.9465 14.8929 30.4919 14.4054 31.2388C13.918 31.9858 13.7171 32.8838 13.8399 33.7672C13.9627 34.6507 14.4008 35.4599 15.0735 36.0455C15.7462 36.6312 16.6081 36.9538 17.5 36.9538C18.3919 36.9538 19.2538 36.6312 19.9265 36.0455C20.5992 35.4599 21.0373 34.6507 21.1601 33.7672C21.2829 32.8838 21.082 31.9858 20.5946 31.2388C20.1071 30.4919 19.3659 29.9465 18.5078 29.7033V26.2031H33.625C33.8923 26.2031 34.1486 26.0969 34.3376 25.9079C34.5266 25.7189 34.6328 25.4626 34.6328 25.1953C34.6328 24.928 34.5266 24.6717 34.3376 24.4827C34.1486 24.2937 33.8923 24.1875 33.625 24.1875H31.9453V7.39062H32.2812ZM19.1797 33.2578C19.1797 33.59 19.0812 33.9148 18.8966 34.191C18.712 34.4672 18.4497 34.6825 18.1428 34.8096C17.8359 34.9368 17.4981 34.97 17.1723 34.9052C16.8465 34.8404 16.5472 34.6804 16.3123 34.4455C16.0774 34.2106 15.9174 33.9113 15.8526 33.5855C15.7878 33.2597 15.821 32.9219 15.9482 32.615C16.0753 32.3081 16.2906 32.0458 16.5668 31.8612C16.843 31.6766 17.1678 31.5781 17.5 31.5781C17.9453 31.5787 18.3722 31.7558 18.6871 32.0707C19.002 32.3856 19.1792 32.8125 19.1797 33.2578V33.2578ZM2.38281 5.03906V2.35156C2.38295 2.26251 2.41838 2.17714 2.48135 2.11417C2.54433 2.05119 2.62969 2.01576 2.71875 2.01562H32.2812C32.3703 2.01576 32.4557 2.05119 32.5186 2.11417C32.5816 2.17714 32.6171 2.26251 32.6172 2.35156V5.03906C32.6171 5.12812 32.5816 5.21349 32.5186 5.27646C32.4557 5.33943 32.3703 5.37487 32.2812 5.375H2.71875C2.62969 5.37487 2.54433 5.33943 2.48135 5.27646C2.41838 5.21349 2.38295 5.12812 2.38281 5.03906V5.03906ZM29.9297 24.1875H5.07031V7.39062H29.9297V24.1875Z" fill="#F39908"/>
+                                    </svg>                                                                              
+                                </h4>
+                                <ul class="actions list-inline">
+                                    <li>
+                                        <h5> {{ statisticsData.nbrNewUsers }} <span *ngIf="statisticsData.newUsersProportion" [ngClass]="{'negative' : statisticsData.newUsersProportion < 0 }" > <ng-container *ngIf="statisticsData.newUsersProportion > 0">+</ng-container>{{ statisticsData.newUsersProportion }}% </span> </h5>
+                                        <p>{{ t('admin.NEW_USERS') }}</p>
+                                    </li>
+                                    <li>
+                                        <h5> {{ statisticsData.nbrNewProjects }} <span *ngIf="statisticsData.newProjectsProportion" [ngClass]="{'negative' : statisticsData.newProjectsProportion < 0 }"> <ng-container *ngIf="statisticsData.newProjectsProportion > 0">+</ng-container>{{ statisticsData.newProjectsProportion }}% </span> </h5>
+                                        <p>{{ t('admin.PUBLISHED_OFFERS') }}</p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-inline-item">
+                                <h4>{{ t('admin.PRESTATAIRES') }}
+                                    <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g clip-path="url(#clip0_716:637)">
+                                        <path d="M16.2045 0C10.5009 0 5.84772 4.63303 5.84772 10.312C5.84772 13.8623 7.66757 17.0148 10.4254 18.8753C5.1479 21.1293 1.40909 26.3442 1.40909 32.4091H4.36818C4.36818 25.8831 9.65016 20.624 16.2045 20.624C22.7589 20.624 28.0409 25.8831 28.0409 32.4091H31C31 26.3442 27.2612 21.1307 21.9837 18.8739C23.3912 17.9278 24.5445 16.6527 25.3425 15.1601C26.1405 13.6675 26.559 12.0029 26.5614 10.312C26.5614 4.63303 21.9082 0 16.2045 0ZM16.2045 2.94628C20.3073 2.94628 23.6023 6.22696 23.6023 10.312C23.6023 14.397 20.3073 17.6777 16.2045 17.6777C12.1018 17.6777 8.80682 14.397 8.80682 10.312C8.80682 6.22696 12.1018 2.94628 16.2045 2.94628Z" fill="#F39908"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0_716:637">
+                                        <rect width="31" height="31" fill="white"/>
+                                        </clipPath>
+                                        </defs>
+                                    </svg>
+                                </h4>
+                                <ul class="actions list-inline">
+                                    <li>
+                                        <h5> {{ statisticsData.allUsers }} <span *ngIf="statisticsData.allUsersProportion" [ngClass]="{'negative' : statisticsData.allUsersProportion < 0 }"><ng-container *ngIf="statisticsData.allUsersProportion > 0" >+</ng-container>{{ statisticsData.allUsersProportion }}%</span>  </h5>
+                                        <p>{{ t('admin.PROVIDERS_LISTED_IN_THE_DIRECTORY') }}</p>
+                                    </li>
+                                </ul>
+
+                                
+                            </li>
+                            <li class="list-inline-item">
+                                <h4>{{ t('admin.JOBBOARD') }}
+                                    <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M0.60714 6.3644C0.60714 4.83703 1.21388 3.37223 2.29389 2.29222C3.3739 1.21221 4.83871 0.605469 6.36607 0.605469H28.6339C30.1613 0.605469 31.6261 1.21221 32.7061 2.29222C33.7861 3.37223 34.3929 4.83703 34.3929 6.3644V28.6323C34.3929 30.1596 33.7861 31.6244 32.7061 32.7044C31.6261 33.7844 30.1613 34.3912 28.6339 34.3912H6.36607C4.83871 34.3912 3.3739 33.7844 2.29389 32.7044C1.21388 31.6244 0.60714 30.1596 0.60714 28.6323V6.3644ZM2.91071 18.2662V28.6323C2.91071 29.5487 3.27476 30.4276 3.92276 31.0756C4.57077 31.7236 5.44965 32.0876 6.36607 32.0876H20.5714V18.2662H2.91071ZM20.5714 15.9626V2.90904H6.36607C5.44965 2.90904 4.57077 3.27309 3.92276 3.92109C3.27476 4.5691 2.91071 5.44798 2.91071 6.3644V15.9626H20.5714ZM28.6339 32.0876C29.5503 32.0876 30.4292 31.7236 31.0772 31.0756C31.7252 30.4276 32.0893 29.5487 32.0893 28.6323V23.6412H22.875V32.0876H28.6339ZM32.0893 21.3376V13.659H22.875V21.3376H32.0893ZM22.875 2.90904V11.3555H32.0893V6.3644C32.0893 5.44798 31.7252 4.5691 31.0772 3.92109C30.4292 3.27309 29.5503 2.90904 28.6339 2.90904H22.875Z" fill="#F39908"/>
+                                    </svg>
+                                </h4>
+                                <ul class="actions list-inline">
+                                    <li>
+                                        <h5> {{ statisticsData.nbrNewJobs }} <span *ngIf="statisticsData.newJobsProportion" [ngClass]="{'negative' : statisticsData.newJobsProportion < 0 }"><ng-container *ngIf="statisticsData.newJobsProportion > 0" >+</ng-container>{{ statisticsData.newJobsProportion }}% </span> </h5>
+                                        <p>{{ t('admin.POSTED_JOBS') }}</p>
+                                    </li>
+                                    <li>
+                                        <h5> {{statisticsData.nbrNewCvs}} <span *ngIf="statisticsData.newCvProportion" [ngClass]="{'negative' : statisticsData.newCvProportion < 0 }"><ng-container *ngIf="statisticsData.newCvProportion > 0">+</ng-container>{{ statisticsData.newCvProportion }}% </span> </h5>
+                                        <p> {{ t('admin.CV_POSTED') }} </p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="list-inline-item">
+                                <h4>{{ t('admin.BUILD_AND_DISCUSS') }}
+                                    <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M26.0833 0.167969H3.91667C2.17025 0.167969 0.75 1.58822 0.75 3.33464V22.3346C0.75 24.0811 2.17025 25.5013 3.91667 25.5013H9.5945L15 30.9068L20.4055 25.5013H26.0833C27.8298 25.5013 29.25 24.0811 29.25 22.3346V3.33464C29.25 1.58822 27.8298 0.167969 26.0833 0.167969ZM26.0833 22.3346H19.0945L15 26.4291L10.9055 22.3346H3.91667V3.33464H26.0833V22.3346Z" fill="#F39908"/>
+                                    </svg>
+                                </h4>
+                                <ul class="actions list-inline">
+                                    <li>
+                                        <h5> {{statisticsData.nbrNewPosts}} <span *ngIf="statisticsData.newPostsProportion" [ngClass]="{'negative' : statisticsData.newPostsProportion < 0 }"><ng-container *ngIf="statisticsData.newPostsProportion > 0" >+</ng-container>{{ statisticsData.newPostsProportion }}% </span> </h5>
+                                        <p> {{ t('admin.POSTED_PUBLICATIONS') }} </p>
+                                    </li>
+                                </ul>
+                                
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="height: 75%; display: flex;" >
+                        <div class="ventes" >
+                            <div class="mollie">
+                                <div>
+                                    <h4> {{ t('admin.SALES') }} </h4>
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item small after border-bottom">
+                                            <h5 class="color-primary"> {{ statisticsData.totalAmount }}€</h5>
+                                            <p> {{ t('admin.FROM_THE_BEGINNING') }} </p>
+                                        </li>
+                                        <li class="list-inline-item border-bottom">
+                                            <h5> {{ statisticsData.yearAmount }}€</h5>
+                                            <p> {{ t('admin.THIS_YEAR') }} </p>
+                                        </li>
+                                        <li class="list-inline-item small after">
+                                            <h5> {{ statisticsData.monthAmount }}€</h5>
+                                            <p> {{ t('admin.THIS_MONTH') }} </p>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <div class="w-100 d-flex mollie_link align-items-center">
+                                                <img src="./../../assets/img/mollie logo.jpg" class="img-fluid mr-3" alt="" srcset="">
+                                                <p class="color-primary">{{ t('admin.ALL_MY_SALES_STATISTICS') }}</p>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chart">
+                                <div>
+                                    <h4>
+                                        {{ t('admin.PUBLICATIONS') }}
+                                        <div class="d-flex">
+                                            <button class="btn mr-2" [ngClass]=" {'active' : filtre.value == 'day' } " (click)="filtre.setValue('day')" > J </button>
+                                            <button class="btn mr-2" [ngClass]=" {'active' : filtre.value == 'month' } " (click)="filtre.setValue('month')" > M </button>
+                                            <button class="btn" [ngClass]=" {'active' : filtre.value == 'year' } " (click)="filtre.setValue('year')" > A </button>
+                                        </div>
+                                    </h4>
+                                    <ng-container *ngIf="adminDashboard.offsetWidth > 1400">
+                                         <canvas baseChart height="100vh"
+                                            [datasets]="barChartData"
+                                            [labels]="barChartLabels"
+                                            [options]="barChartOptions"
+                                            [legend]="barChartLegend"
+                                            [chartType]="barChartType">
+                                        </canvas>   
+                                    </ng-container>
+                                    <ng-container *ngIf="adminDashboard.offsetWidth <= 1400">
+                                         <canvas baseChart
+                                            [datasets]="barChartData"
+                                            [labels]="barChartLabels"
+                                            [options]="barChartOptions"
+                                            [legend]="barChartLegend"
+                                            [chartType]="barChartType">
+                                        </canvas>   
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="users">
+                            <div>
+                                <h4> {{ t('admin.RECENTLY_REGISTRED') }} </h4>
+                                <div infinite-scroll [infiniteScrollDistance]="1"
+                                [infiniteScrollUpDistance]="2" [infiniteScrollThrottle]="300"
+                                (scrolled)="onScrollDown()" class="users_list" >
+                                
+                                    <ng-container *ngFor="let user of usersData; let last = last" >
+                                        <div class="d-flex align-items-center py-1">
+                                            <div class="profile_picture"  
+                                            [ngStyle]="{'background-image': 'url(' +  profileImgUrl + user.profile_picture + ')'}"></div> 
+                                            <div class="content d-flex flex-column justify-content-center pl-3 w-100">
+                                                <p class="color-secondary size-13"> {{ user.company_name }} </p>
+                                                <p> {{ user.email }} </p>
+                                            </div>
+                                            <a class="primary text-nowrap" routerLink="user.slug"> {{ t('admin.SEE_THE_PROFILE') }} > </a>
+                                        </div>
+                                        <hr class="my-2" *ngIf="!last " >
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-container>

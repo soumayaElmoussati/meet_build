@@ -1,0 +1,37 @@
+<section class="d-flex align-items-center justify-content-center h-100" *transloco="let t">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 slogon text-center">
+                <h4>{{ t('RIGHTTEAM') }}, <span>{{ t('GOODWORK') }}</span> </h4>
+            </div>
+            <div class="col-sm-5 col-md-5 p-5 shadow">
+                <div class="w-100 text-center">
+                    <img src="./../../../assets/img/logo/meet&build.svg" alt="meet and build logo">
+                </div>
+                <form [formGroup]="loginForm" class="w-100 pt-4 meduim" (ngSubmit)="onSubmit()">
+                    <!-- <div *ngIf="loginError" class="alert  ">
+                       
+                    </div> -->
+                    <ngb-alert class="alert alert-failed" *ngIf="loginError" type="success "> {{ t(loginError) }}</ngb-alert>
+                    <mat-form-field appearance="outline" class="mb-3">
+                        <input type="email" matInput formControlName="email" required placeholder="{{ t('fields.EMAIL') }}" (click)="loginError=null">
+                        <mat-icon matSuffix>mail_outline</mat-icon>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <input [type]="show ? 'text' : 'password'" placeholder="{{ t('fields.PASSWORD') }}" matInput formControlName="password" required (click)="loginError=null">
+                        <mat-icon matSuffix (click)="show = !show">{{show ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    </mat-form-field>
+
+                    <div class="d-flex justify-content-between w-100 pt-3 ">
+                        <mat-checkbox formControlName="remember_me">{{ t('STAYCONNECTED') }}</mat-checkbox>
+                        <a routerLink="/send-request">{{ t('FORGOUTPASSWORD') }}</a>
+                    </div>
+
+                    <button type="submit" class="btn center primary my-3 px-5">
+                        {{ t('CONNECTION') }}</button>
+                    <p class="pt-4 w-100 text-center">{{ t('YOUDONTHAVEACCOUNT') }} <a routerLink="/register">{{ t('CREATEACCOUNT') }}</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,30 @@
+<section class=" d-flex align-items-center justify-content-center h-100" *transloco="let t; lang: 'fr'">
+    <div class="container send-request">
+        <div class="row justify-content-center ">
+            <div class="col-sm-6 p-5 shadow">
+                <a class="return" routerLink="/login">
+                    <svg width="16" height="14" class="mr-2" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7 1L1 7L7 13" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M1 7H14.7143" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg> {{ t('RETURNTOLOGIN') }}
+                </a>
+                <div class="w-100 text-center pt-5">
+                    <img src="./../../../assets/img/logo/meet&build.svg" alt="meet and build logo">
+                </div>
+                <form [formGroup]="requestForm" class="w-100 pt-4 px-5 meduim" (ngSubmit)="onSubmit()">
+                    <p *ngIf="!responseMessage">
+                        {{ t('TAP_RESETEMAIL') }}
+                    </p>
+                    <ngb-alert *ngIf="responseMessage" [ngClass]="{'alert-failed ': responseMessage=='Email not existe','alert-success': responseMessage=='An email has been sent'}"> {{ t(responseMessage) }}</ngb-alert>
+                    <mat-form-field appearance="outline" class="mb-3">
+                        <input type="email" matInput formControlName="email" (focus)="responseMessage=null" required placeholder="{{ t('fields.EMAIL') }}">
+                        <mat-icon matSuffix>mail_outline</mat-icon>
+                    </mat-form-field>
+                    <button type="submit" class="btn center primary my-3 px-5">
+                        {{ t('RECIEVEMAIL') }}</button>
+                    <p class="pt-4 w-100 text-center">{{ t('YOUDONTHAVEACCOUNT') }} <a routerLink="/register">{{ t('CREATEACCOUNT') }}</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

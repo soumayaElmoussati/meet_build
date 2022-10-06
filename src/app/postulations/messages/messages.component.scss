@@ -1,0 +1,84 @@
+.profile_picture{
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+}
+
+.write_message{
+    position: relative;
+    border-top: .5px solid var(--default_color);
+    textarea{
+        width: 85%;
+    }
+    .attach_file{
+        position: absolute;
+        left: 72%;
+        top: 25px;
+    }
+    .action{
+        width: 15%;
+    } 
+}
+
+.project_details{
+    position: sticky;
+    top: 0;
+}
+.conversation{
+    max-height: calc(100vh - 400px);
+    min-height: calc(100vh - 400px);
+    overflow: auto;
+} 
+
+ul li{
+    font-size: 12px;
+}
+
+.read_information{
+    position: absolute;
+    right: 0px;
+    bottom: 10px;
+}
+.badge_winner{
+    background-color: #00ABE1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: end;
+    height: 35px;
+    border-radius: 5px;
+    p{
+        color: #FFFFFF;
+        margin-bottom: 0;
+        width: 100%;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .svg{
+        position: absolute;
+        right: 35px;
+    }
+}
+
+.message_for_other_users{
+    background-color: var(--secondary_color);
+    position: absolute;
+    top: -35px;
+    height: 35px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    p{
+        margin-bottom: 0;
+        font-size: 13px;
+        color: #FFF;
+    }
+}

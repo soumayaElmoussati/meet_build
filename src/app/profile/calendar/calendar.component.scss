@@ -1,0 +1,73 @@
+ 
+::ng-deep.UNSPECIFIED:after{
+    background-color: #fff; // #fff;
+}
+::ng-deep.SEMI_AVAILABLE{
+    .mat-calendar-body-cell-content{color: #FFA726;}
+    &:after{background-color: #FDF0DA;}
+}
+::ng-deep.AVAILABLE{
+    .mat-calendar-body-cell-content{color: #486b01;}
+    &::after{background-color: #699F00;}
+}
+::ng-deep.NOT_AVAILABLE{
+    .mat-calendar-body-cell-content{color: #800606;}
+    &::after{background-color: #E10000;}
+}
+::ng-deep.first_day:after{
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+} 
+::ng-deep.last_day:after{
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+::ng-deep.last_day + td:after{
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+ul.agenda_status{
+    li{
+        position: relative;
+        font-size: 12px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        padding-left: 49px;
+        &:after{
+            content: '';
+            width: 36px;
+            height: 36px;
+            left: 0;
+            position: absolute;
+            background-color: red;
+            border-radius: 50%;
+            border: 1px solid #fff;
+        }
+        &.UNSPECIFIED:after{
+            background-color: #fff;
+            border-color: #DADADA;
+        }
+        &.SEMI_AVAILABLE:after{
+            background-color: #FDF0DA;
+            border-color: #FDF0DA;
+        }
+        &.AVAILABLE:after{
+            background-color: #699F00;
+            border-color: #699F00;
+        }
+        &.NOT_AVAILABLE:after{
+            background-color: #E10000;
+            border-color: #E10000;
+        }
+    }
+}
+
+::ng-deep .mat-calendar-body-label {
+    opacity: 0;
+}
+::ng-deep .mat-calendar-body-label[colspan="7"] {
+    display: none;
+}

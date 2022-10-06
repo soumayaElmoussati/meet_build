@@ -1,0 +1,28 @@
+<ng-container *transloco="let t">
+    <div class="row white-background-color custom-padding border-raduis-15 " *ngIf="annonces" >
+        <div class="col-12" *ngFor="let job of annonces.data ; let first = first">
+            <hr *ngIf="!first" >
+            <app-job [job]="job" [display]="false" [mine]="false" [showPicture]="false" ></app-job>
+        </div>
+        <div class="col-12 pt-3 text-center" *ngIf="annonces">
+            <ng-container *ngIf="annonces.total > 3">
+                <a class="secondary" [ngClass]="{'disabled': currentPage == 1}"
+                    (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+                <a class="secondary" [ngClass]="{'disabled': currentPage == annonces.last_page}"
+                    (click)="currentPage!=annonces.last_page ? navigateTo(currentPage+1) : null">
+                    <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

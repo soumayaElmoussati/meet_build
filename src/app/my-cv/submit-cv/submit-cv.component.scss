@@ -1,0 +1,103 @@
+h1{
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.white-background-color{
+    position: relative;
+} 
+
+h4{
+    position: absolute;
+    border-bottom: 1px solid #607D8B;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+
+.background-before{
+    position: relative;
+    &:before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 150px;
+        width: 100%;
+        background-image: url(../../../assets/img/background_job.jpg);
+        background-color: var(--primary_color);
+        background-position: center;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    } 
+    &:after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 150px;
+        top: 0;
+        left: 0;
+        background-color: rgba(17, 59, 58, .45);
+    }
+    div{
+        z-index: 9;
+    }
+}
+ 
+
+.color-red{
+    color: #f44336;
+}
+
+.alert.alert-success{
+    position: absolute;
+    top: -30px;
+    height: 29px;
+    border: unset;
+    left: 0;
+    right: 0;
+    width: calc(100% - 2rem );
+    margin: auto;
+    padding: 4px 20px;
+    font-size: 12px;
+}
+
+.image_profile{
+    width: 122px;
+    height: 122px;
+    position: relative;
+    .progresse_bar{
+        width: 80%;
+        height: 5px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        box-shadow: 0px 0px 4px rgb(246 246 246 / 2%), inset -2.8px -2.8px 3.9px rgb(255 255 255 / 58%), inset 3.5px 3.5px 4px rgb(119 132 157 / 27%);
+        background-color: rgba(17, 59, 58, 0.05) !important;
+        .bar{
+            width: 50%;
+            height: 100%;
+            position: inherit;
+            background-color: var(--primary_color);
+        }
+    }
+    &.loading:before{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        background-color: rgba($color: #ffffff, $alpha: .5);
+    }
+}

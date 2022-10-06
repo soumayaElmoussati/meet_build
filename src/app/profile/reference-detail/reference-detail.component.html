@@ -1,0 +1,84 @@
+
+ 
+    <app-nav></app-nav> 
+    <mat-sidenav-container fxFlexFill class="example-container">
+  
+      <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+        <div fxLayout="column">
+          <a mat-button routerLink="/about-us">About us</a>
+          <a mat-button routerLink="/prices">Prices</a>
+          <a mat-button routerLink="/start-page">Start page</a>
+          <a mat-button routerLink="/offer">Offer</a>
+          <a mat-button routerLink="/contact">Contact</a>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content fxFlexFill>
+        
+<section class="profile_header" *transloco="let t">
+  <div class="container">
+      <div class="row">
+          <div class="col-12" *ngIf="profile && reference">
+              <div class="d-flex align-items-center">
+                <h1 class="mr-2 mb-0">{{ profile.company_name }}</h1>
+                <ngb-rating class="rate" [(rate)]="profile.score" [readonly]="true" [max]=5></ngb-rating>
+                <p class="mb-0"> {{ t('PROFILE_RATES', { count: profile.nbrEvaluations }) }} </p>    
+              </div> 
+              <p class="title mb-0 pt-2 pl-0">{{ reference.title }}</p>
+          </div>
+      </div>
+  </div>
+</section> 
+<section class="" *transloco="let t">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 py-2">
+                <a routerLink="/{{profileSlug}}" class="d-inline-flex align-items-center secondary"> <svg class="mr-2" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.375 1.5L1.375 6.5L6.375 11.5" class="stroke" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                     {{ t('BACK') }} </a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="gray-background-color pb-4" *transloco="let t">
+  <div class="container" *ngIf="reference">
+      <div class="row justify-content-end">
+          <div class="col-sm-12">
+              <div class="row justify-content-center">
+                  <div class="col-12 col-sm-7 text-center pt-sm-5 pb-sm-3">
+                      <p>{{ reference.description }}</p> 
+                      <p *ngIf="reference.serviceProviders.length"><strong>
+                          {{ profileSlug }} {{ t('WORKED_IN_COLLABORATION_WITH') | lowercase }}
+                          <ng-container *ngFor="let provider of reference.serviceProviders ; let first = first; let last = last ">
+                              <ng-container *ngIf="last"> {{ t('AND') | lowercase }} </ng-container>
+                              <ng-container *ngIf="!first && !last">, </ng-container>  
+                              <ng-container *ngIf="provider.id; else notUser">
+                                  <a routerLink="/{{provider.slug}}">{{ provider.company_name }}</a>
+                              </ng-container>
+                              <ng-template #notUser>
+                                  <a href="mailto:{{ provider.email }}">{{ provider.email }}</a>
+                              </ng-template>
+                          </ng-container>
+                          {{ t('ON_THIS_PROJECT') | lowercase }}
+                      </strong></p>    
+                  </div>
+              </div>
+          </div>
+      </div> 
+
+      <div class="row white-background-color custom-padding border-raduis-15"  *ngIf="reference">
+          <div class="col-6 col-sm-3" *ngFor="let file of reference.files">
+              <div class="reference_image"  [ngStyle]="{'background-image': 'url(' +  referenceImgUrl + file.name + ')'}"></div>
+          </div>
+      </div>
+     
+  </div>
+</section>
+
+<app-footer></app-footer>
+
+
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+     

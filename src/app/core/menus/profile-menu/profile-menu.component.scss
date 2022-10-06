@@ -1,0 +1,122 @@
+
+ul.profile_nav{
+    li{
+        a{
+            color: var(--secondary_color);
+            position: relative;
+            height: 100%;
+            padding: 13px 8px 13px 8px;
+            display: block;
+            font-size: 13px;
+            &:hover:after{
+                transition: .3s;
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 7px;
+                background-color: var(--primary_color);
+                bottom: 0;
+                left: 0;
+            }
+        }   
+        &.active{
+            a:after{
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 7px;
+                background-color: var(--primary_color);
+                bottom: 0;
+                left: 0;
+            }
+        }
+    }
+}
+
+ul.follow_like{
+    li{
+        &.active{
+            a{
+                background-color: var(--primary_color);
+                color: #fff;
+                svg{
+                    path{
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+        a{
+            color: #607D8B;
+            background-color: #F1F3F5;
+            font-size: 13px;
+            padding: 6px 19px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            letter-spacing: 0.13px;
+            transition: .3s;
+            svg{
+                margin-right: 8px;
+            }
+            &:hover{
+                background-color: var(--secondary_color);
+                color: #fff;
+                transition: .3s;
+                svg{
+                    path{
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.profile_picture{
+    width: 165px;
+    height: 165px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: transparent;
+    position: absolute;
+    right: 15px;
+    top: -100px;
+    border-radius: 50%;
+    transition: 0.3s linear all;
+    opacity: 1;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .profile_picture{
+        width: 165px;
+        height: 165px;
+        right: 0;
+        left: 0;
+        margin: auto;
+        top: -138px;
+        width: 70px;
+        height: 70px;
+    }
+
+    .menu-responsive{
+        overflow-x: auto;
+        max-width: 100%;
+        min-width: 100%;
+        ul.profile_nav{
+            li{
+                display: table-cell;
+                white-space: nowrap;
+            }
+        }
+
+    }
+
+
+
+    
+}

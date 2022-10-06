@@ -1,0 +1,92 @@
+<mat-sidenav-container class="example-container">
+
+    <mat-sidenav #sidemenu mode="over" [(opened)]="opened" position="end" class="right-menu">
+        <app-right-menu></app-right-menu>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <app-nav (menuStatusChanged)="menuStatusChange($event)" (phoneMenuStatus)="phoneMenuStatus($event)" ></app-nav>
+    <mat-sidenav-container fxFlexFill class="example-container">
+  
+      <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+        <div fxLayout="column">
+          <a mat-button routerLink="/about-us">About us</a>
+          <a mat-button routerLink="/prices">Prices</a>
+          <a mat-button routerLink="/start-page">Start page</a>
+          <a mat-button routerLink="/offer">Offer</a>
+          <a mat-button routerLink="/contact">Contact</a>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content fxFlexFill>
+
+        <ng-container *transloco="let t">
+            <app-my-projects-postulations [activeLink]='activeLink'></app-my-projects-postulations>
+            <section class="py-4 gray-background-color main">
+                <div class="container">
+                    <div class="row px-3">
+                        <div class="col-12 white-background-color border-raduis-15">
+                            <div class="row">
+                                <div class="col-sm-3 border-right">
+                                    <ul class="list-inline">
+                                        <li class="py-2">
+                                            <a class="secondary d-block" routerLink="/mes-postulations/conversations" [ngClass]="{ 'active' : currentLink=='conversations' }" >
+                                                <svg class="mr-2" width="27" height="17" viewBox="0 0 27 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path class="fill" d="M8.40375 1.75C8.27729 1.75018 8.15248 1.77879 8.03857 1.8337C7.92465 1.88861 7.82454 1.96843 7.74562 2.06725L2.59875 8.5H10.125C10.3488 8.5 10.5634 8.58889 10.7216 8.74713C10.8799 8.90536 10.9687 9.11997 10.9687 9.34375C10.9687 10.0151 11.2354 10.6589 11.7101 11.1336C12.1848 11.6083 12.8287 11.875 13.5 11.875C14.1713 11.875 14.8152 11.6083 15.2899 11.1336C15.7646 10.6589 16.0312 10.0151 16.0312 9.34375C16.0312 9.11997 16.1201 8.90536 16.2784 8.74713C16.4366 8.58889 16.6512 8.5 16.875 8.5H24.4012L19.2544 2.06725C19.1755 1.96843 19.0753 1.88861 18.9614 1.8337C18.8475 1.77879 18.7227 1.75018 18.5963 1.75H8.40375ZM25.2011 10.1875H17.6344C17.4407 11.1412 16.9233 11.9986 16.1698 12.6144C15.4164 13.2303 14.4731 13.5667 13.5 13.5667C12.5269 13.5667 11.5836 13.2303 10.8302 12.6144C10.0767 11.9986 9.55928 11.1412 9.36562 10.1875H1.79887L2.33887 14.5109C2.36441 14.7152 2.46377 14.9031 2.61825 15.0393C2.77273 15.1754 2.97165 15.2504 3.17756 15.25H23.8224C24.0281 15.2499 24.2266 15.1748 24.3807 15.0387C24.5348 14.9026 24.6339 14.7149 24.6594 14.5109L25.1994 10.1875H25.2011ZM6.42769 1.01256C6.66494 0.715967 6.96591 0.476567 7.30827 0.312104C7.65063 0.147641 8.02562 0.0623325 8.40544 0.0625002H18.5946C18.9744 0.0623325 19.3494 0.147641 19.6917 0.312104C20.0341 0.476567 20.3351 0.715967 20.5723 1.01256L26.8161 8.81725C26.8862 8.90531 26.938 9.00651 26.9685 9.1149C26.9989 9.22329 27.0073 9.33668 26.9932 9.44838L26.3351 14.7201C26.2586 15.3325 25.961 15.8958 25.4983 16.3042C25.0355 16.7125 24.4396 16.9377 23.8224 16.9375H3.17756C2.56042 16.9377 1.96446 16.7125 1.50173 16.3042C1.03901 15.8958 0.741399 15.3325 0.664873 14.7201L0.00674849 9.44838C-0.00708269 9.33656 0.0016192 9.22311 0.0323408 9.11472C0.0630624 9.00632 0.115182 8.90518 0.185623 8.81725L6.42937 1.01256H6.42769Z" fill="#F39908"/>
+                                                </svg>
+                                                {{ t('MAILBOX') }}
+                                            </a>
+                                        </li>
+                                        <li class="py-2">
+                                            <a class="secondary d-block" routerLink="/mes-postulations/non-lus" [ngClass]="{ 'active' : currentLink=='non-lus' }"   >
+                                                <svg class="mr-2" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path class="fill" d="M23.0029 11.8698C22.1447 10.0617 21.1234 8.58707 19.939 7.44595L18.6968 8.68814C19.7097 9.65616 20.592 10.9225 21.355 12.4997C19.3237 16.7038 16.4404 18.7008 12.5 18.7008C11.3172 18.7008 10.2278 18.5187 9.23168 18.1544L7.88573 19.5004C9.26919 20.1392 10.8073 20.4586 12.5 20.4586C17.1924 20.4586 20.6933 18.0148 23.0029 13.1271C23.0958 12.9305 23.1439 12.7158 23.1439 12.4984C23.1439 12.281 23.0958 12.0664 23.0029 11.8698ZM21.4509 4.04166L20.4101 2.99967C20.392 2.98151 20.3705 2.9671 20.3468 2.95727C20.323 2.94744 20.2976 2.94238 20.272 2.94238C20.2463 2.94238 20.2209 2.94744 20.1972 2.95727C20.1735 2.9671 20.1519 2.98151 20.1338 2.99967L17.4636 5.66861C15.9914 4.91666 14.3369 4.54068 12.5 4.54068C7.80761 4.54068 4.30663 6.98453 1.99706 11.8722C1.90423 12.0688 1.85608 12.2835 1.85608 12.5009C1.85608 12.7183 1.90423 12.933 1.99706 13.1295C2.91975 15.0729 4.03059 16.6306 5.32958 17.8026L2.74608 20.3854C2.70948 20.422 2.68892 20.4717 2.68892 20.5235C2.68892 20.5752 2.70948 20.6249 2.74608 20.6615L3.78832 21.7038C3.82494 21.7404 3.8746 21.7609 3.92638 21.7609C3.97816 21.7609 4.02782 21.7404 4.06444 21.7038L21.4509 4.31802C21.4691 4.29989 21.4835 4.27834 21.4933 4.25463C21.5031 4.23092 21.5082 4.20551 21.5082 4.17984C21.5082 4.15417 21.5031 4.12876 21.4933 4.10505C21.4835 4.08134 21.4691 4.0598 21.4509 4.04166ZM3.64501 12.4997C5.6787 8.29556 8.562 6.29849 12.5 6.29849C13.8315 6.29849 15.0422 6.52701 16.1406 6.99161L14.4243 8.70792C13.6115 8.27423 12.6808 8.11328 11.7695 8.2488C10.8583 8.38432 10.0147 8.80914 9.36325 9.46058C8.7118 10.112 8.28699 10.9556 8.15147 11.8669C8.01595 12.7781 8.1769 13.7088 8.61058 14.5216L6.57396 16.5583C5.44677 15.5634 4.47509 14.2155 3.64501 12.4997ZM9.66796 12.4997C9.66838 12.0692 9.77036 11.6448 9.96559 11.2611C10.1608 10.8774 10.4438 10.5452 10.7916 10.2914C11.1393 10.0377 11.542 9.86949 11.967 9.8006C12.392 9.7317 12.8272 9.76402 13.2373 9.89493L9.7976 13.3346C9.71138 13.0647 9.66765 12.783 9.66796 12.4997Z" fill="#113B3A"/>
+                                                    <path class="fill" d="M12.4023 15.2341C12.3179 15.2341 12.2346 15.2302 12.1521 15.2227L10.8625 16.5122C11.6382 16.8093 12.4832 16.8753 13.2955 16.7023C14.1079 16.5293 14.8527 16.1247 15.44 15.5374C16.0272 14.9501 16.4318 14.2053 16.6048 13.3929C16.7778 12.5806 16.7118 11.7356 16.4148 10.96L15.1252 12.2495C15.1328 12.332 15.1367 12.4153 15.1367 12.4998C15.1369 12.8589 15.0663 13.2146 14.929 13.5464C14.7916 13.8782 14.5902 14.1797 14.3363 14.4337C14.0823 14.6876 13.7808 14.889 13.449 15.0264C13.1171 15.1637 12.7615 15.2343 12.4023 15.2341Z" fill="#113B3A"/>
+                                                </svg>                                    
+                                                {{ t('UNREAD') }}
+                                            </a>
+                                        </li>
+                                        <li class="py-2">
+                                            <a class="secondary d-block" routerLink="/mes-postulations/favoris"  [ngClass]="{ 'active' : currentLink=='favoris' }"  >
+                                                <svg class="mr-2" width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path class="stroke" d="M6.125 1.625C3.70913 1.625 1.75 3.564 1.75 5.95625C1.75 7.88737 2.51562 12.4706 10.052 17.1038C10.187 17.1859 10.342 17.2293 10.5 17.2293C10.658 17.2293 10.813 17.1859 10.948 17.1038C18.4844 12.4706 19.25 7.88737 19.25 5.95625C19.25 3.564 17.2909 1.625 14.875 1.625C12.4591 1.625 10.5 4.25 10.5 4.25C10.5 4.25 8.54087 1.625 6.125 1.625Z" stroke="#113B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>                                    
+                                                {{ t('FAVORITES') }}
+                                            </a>
+                                        </li>
+                                        <li class="py-2">
+                                            <a class="secondary d-block" routerLink="/mes-postulations/archives"  [ngClass]="{ 'active' : currentLink=='archives' }"  >
+                                                <svg class="mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path class="stroke" d="M21 8V21H3V8" stroke="#113B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path class="stroke" d="M1 3H23V8H1V3Z" stroke="#113B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path class="stroke" d="M10 12H14" stroke="#113B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>                                    
+                                                {{ t('ARCHIVES') }}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-9 pl-0">
+                                    <router-outlet></router-outlet>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </ng-container>
+
+<app-footer></app-footer>
+
+
+
+</mat-sidenav-content>
+</mat-sidenav-container>
+</mat-sidenav-content>
+
+</mat-sidenav-container>
+
+
+
+
+
+

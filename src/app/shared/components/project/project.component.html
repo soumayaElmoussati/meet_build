@@ -1,0 +1,73 @@
+<ng-container *transloco="let t">
+    <div class="d-flex">
+        <div *ngIf="project" class="profile_picture background-center-cover" [ngStyle]="{'background-image': 'url(' +  profileImgUrl + project.project_creator.profile_picture + ')'}" ></div>
+        <div>
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                    <h3 class="mb-0">{{ project.name }} <span class="color-primary">{{ t('PLACE:') }} {{project.city}}</span> </h3>
+                </li>
+                <li class="list-inline-item">
+                    <p class="place color-primary mb-0"> {{ t('FROM') }}
+                        {{this.helpersS.formatDate(project.startdate)}} -
+                        {{this.helpersS.formatDate(project.enddate)}} </p>
+                </li>
+                <li class="list-inline-item">
+                    <p class="date mb-0"> {{ this.helpersS.postedAt(project.filed_ago) }} </p>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center">
+                <span class="badge badge-project badge-{{project.status.name}} mr-1">{{
+                    t('PROJECT_STATUS.'+project.status.name) }} </span>
+                <p class="mb-0 font-weight-300">{{ t('POSTED_BY', { name: project.project_creator.company_name }) }}</p>    
+            </div>
+            
+            <p class="pt-1 mb-0" [innerHTML]="project.description_br" ></p>
+            <ul class="skills_list list-inline pt-2 mb-0" *ngIf="project.competances" >
+                <li class="list-inline-item" *ngFor="let item of project.competances" > {{ item.name }} </li>
+            </ul>
+
+            <ng-container *ngIf="project.proposal_sent && !project.isMine">
+                <div class="py-3" ></div>
+                <div class="project_footer" >
+                    <div class="proposal_sent">
+                        <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="13.5" cy="13.5" r="13.5" fill="#699F00"/>
+                            <path d="M7.83334 13.5L12.0833 17.75L19.1667 9.25" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>                                                          
+                        <p class="mb-0 pl-2">{{ t('PROPOSAL_SENT') }}</p>
+                    </div>
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="project.nbrConversations && project.isMine">
+                <div class="py-3"></div>
+                <div class="project_footer">
+                    <div class="proposal_sent">
+                        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="17" cy="17" r="17" fill="#699F00"/>
+                            <path d="M17.3951 11.3662C17.6677 11.3662 17.9376 11.4199 18.1894 11.5242C18.4412 11.6285 18.6701 11.7814 18.8628 11.9741C19.0555 12.1668 19.2084 12.3957 19.3127 12.6475C19.417 12.8993 19.4707 13.1692 19.4707 13.4418C19.4707 13.7143 19.417 13.9842 19.3127 14.2361C19.2084 14.4879 19.0555 14.7167 18.8628 14.9094C18.6701 15.1022 18.4412 15.255 18.1894 15.3594C17.9376 15.4637 17.6677 15.5173 17.3951 15.5173C16.8447 15.5173 16.3167 15.2987 15.9275 14.9094C15.5382 14.5202 15.3196 13.9922 15.3196 13.4418C15.3196 12.8913 15.5382 12.3634 15.9275 11.9741C16.3167 11.5849 16.8447 11.3662 17.3951 11.3662ZM17.3951 20.2615C20.3306 20.2615 23.4242 21.7046 23.4242 22.3371V23.4243H11.3661V22.3371C11.3661 21.7046 14.4597 20.2615 17.3951 20.2615ZM17.3951 9.48828C15.2108 9.48828 13.4416 11.2575 13.4416 13.4418C13.4416 15.6261 15.2108 17.3953 17.3951 17.3953C19.5794 17.3953 21.3486 15.6261 21.3486 13.4418C21.3486 11.2575 19.5794 9.48828 17.3951 9.48828ZM17.3951 18.3836C14.7562 18.3836 9.48816 19.708 9.48816 22.3371V25.3022H25.3021V22.3371C25.3021 19.708 20.0341 18.3836 17.3951 18.3836Z" fill="white"/>
+                        </svg>                                                                                  
+                        <p class="mb-0 pl-2" *ngIf="project.nbrConversations == 1" >{{  t('A_PROPOSAL_RECIEVED') }}</p>
+                        <p class="mb-0 pl-2" *ngIf="project.nbrConversations != 1" >{{  t('PROPOSALS_RECIEVED', { number: project.nbrConversations } ) }}</p>
+                    </div>
+                    <div class="new_message pl-3" *ngIf="project.nbrUnreadMsg ">
+                        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="17" cy="17" r="17" fill="#00ABE1"/>
+                            <path d="M15.875 17C15.875 17.2984 15.9935 17.5845 16.2045 17.7955C16.4155 18.0065 16.7016 18.125 17 18.125C17.2984 18.125 17.5845 18.0065 17.7955 17.7955C18.0065 17.5845 18.125 17.2984 18.125 17C18.125 16.7016 18.0065 16.4155 17.7955 16.2045C17.5845 15.9935 17.2984 15.875 17 15.875C16.7016 15.875 16.4155 15.9935 16.2045 16.2045C15.9935 16.4155 15.875 16.7016 15.875 17ZM20.5625 17C20.5625 17.2984 20.681 17.5845 20.892 17.7955C21.103 18.0065 21.3891 18.125 21.6875 18.125C21.9859 18.125 22.272 18.0065 22.483 17.7955C22.694 17.5845 22.8125 17.2984 22.8125 17C22.8125 16.7016 22.694 16.4155 22.483 16.2045C22.272 15.9935 21.9859 15.875 21.6875 15.875C21.3891 15.875 21.103 15.9935 20.892 16.2045C20.681 16.4155 20.5625 16.7016 20.5625 17ZM11.1875 17C11.1875 17.2984 11.306 17.5845 11.517 17.7955C11.728 18.0065 12.0141 18.125 12.3125 18.125C12.6109 18.125 12.897 18.0065 13.108 17.7955C13.319 17.5845 13.4375 17.2984 13.4375 17C13.4375 16.7016 13.319 16.4155 13.108 16.2045C12.897 15.9935 12.6109 15.875 12.3125 15.875C12.0141 15.875 11.728 15.9935 11.517 16.2045C11.306 16.4155 11.1875 16.7016 11.1875 17ZM26.6844 12.9312C26.1547 11.6727 25.3953 10.543 24.4274 9.57266C23.4662 8.60796 22.3251 7.84114 21.0688 7.31563C19.7797 6.77422 18.4109 6.5 17 6.5H16.9531C15.5328 6.50703 14.157 6.78828 12.8633 7.34141C11.6177 7.87232 10.4873 8.64049 9.53517 9.60312C8.57657 10.5711 7.82423 11.6961 7.30392 12.95C6.76485 14.2484 6.49298 15.6289 6.50001 17.0492C6.50796 18.6769 6.89304 20.2806 7.62501 21.7344V25.2969C7.62501 25.5828 7.7386 25.857 7.94079 26.0592C8.14297 26.2614 8.4172 26.375 8.70314 26.375H12.268C13.7218 27.107 15.3255 27.492 16.9531 27.5H17.0024C18.4063 27.5 19.768 27.2281 21.05 26.6961C22.3 26.1768 23.4368 25.419 24.3969 24.4648C25.3649 23.5063 26.1266 22.3859 26.6586 21.1367C27.2117 19.843 27.493 18.4672 27.5 17.0469C27.507 15.6195 27.2305 14.2344 26.6844 12.9312ZM23.143 23.1969C21.5 24.8234 19.3203 25.7188 17 25.7188H16.9602C15.5469 25.7117 14.143 25.3602 12.9031 24.6992L12.7063 24.5938H9.40626V21.2938L9.30079 21.0969C8.63985 19.857 8.28829 18.4531 8.28126 17.0398C8.27189 14.7031 9.16485 12.5094 10.8031 10.857C12.4391 9.20469 14.6258 8.29062 16.9625 8.28125H17.0024C18.1742 8.28125 19.3109 8.50859 20.382 8.95859C21.4274 9.39687 22.3649 10.0273 23.1711 10.8336C23.975 11.6375 24.6078 12.5773 25.0461 13.6227C25.5008 14.7055 25.7281 15.8539 25.7234 17.0398C25.7094 19.3742 24.793 21.5609 23.143 23.1969Z" fill="white"/>
+                        </svg>    
+                        <p class="mb-0 pl-2" *ngIf="project.nbrUnreadMsg == 1" >{{  t('NEW_MESSAGE_AVAILABLE') }}</p>
+                        <p class="mb-0 pl-2" *ngIf="project.nbrUnreadMsg > 1" >{{  t('NEW_MESSAGES_AVAILABLE', { number: project.nbrUnreadMsg } ) }}</p>
+                    </div>
+                </div>
+            </ng-container>
+
+            
+ 
+        </div>
+        <a *ngIf="project.files.length" (click)="downloadFiles(project.id)" class="secondary link_files">
+            <svg width="14" height="22" viewBox="0 0 14 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="stroke" d="M1 6.91V15C1 16.5913 1.63214 18.1174 2.75736 19.2426C3.88258 20.3679 5.4087 21 7 21C8.5913 21 10.1174 20.3679 11.2426 19.2426C12.3679 18.1174 13 16.5913 13 15V5C13 3.93913 12.5786 2.92172 11.8284 2.17157C11.0783 1.42143 10.0609 1 9 1C7.93913 1 6.92172 1.42143 6.17157 2.17157C5.42143 2.92172 5 3.93913 5 5V14.182C5 14.4446 5.05173 14.7047 5.15224 14.9474C5.25275 15.19 5.40007 15.4105 5.58579 15.5962C5.7715 15.7819 5.99198 15.9292 6.23463 16.0298C6.47728 16.1303 6.73736 16.182 7 16.182V16.182C7.53043 16.182 8.03914 15.9713 8.41421 15.5962C8.78929 15.2211 9 14.7124 9 14.182V7" stroke="#113B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
+        </a>
+    </div>
+</ng-container>

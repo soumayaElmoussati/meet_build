@@ -1,0 +1,219 @@
+<ng-container *transloco="let t">
+    <div class="row">
+        <div class="col-sm-5 p-3">
+            <form [formGroup]="informationsForm" class="w-100 meduim white-background-color p-4 border-raduis-15"
+                (ngSubmit)="onInformationsFormSubmit()">
+                <label class="custom_label"> {{ t('fields.COMERCIAL_NAME') }} </label>
+                <mat-form-field appearance="outline" class="mb-3">
+                    <input matInput formControlName="company_name" placeholder="{{ t('fields.COMERCIAL_NAME') }}">
+                </mat-form-field>
+
+                <label class="custom_label">{{ t('fields.PRESENTATION') }} </label>
+                <div class="textarea">
+                    <mat-form-field appearance="outline" class="mb-3">
+                        <textarea matInput formControlName="presentation" placeholder="{{ t('fields.PRESENTATION') }}"></textarea>
+                    </mat-form-field>
+                </div>
+
+                <label class="custom_label">{{ t('fields.VAT_NUMBER') }} </label>
+                <mat-form-field appearance="outline" class="mb-3">
+                    <input matInput formControlName="vat" placeholder="{{ t('fields.VAT_NUMBER') }}">
+                </mat-form-field>
+
+                <label class="custom_label">{{ t('fields.PHONE_NUMBER') }} </label>
+                <mat-form-field appearance="outline" class="mb-3">
+                    <input matInput formControlName="tel" placeholder="{{ t('fields.PHONE_NUMBER') }}">
+                </mat-form-field>
+
+                <ng-container *ngIf="role=='mission'">
+                    <label class="custom_label">{{ t('fields.WEBSITE') }} </label>
+                <mat-form-field appearance="outline" class="mb-3">
+                    <input matInput formControlName="website" placeholder="{{ t('fields.WEBSITE') }}">
+                </mat-form-field>
+
+                <label class="custom_label">{{ t('fields.CONTACT_ADDRESS_MAIL') }} </label>
+                <mat-form-field appearance="outline" class="mb-3">
+                    <input matInput formControlName="contact_email"
+                        placeholder="{{ t('fields.CONTACT_ADDRESS_MAIL') }}">
+                </mat-form-field>
+
+                <div class="d-flex align-items-center mb-2 pt-3">
+                    <img src="./../../../assets/img/social_media_picto/facebook.svg" width="32" alt="" srcset="">
+                    <mat-form-field appearance="outline" class="pl-2">
+                        <input matInput formControlName="facebook" placeholder="Facebook">
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex align-items-center mb-2">
+                    <img src="./../../../assets/img/social_media_picto/instagram.svg" width="32" alt="" srcset="">
+                    <mat-form-field appearance="outline" class="pl-2">
+                        <input matInput formControlName="instagram" placeholder="Instagram">
+                    </mat-form-field>
+                </div>
+
+                <div class="d-flex align-items-center mb-2">
+                    <img src="./../../../assets/img/social_media_picto/linkedin.svg" width="32" alt="" srcset="">
+                    <mat-form-field appearance="outline" class="pl-2">
+                        <input matInput formControlName="linkedin" placeholder="Linkedin">
+                    </mat-form-field>
+                </div>
+                </ng-container>
+                
+
+                <button type="submit" class="btn secondary mt-3 px-5">
+                    {{ t('REGISTER') }}
+                    <ng-container *ngIf="informationsFormSaving">
+                        <svg class="loader" width="60px" height="60px" version="1.1" id="L9"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                            <path fill="#fff"
+                                d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                                    from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                            </path>
+                        </svg>
+                    </ng-container>
+                </button>
+
+
+            </form>
+        </div>
+
+        <div class="col-sm-7 py-sm-3">
+            <div class="row">
+                <div class="col-sm-5 mb-3 pl-sm-0 pr-sm-2 h-100 text-center">
+                    <div class="white-background-color p-4 border-raduis-15 h-100 d-flex align-items-center flex-column">
+                        <input type="file" name="" #profileImage id="" (change)="onEditProfilePicture($event)" class="d-none">
+                        <h5>{{ t('YOUR_PROFILE_PICTURE') }}</h5>
+                        <div *ngIf="profile" class="image_profile background-center-cover" style="background-image: url('{{ profileImagePath ? profileImagePath : profileImgUrl + profile.profile_picture }}') " [ngClass]="{'loading': profileImageProgress != 100  && profileImageProgress != 0 }">
+                            <div class="progresse_bar" [ngClass]="{'d-none': profileImageProgress == 100 || profileImageProgress == 0}">
+                                <div class="bar" [ngStyle]="{'width': profileImageProgress + '%'}"></div>
+                            </div>
+                        </div>
+                        <button class="btn secondary mb-2 mt-2 px-4 w-100" (click)="profileImage.click()" > {{ t('EDIT') }} </button>
+                        <button class="btn primary px-4 w-100" (click)="onDeleteProfilePicture()" > {{ t('DELETE') }} </button>
+                    </div>
+                </div>
+                <div class="col-sm-7 mb-3 pr-sm-0 pl-sm-2">
+                    <div class="white-background-color p-4 border-raduis-15 h-100" *ngIf="role=='mission'" > 
+                        <ng-container *ngIf="profile && profile.competenceUser">
+                            <ul class="skills_list list-inline mb-0" >
+                                <li class="list-inline-item" *ngFor="let item of profile.competenceUser.principalCompetences" > {{ item.name }} </li>
+                                <!-- <ng-container *ngFor="let item of profile.competenceUser.principalCompetences" >
+                                    <li class="mb-2 list-inline-item" *ngFor="let compt of item.competences "
+                                    [ngClass]="{'d-none' : !compt.selected }" > {{ compt.name }}  </li>
+                                </ng-container> -->
+                            </ul>
+                            
+                            <ul class="skills_list list-inline " >
+                                <ng-container *ngFor="let compt of competencesList; let index = index">
+                                    <li class="mb-2 list-inline-item additionalCompetences" > {{ compt.name }} 
+                                        <a class="cursor-pointer ml-1" (click)="remove(cmpt, index)">
+                                            <svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M5.77156 5.79406C5.62813 5.92372 5.4336 5.99656 5.23076 5.99656C5.02793 5.99656 4.8334 5.92372 4.68996 5.79406L3.00032 4.04813L1.31068 5.79348C1.23987 5.85855 1.15551 5.91029 1.06247 5.94574C0.969429 5.98118 0.869547 5.99962 0.768585 5.99999C0.667622 6.00037 0.567577 5.98266 0.474221 5.9479C0.380864 5.91315 0.296044 5.86202 0.224652 5.79748C0.15326 5.73294 0.0967095 5.65625 0.0582624 5.57185C0.0198154 5.48745 0.000232546 5.39701 0.000643656 5.30573C0.00105477 5.21445 0.0214516 5.12415 0.0606576 5.04004C0.0998636 4.95593 0.157103 4.87966 0.229074 4.81565L1.98692 3.00058L0.228437 1.18435C0.156466 1.12034 0.0992263 1.04407 0.0600203 0.959961C0.0208143 0.875847 0.000417451 0.785547 6.34107e-06 0.694271C-0.000404769 0.602995 0.0191781 0.512548 0.0576251 0.428148C0.0960722 0.343748 0.152622 0.267065 0.224014 0.202523C0.295406 0.13798 0.380227 0.086855 0.473583 0.0520966C0.56694 0.0173381 0.666985 -0.000365936 0.767947 5.73272e-06C0.86891 0.000377401 0.968792 0.0188174 1.06183 0.054262C1.15487 0.0897066 1.23923 0.141455 1.31004 0.206521L3.00032 1.95302L4.68996 0.206521C4.76077 0.141455 4.84513 0.0897066 4.93817 0.054262C5.03121 0.0188174 5.13109 0.000377401 5.23205 5.73272e-06C5.33302 -0.000365936 5.43306 0.0173381 5.52642 0.0520966C5.61977 0.086855 5.70459 0.13798 5.77599 0.202523C5.84738 0.267065 5.90393 0.343748 5.94238 0.428148C5.98082 0.512548 6.00041 0.602995 5.99999 0.694271C5.99958 0.785547 5.97919 0.875847 5.93998 0.959961C5.90077 1.04407 5.84353 1.12034 5.77156 1.18435L4.01372 3.00058L5.77156 4.81565C5.84268 4.87986 5.89909 4.95612 5.93758 5.04007C5.97607 5.12401 5.99588 5.21398 5.99588 5.30485C5.99588 5.39572 5.97607 5.4857 5.93758 5.56964C5.89909 5.65358 5.84268 5.72984 5.77156 5.79406Z" fill="#113B3A"/>
+                                            </svg>       
+                                        </a> 
+                                    </li>
+                                </ng-container>
+                            </ul>
+
+                            <div class="min-height mb-3">
+                                <mat-form-field class="example-chip-list "  appearance="outline" >
+                                    <mat-chip-list #competenceList>
+                                        <input placeholder="{{ t('fields.DO_YOU_HAVE_OTHERS_SKILLS') }}" #competenceInput [formControl]="competenceCtrl" [matAutocomplete]="auto" [matChipInputFor]="competenceList"
+                                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+                                    </mat-chip-list>
+                                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                        <mat-option *ngFor="let competence of filteredCompetences | async" [value]="competence">
+                                            {{competence.name}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                            
+
+                            <button class="btn secondary px-3 center" (click)="onUpdateCompetence()" > {{ t('REGISTER') }} </button>
+
+                            
+                        </ng-container>
+                    </div>
+                    <div class="white-background-color p-4 border-raduis-15 h-100 upgrad-subscription text-center" *ngIf="role=='job'" > 
+                        <h3 [innerHTML]="t('DO_YOU_OFTEN_USE_SUBCONTRACTORS')" ></h3>
+                        <p>Inscrivez-vous maintenant à notre plateforme de mise en relation et trouvez un sous-traitant en seulement quelques minutes!</p>
+                        <button class="btn primary px-4 mt-4" (click)="onUpgrade()" > {{ t('I_AM_INTERESTED') }} </button>
+                    </div>
+                </div>
+                <div class="col-sm-12 white-background-color p-4 border-raduis-15" *ngIf="role=='mission'">
+                    <button class="btn secondary mb-4 px-4" (click)="addNewReference()"> {{ t('ADD_NEW_REFERENCE') }}
+                    </button>
+                    <ul class="list-inline portfolio_list">
+                        <li class="list-inline-item" *ngFor="let reference of profileReferences.data ">
+                            <div *ngIf="reference.files[0]"
+                                [ngStyle]="{'background-image': 'url(' +  referenceImgUrl + reference.files[0].name + ')'}"
+                                class="image background-center-cover"></div>
+                            <div class="content">
+                                <p class="mb-0 color-secondary"><strong> {{ reference.title }} </strong></p>
+                                <p class="detail"> {{ (reference.description.length>90)? (reference.description |
+                                    slice:0:90)+'..':(reference.description) }} </p>
+                            </div>
+                            <div class="actions">
+                                <a (click)="onEditReference(reference)" class="secondary">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path class="stroke"
+                                            d="M11.2737 2.98294L13.0179 4.72637L11.2737 2.98294ZM12.3953 1.44704L7.67893 6.16344C7.43523 6.40679 7.26903 6.71684 7.20128 7.05451L6.76562 9.23524L8.94635 8.79876C9.284 8.73123 9.59365 8.5657 9.83742 8.32193L14.5538 3.60553C14.6956 3.4638 14.808 3.29555 14.8847 3.11037C14.9614 2.92519 15.0009 2.72672 15.0009 2.52628C15.0009 2.32585 14.9614 2.12738 14.8847 1.9422C14.808 1.75702 14.6956 1.58877 14.5538 1.44704C14.4121 1.30531 14.2438 1.19288 14.0587 1.11618C13.8735 1.03948 13.675 1 13.4746 1C13.2741 1 13.0757 1.03948 12.8905 1.11618C12.7053 1.19288 12.5371 1.30531 12.3953 1.44704V1.44704Z"
+                                            stroke="#113B3A" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path class="stroke"
+                                            d="M13.3531 10.8824V13.353C13.3531 13.7898 13.1795 14.2087 12.8706 14.5176C12.5618 14.8265 12.1428 15 11.706 15H2.64708C2.21024 15 1.7913 14.8265 1.48242 14.5176C1.17353 14.2087 1 13.7898 1 13.353V4.29405C1 3.85722 1.17353 3.43828 1.48242 3.12939C1.7913 2.8205 2.21024 2.64697 2.64708 2.64697H5.11769"
+                                            stroke="#113B3A" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                    </svg>
+                                </a>
+
+                                <a (click)="onDeleteReference( reference.id )" class="secondary">
+                                    <svg width="15" height="15" viewBox="0 0 15 15" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path class="stroke" d="M10.1004 7.5H4.90039" stroke="#113B3A"
+                                            stroke-width="1.5" stroke-linecap="round" />
+                                        <path class="stroke"
+                                            d="M7.5 14C11.0899 14 14 11.0899 14 7.5C14 3.91015 11.0899 1 7.5 1C3.91015 1 1 3.91015 1 7.5C1 11.0899 3.91015 14 7.5 14Z"
+                                            stroke="#113B3A" stroke-width="1.5" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="col-12  text-center" *ngIf="profileReferences">
+                        <ng-container *ngIf="profileReferences.total > perPage">
+                            <a class="secondary" [ngClass]="{'disabled': currentPage == 1}"
+                                (click)="currentPage > 1 ? navigateTo(currentPage-1) : null">
+                                <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 1L1 9L9 17" class="stroke" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                            <a class="secondary" [ngClass]="{'disabled': currentPage == profileReferences.last_page}"
+                                (click)="currentPage!=profileReferences.last_page ? navigateTo(currentPage+1) : null">
+                                <svg class="mx-2" width="10" height="18" viewBox="0 0 10 18" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 17L9 9L1 1" class="stroke" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </a>
+                        </ng-container>
+
+                    </div>
+                    <ng-container *ngIf="profileReferences">
+                        <div class="col-12 text-center p-5" *ngIf="profileReferences.data && !profileReferences.data.length">
+                            <img src="./../../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                            <p [innerHTML]="t('NO_REFERENCE_ON_PRORILE')" class="pt-4"> </p>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

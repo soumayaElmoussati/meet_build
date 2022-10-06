@@ -1,0 +1,61 @@
+<ng-container *transloco="let t">
+    <div mat-dialog-title>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h5 class="dialog_title" [innerHTML]="t(data.title)"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm-12">
+                    <form [formGroup]="emailForm" class="w-100"
+                        (ngSubmit)='emailFormSubmit()'>
+                            <mat-form-field appearance="outline" class="mb-3">
+                                <input matInput placeholder="{{t('fields.SUBJECT') }} *" required
+                                    formControlName="subject" required>
+                            </mat-form-field>
+                            <div class="textarea">
+                                <mat-form-field appearance="outline">
+                                    <textarea matInput class="w-100" placeholder="{{t('fields.MESSAGE') }} *" formControlName="message"
+                                ></textarea> 
+                                </mat-form-field> 
+                            </div>
+                            
+                            <button mat-button #submit type="submit" class="d-none">{{t('SUIVANT') }}</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="left">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-12 d-flex">
+                    <button class="btn primary mt-3 px-5 mr-3" (click)="submit.click()"  >
+                        {{ t(data.confirmBtn) }}
+                        <ng-container *ngIf="emailFormSubmitting">
+                            <svg class="loader" width="60px" height="60px" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                enable-background="new 0 0 0 0" xml:space="preserve">
+                                <path fill="#fff"
+                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                    <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                                        from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                </path>
+                            </svg>
+                        </ng-container>
+                    </button>
+                    <button class="btn secondary mt-3 px-5" (click)="onCancel()">
+                        {{ t(data.cancelBtn) }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-actions>
+
+
+</ng-container>

@@ -1,0 +1,72 @@
+h4{
+    font-weight: 700;
+    font-size: 14px;
+}
+h5{
+    font-weight: 300;
+    font-size: 14px;
+}
+.min-height-500{
+    min-height: 500px;
+}
+.profile_picture{
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+}
+
+.profile_picture_detail{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.profile_picture_assign{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+}
+
+.write_message{
+    position: relative;
+    textarea{
+        width: 90%;
+    }
+    .attach_file{
+        position: absolute;
+        left: 83%;
+        top: 25px;
+    }
+    .action{
+        width: 10%;
+    } 
+}
+
+.profile_details{
+    position: sticky;
+    top: 0;
+}
+.conversation{
+    max-height: calc(100vh - 400px);
+    min-height: calc(100vh - 400px);
+    overflow: auto;
+} 
+
+ul li{
+    font-size: 12px;
+}
+
+.read_information{
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+.border-bottom{
+    border-bottom: .5px solid var(--default_color);
+}
+.assigned_bloc{
+    background-color: #00ABE1;
+}

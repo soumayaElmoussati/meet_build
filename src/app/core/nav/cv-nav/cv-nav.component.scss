@@ -1,0 +1,76 @@
+.companyName{
+    img{
+      width: 88px;
+    }
+  }
+  
+  .mat-toolbar{
+    height: 64px;
+    background-color: #fff;
+  }
+  
+  div {
+      overflow: inherit;
+  }
+  
+  .mat-sidenav-container{
+    background-color: lightskyblue;
+    min-height: 93vh !important;
+  }
+  
+  .menu{  
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    a{
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.13px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      padding: 0 11px;
+    }
+  }
+  
+  .example-icon {
+      padding: 0 14px;
+    }
+    
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+  
+    .mat-sidenav-content{
+        font-size: 200%;
+        text-align: center;
+    }
+    .profile_picture{
+      width: 46px;
+      height: 46px;
+      max-width: 46px;
+      max-height: 46px;
+      min-width: 46px;
+      min-height: 46px;
+      border-radius: 50%;
+    }
+  
+  .notification{
+    position: relative;
+      .unread_message{
+        position: absolute;
+        right: -10px;
+        top: -6px;
+      }
+  }
+  ::ng-deep button.mat-menu-item{
+    line-height: 1 !important;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+  }
+  
+  

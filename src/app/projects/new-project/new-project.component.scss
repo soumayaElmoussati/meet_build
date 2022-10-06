@@ -1,0 +1,27 @@
+.header{
+    background-color: #113B3A;
+    color: #fff;
+    h1{
+        font-size: 27px;
+        font-weight: 500;
+        span{
+            font-weight: 700;
+        }
+    }
+}
+
+.form_section:before{
+    content: '';
+    background-color: #113B3A;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100px;
+    width: 100%;
+
+}
+
+label{
+    font-size: 12px;
+    font-weight: 300;
+}

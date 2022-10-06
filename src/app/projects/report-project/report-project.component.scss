@@ -1,0 +1,36 @@
+h2{
+    font-size: 20px;
+}
+
+.background-before{
+    position: relative;
+    &:before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 200px;
+        width: 100%;
+        background-color: var(--primary_color);
+    }    
+}
+::ng-deep .mat-radio-label-content{
+    font-size: 12px;
+}
+::ng-deep .mat-radio-outer-circle{
+    background-color: #DADADA;
+    border: 1px solid #FFFFFF;
+}
+
+.alert.alert-success{
+    position: absolute;
+    top: -30px;
+    height: 29px;
+    border: unset;
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin: auto;
+    padding: 4px 20px;
+    font-size: 12px;
+}

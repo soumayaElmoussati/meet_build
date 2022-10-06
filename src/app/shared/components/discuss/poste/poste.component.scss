@@ -1,0 +1,167 @@
+.card {
+    background: #fff;
+    border-radius: 15px !important;
+    border: none;
+    .header {
+        padding: 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        small {
+            font-size: 11px;
+            color: var(--default_color)
+        }
+        p {
+            margin: 0px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--default_color);
+        }
+    }
+    .body {
+        padding: 1rem;
+        a.active{
+            path{
+                fill: var(--primary_color);
+            }
+            
+        }
+    }
+}
+
+::ng-deep .mat-form-field {
+    &.comment {
+        .mat-form-field-outline {
+            top: 0 !important;
+            height: 50px;
+        }
+        .mat-form-field-flex {
+            box-shadow: unset;
+            border-radius: 3px;
+            height: 50px;
+            background-color: #F1F3F5 !important;
+            ;
+            display: flex;
+            align-items: center;
+        }
+         ::placeholder {
+            color: var(--default_color) !important;
+        }
+        .mat-input-element {
+            color: var(--default_color) !important;
+        }
+        .mat-form-field-outline-end {
+            border-radius: 0px !important;
+        }
+        .mat-form-field-outline-start {
+            border-radius: 0px !important;
+        }
+        .mat-form-field-outline-start,
+        .mat-form-field-outline-end {
+            min-width: 3px!important;
+        }
+        &.medium {
+            .mat-form-field-outline {
+                height: 30px;
+            }
+            .mat-form-field-flex {
+                height: 30px;
+            }
+            .mat-form-field.comment .mat-form-field-outline-end {
+                border-radius: 0 !important;
+            }
+            .mat-form-field-appearance-outline .mat-form-field-outline-end {
+                border: unset !important;
+                min-width: 5px;
+            }
+        }
+        .mat-form-field-appearance-outline .mat-form-field-outline-start,
+        .mat-form-field-appearance-outline .mat-form-field-outline-end {
+            border: 0px !important;
+            min-width: 5px;
+        }
+    }
+}
+
+.mat-menu-item {
+    height: 31px;
+    font-weight: 300;
+}
+
+hr {
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    border: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.signal {
+    color: var(--primary_color);;
+}
+
+.user-logo {
+    width: 50px;
+    height: 50px;
+}
+
+.write_comment{
+    position: relative;
+    textarea{
+        width: 100%;
+        height: 9px;
+        min-height: unset;
+        box-shadow: unset;
+        border-radius: unset;
+        border: unset !important;
+        resize: none;
+        background-color: #F1F3F5 !important;
+        overflow-y: hidden;
+        padding: 1px 19px 1px 5px !important;
+        font-size: 11px !important;
+
+    }
+    a{
+        position: absolute;
+        top: -1px;
+        right: 9px;
+    }
+}
+
+ul.comments{
+    li{
+        margin-bottom: 10px;
+        display: flex;
+        align-items: flex-start;
+        .picture_profile {
+            width: 27px;
+            height: 27px;
+            max-width: 27px;
+            max-height: 27px;
+            min-width: 27px;
+            min-height: 27px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        p{
+            padding-top: 4px;
+            font-weight: 300;
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+        a{
+            font-size: 11px;
+        }
+    }
+}
+
+.post_image {
+    svg {
+        height: 200px;
+        width: 100%;
+    }
+    height: 220px;
+    width: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+ 

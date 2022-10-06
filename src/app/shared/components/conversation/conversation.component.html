@@ -1,0 +1,51 @@
+<ng-container *transloco="let t">
+    <div class="d-flex align-items-center justify-content-end pt-2">
+        <a class="mr-3" (click)="favorite(conversation.id, index)"
+        [ngClass]="{'primary' : conversation.favorite , 'light' : !conversation.favorite }" >
+            <svg class="mr-1" width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="stroke" d="M6 1C3.239 1 1 3.216 1 5.95C1 8.157 1.875 13.395 10.488 18.69C10.6423 18.7839 10.8194 18.8335 11 18.8335C11.1806 18.8335 11.3577 18.7839 11.512 18.69C20.125 13.395 21 8.157 21 5.95C21 3.216 18.761 1 16 1C13.239 1 11 4 11 4C11 4 8.761 1 6 1Z" stroke="#607D8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {{ t('FAVORITES') }}                
+        </a>
+        <a class="light mr-3" (click)="archive(conversation.id, index)"
+        [ngClass]="{'primary' : conversation.archived , 'light' : !conversation.archived  }" >
+            <svg class="mr-1" width="24" height="20" viewBox="0 0 24 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path class="stroke" d="M21 6V19H3V6" stroke="#607D8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="stroke" d="M1 1H23V6H1V1Z" stroke="#607D8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="stroke" d="M10 10H14" stroke="#607D8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
+            {{ t('ARCHIVER') }}                
+        </a>
+        <span class="badge badge-project badge-{{conversation.project_status.name}} mr-1">
+            {{ t('PROJECT_STATUS.'+conversation.project_status.name) }} </span>
+    </div>
+    <div class="d-flex pb-2" [ngClass]="{ 'unread' : !conversation.read }"  (click)="navigateToConvercation(conversation.project_id)" >
+        <div class="profile_picture background-center-cover position-relative"
+            [ngStyle]="{'background-image': 'url(' +  profileImgUrl + conversation.picture + ')'}">
+            <div class="svg" *ngIf="conversation.isAssignedToMe">
+                <svg width="29" height="41" viewBox="0 0 29 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M14.5 40.0832C22.0572 40.0832 28.2083 33.932 28.2083 26.3748C28.2083 18.8176 22.0572 12.6665 14.5 12.6665C6.94079 12.6665 0.791626 18.8176 0.791626 26.3748C0.791626 33.932 6.94079 40.0832 14.5 40.0832ZM14.5 16.5832C19.8991 16.5832 24.2916 20.9757 24.2916 26.3748C24.2916 31.774 19.8991 36.1665 14.5 36.1665C9.10084 36.1665 4.70829 31.774 4.70829 26.3748C4.70829 20.9757 9.10084 16.5832 14.5 16.5832ZM12.5416 0.916504H4.70829V11.7226C7.05179 10.1544 9.73882 9.17431 12.5416 8.86538V0.916504ZM24.2916 0.916504H16.4583V8.86538C19.2611 9.17431 21.9481 10.1544 24.2916 11.7226V0.916504Z" fill="#113B3A"/>
+                    <path d="M10.6207 27.963L9.70417 33.3015L14.5001 30.7811L19.2961 33.3015L18.3796 27.963L22.261 24.1795L16.8991 23.4001L14.5001 18.5415L12.1012 23.4001L6.73926 24.1795L10.6207 27.963Z" fill="#113B3A"/>
+                </svg>     
+            </div>                         
+        </div>
+        <div class="w-100 pr-5">
+            <ul class="list-inline mb-0">
+                <li class="">
+                    <p class="mb-0">{{ conversation.company_name }}</p>
+                </li>
+                <li class="pr-5 mb-2">
+                    <p class="mb-0 pr-5">{{ conversation.project_name }}
+                        <span class="place color-primary mb-0 float-right"> {{ t('PLACE:') }} {{conversation.project_city}}, {{ t('FROM') }}
+                            {{this.helpersS.formatDate(conversation.project_startdate)}} -
+                            {{this.helpersS.formatDate(conversation.project_enddate)}} </span>
+                    </p>
+                </li>
+                <li class="">
+                    <p class="last_message"> {{ conversation.message.message }} </p>                    
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr *ngIf="!last" >
+</ng-container>

@@ -1,0 +1,47 @@
+footer{
+    background-color: #113B3A;
+    color: #fff;
+    h3{
+        color: #fff;
+        font-size: 18px;
+        font-weight: 700;
+    }
+    h4{
+        font-size: 30px;
+        font-weight: 900;
+        margin-bottom: 1.5rem;
+        span{
+            font-weight: 500;
+        }
+    }
+    ul{
+        li{
+            padding: 10px 0;
+            font-size: 13px;
+            a{
+                &:hover{
+                    color: #fff;
+                }
+            }
+        }
+    }
+    .meet-copyright{
+        p{
+            border-top: 1px solid #fff;
+            margin-bottom: 0;
+            padding: 5px 0;
+            a{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:hover{
+                    color: #fff !important;
+                }
+            }
+            img{
+                min-width: 46px !important;
+                max-width: 45px !important;
+            }
+        }
+    }
+}

@@ -1,0 +1,126 @@
+
+ 
+    <app-nav></app-nav> 
+    <mat-sidenav-container fxFlexFill class="example-container">
+  
+      <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+        <div fxLayout="column">
+          <a mat-button routerLink="/about-us">About us</a>
+          <a mat-button routerLink="/prices">Prices</a>
+          <a mat-button routerLink="/start-page">Start page</a>
+          <a mat-button routerLink="/offer">Offer</a>
+          <a mat-button routerLink="/contact">Contact</a>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content fxFlexFill>
+
+        <ng-container *transloco="let t">
+            <section class="primary-background-color py-3" *ngIf="conversationsList">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h1 class="color-white mb-0"> {{ conversationsList.project.name }} </h1>
+                            <p class="place color-white mb-0"> {{ t('PLACE:') }} {{conversationsList.project.city}}, {{ t('FROM') }}
+                                {{this.helpersS.formatDate(conversationsList.project.startdate)}} -
+                                {{this.helpersS.formatDate(conversationsList.project.enddate)}} <span class="color-default"> {{ this.helpersS.postedAt(conversationsList.project.filed_ago) }} </span> </p>
+                        </div>
+                        <div class="col-sm-3">
+                            <button *ngIf="conversationsList.project.isMine && conversationsList.project.status.name!='ENDED' "
+                    class="btn primary w-100 px-4 "
+                    [ngClass]=" {
+                        'black': conversationsList.project.status.name=='OPEN',
+                        'red': conversationsList.project.status.name=='ASSIGNED',
+                        'green': conversationsList.project.status.name=='CLOSED'
+                    } "
+                    (click)="onChangeProjectStatus()">
+                    <ng-container *ngIf="conversationsList.project.status.name=='OPEN'" > {{ t('CLOSE_THIS_PROJECT') }} </ng-container>
+                    <ng-container *ngIf="conversationsList.project.status.name=='ASSIGNED'" > {{ t('IS_THIS_PROJECT_FINISHED') }} </ng-container>
+                    <ng-container *ngIf="conversationsList.project.status.name=='CLOSED'" > {{ t('REOPEN_THIS_PROJECT') }} </ng-container>
+                        <ng-container *ngIf="changingStatus">
+                            <svg class="loader" width="60px" height="60px" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                enable-background="new 0 0 0 0" xml:space="preserve">
+                                <path fill="#fff"
+                                    d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                    <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                                        from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                </path>
+                            </svg>
+                        </ng-container>
+                    </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="gray-background-color py-4" *ngIf="conversationsList">
+                <div class="container">
+                    <div class="row px-3">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-sm-3 px-0">
+                                    <div class="white-background-color border-raduis-15">
+                                        <div class="secondary-background-color w-100 py-5 border-raduis-15 d-flex align-items-center justify-content-center"> <p class="color-white mb-0 font-size-14">{{ t('OFFERS') }} ({{ conversationsList.conversations.length }})</p> </div>
+                                        <ul class="list-inline">
+                                            <li class="cursor-pointer"
+                                            *ngFor="let conversation of conversationsList.conversations; let index = index"
+                                            (click)="setRouter('/projet-conversations/'+conversationsList.project.id+'/'+conversation.id)"
+                                            [ngClass]="{ 'active': selectedConversationIndex==index } ">
+                                                <div>
+                                                    <div class="profile_picture background-center-cover" [ngStyle]="{'background-image': 'url(' +  profileImgUrl + conversation.applicant.profile_picture + ')'}">
+                                                        <div class="svg" *ngIf="conversation.isAssignedToMe">
+                                                            <svg width="29" height="41" viewBox="0 0 29 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M14.5 40.0832C22.0572 40.0832 28.2083 33.932 28.2083 26.3748C28.2083 18.8176 22.0572 12.6665 14.5 12.6665C6.94079 12.6665 0.791626 18.8176 0.791626 26.3748C0.791626 33.932 6.94079 40.0832 14.5 40.0832ZM14.5 16.5832C19.8991 16.5832 24.2916 20.9757 24.2916 26.3748C24.2916 31.774 19.8991 36.1665 14.5 36.1665C9.10084 36.1665 4.70829 31.774 4.70829 26.3748C4.70829 20.9757 9.10084 16.5832 14.5 16.5832ZM12.5416 0.916504H4.70829V11.7226C7.05179 10.1544 9.73882 9.17431 12.5416 8.86538V0.916504ZM24.2916 0.916504H16.4583V8.86538C19.2611 9.17431 21.9481 10.1544 24.2916 11.7226V0.916504Z" fill="#113B3A"/>
+                                                                <path d="M10.6207 27.963L9.70417 33.3015L14.5001 30.7811L19.2961 33.3015L18.3796 27.963L22.261 24.1795L16.8991 23.4001L14.5001 18.5415L12.1012 23.4001L6.73926 24.1795L10.6207 27.963Z" fill="#113B3A"/>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div class="notif d-flex align-items-center">
+                                                            <svg *ngIf="conversation.pinned" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M8.059 0.444699C7.89335 0.278598 7.69106 0.153663 7.46837 0.0799296C7.24567 0.00619651 7.00879 -0.0142789 6.77675 0.0201481C6.54471 0.054575 6.32398 0.142945 6.13229 0.278158C5.94059 0.413371 5.78329 0.591659 5.673 0.798699L3.653 4.5887L0.842 5.5257C0.761082 5.55258 0.688381 5.5997 0.630808 5.6626C0.573235 5.72549 0.532701 5.80206 0.513061 5.88503C0.49342 5.968 0.495324 6.05462 0.518592 6.13665C0.54186 6.21868 0.585719 6.2934 0.646 6.3537L2.793 8.4997L0.146 11.1467L0 11.9997L0.854 11.8537L3.5 9.2067L5.646 11.3537C5.7063 11.414 5.78102 11.4578 5.86305 11.4811C5.94508 11.5044 6.03169 11.5063 6.11467 11.4866C6.19764 11.467 6.27421 11.4265 6.3371 11.3689C6.4 11.3113 6.44712 11.2386 6.474 11.1577L7.411 8.3477L11.19 6.3237C11.396 6.2132 11.5733 6.05609 11.7078 5.86492C11.8422 5.67374 11.9302 5.45378 11.9646 5.22258C11.999 4.99138 11.9788 4.75535 11.9058 4.53331C11.8328 4.31127 11.7089 4.10936 11.544 3.9437L8.06 0.443699L8.059 0.444699ZM6.555 1.2687C6.59174 1.19957 6.6442 1.14003 6.70815 1.09487C6.7721 1.04972 6.84577 1.02022 6.92321 1.00874C7.00065 0.997257 7.07971 1.00412 7.15401 1.02878C7.22831 1.05344 7.29579 1.0952 7.351 1.1507L10.836 4.6487C10.8911 4.70392 10.9325 4.77126 10.9569 4.84535C10.9814 4.91944 10.9881 4.99821 10.9766 5.07537C10.9652 5.15253 10.9358 5.22593 10.8909 5.28972C10.846 5.3535 10.7868 5.40589 10.718 5.4427L6.764 7.5587C6.65142 7.61915 6.56626 7.72042 6.526 7.8417L5.782 10.0747L1.926 6.2187L4.158 5.4747C4.27963 5.43396 4.38094 5.34804 4.441 5.2347L6.555 1.2697V1.2687Z" fill="#f39908"/>
+                                                            </svg>
+                                                            <div class="unread_message ml-2" *ngIf="conversation.nbrMsgUnread"> {{ conversation.nbrMsgUnread }} </div>
+                                                        </div>
+                                                        <p class="color-secondary mb-0"> {{ conversation.applicant.company_name }} </p>
+                                                        <ngb-rating class="rate" [(rate)]="conversation.applicant.score" [readonly]="true" [max]=5></ngb-rating>
+                                                        <p class="mb-0 size-10" *ngIf="conversation.applicant.experience_years"> {{ t('EXPERIENCES_YEARS', { count: conversation.applicant.experience_years }) }} </p>
+                                                        <p class="mb-0"> {{ t('MUTUAL_FRIENDS', { count: conversation.applicant.nbrMutualFriends }) }} </p>
+                                                        <div class="heure"> {{ this.helpersS.sentSince(conversation.sentSince) }} </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col-sm-9 pr-0">
+                                    <div class="white-background-color border-raduis-15 custom-padding min-height-500 d-flex align-items-center justify-content-center" *ngIf="conversationsList.conversations.length == 0">
+                                        <div class="text-center p-5">
+                                            <img src="./../../assets/img/sand_watch.svg" alt="" class="img-fluid">
+                                            <p [innerHTML]="t('NO_OFFERS')" class="pt-4 mb-4"></p>
+                                            <div class="d-flex align-items-center justify-content-center pt-4">
+                                                <button class="btn primary px-4 mr-2" (click)="setRouter('/projets/'+conversationsList.project.slug)" > {{ t('VIEW_THE_PROJECT') }} </button>
+                                                <button class="btn secondary px-4" (click)="setRouter('/projet/creer')"> {{ t('CREAT_ON_OTHER_PROJECT') }} </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <router-outlet></router-outlet>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </ng-container>
+
+<app-footer></app-footer>
+
+
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  
+
+
+
+
+

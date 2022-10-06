@@ -1,0 +1,46 @@
+<ng-container *transloco="let t">
+    <section class="gray-background-color">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row py-3">
+                        <div class="col-12 py-3">
+                            <div class="row justify-content-center">
+                                <div class="col-md-3 col-lg-3 col-sm-12 dashboard pl-sm-0">
+                                    <app-discuss-notifications></app-discuss-notifications>
+                                </div>
+                                <div class="col-md-7 col-lg-7 col-sm-12 liste-poste">
+                                    <a routerLink="/discuss" class="mb-3 d-inline-block">
+                                        <svg class="mr-1" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path class="stroke" d="M2.33317 7L11.6665 7" stroke="#607D8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <path class="stroke" d="M6.4165 2.91797L2.33317 7.0013L6.4165 11.0846" stroke="#607D8B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        {{ t('RETURN') }}
+                                    </a>
+                                    <div class="row" >
+                                        <div class="col-sm-6 mb-3" *ngFor="let subscriber of subscribersList" >
+                                            <div class="border-raduis-15 white-background-color d-flex p-4">
+                                                <div class="profile_picture background-center-cover" 
+                                                [ngStyle]="{'background-image': 'url(' +  profileImgUrl + subscriber.picture + ')'}" ></div>
+                                                <div class="w-100">
+                                                    <h3 class="mb-0">{{ subscriber.company_name }}</h3>
+                                                    <ngb-rating class="rate" [(rate)]="subscriber.value" [readonly]="true" [max]=5></ngb-rating>
+                                                    <button class="btn primary w-100 mt-3 py-2 h-auto" routerLink="/{{subscriber.slug}}" > {{ t('SEE_PROFILE') }} </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 col-lg-2 col-sm-12">
+                                    <app-suggestions-list></app-suggestions-list>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</ng-container>
+
+ 

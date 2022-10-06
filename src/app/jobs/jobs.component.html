@@ -1,0 +1,81 @@
+<ng-container *transloco="let t">
+    <section class="background_job py-5">
+        <div class="container py-sm-5">
+            <div class="row justify-content-center">
+                <div class="col-8 text-center py-4">
+                    <h1>Trouvez le parfait emploi.</h1>
+                    <form [formGroup]="searchForm" class="row pt-4" (ngSubmit)="onSearchFormSubmit()" >
+                        <mat-form-field appearance="outline" class="col-5 px-2 transparant" >
+                            <input matInput formControlName="request" placeholder="{{ t('fields.WHAT_ARE_YOU_LOOKING_FOR') }}">
+                            <mat-icon class="color-white" matSuffix>search</mat-icon>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="col-4 px-2 transparant" >
+                            <mat-select matInput formControlName="province" placeholder="{{ t('fields.PROVINCE') }}"  >
+                                <mat-option *ngFor="let province of provincesList" [value]="province" > {{ province.name }} </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <div class="col-3 px-2">
+                            <button class="btn primary height-50"> {{ t('RESEARCH') }} </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="default-background-color">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <ul class="list-inline secondary-menu m-0 p-0">
+                        <li class="list-inline-item">
+                            <a routerLink="/jobs/list/tous-jobs">
+                                <svg width="32" height="31" viewBox="0 0 32 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19.1667 6.49935V3.33268H12.8333V6.49935H19.1667ZM3.33332 11.2493V25.4993C3.33332 26.3702 4.04582 27.0827 4.91666 27.0827H27.0833C27.9542 27.0827 28.6667 26.3702 28.6667 25.4993V11.2493C28.6667 10.3785 27.9542 9.66602 27.0833 9.66602H4.91666C4.04582 9.66602 3.33332 10.3785 3.33332 11.2493ZM28.6667 6.49935C30.4242 6.49935 31.8333 7.90851 31.8333 9.66602V27.0827C31.8333 28.8402 30.4242 30.2493 28.6667 30.2493H3.33332C1.57582 30.2493 0.166656 28.8402 0.166656 27.0827L0.18249 9.66602C0.18249 7.90851 1.57582 6.49935 3.33332 6.49935H9.66666V3.33268C9.66666 1.57518 11.0758 0.166016 12.8333 0.166016H19.1667C20.9242 0.166016 22.3333 1.57518 22.3333 3.33268V6.49935H28.6667Z" fill="white"/>
+                                </svg>
+                                {{ t('ALL_JOBS') }}
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a (click)="navigateToViewProfiles()" >
+                                <svg width="30" height="31" viewBox="0 0 30 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 11C16.3924 11 17.7277 10.4469 18.7123 9.46231C19.6969 8.47774 20.25 7.14239 20.25 5.75C20.25 4.35761 19.6969 3.02226 18.7123 2.03769C17.7277 1.05312 16.3924 0.5 15 0.5C13.6076 0.5 12.2723 1.05312 11.2877 2.03769C10.3031 3.02226 9.75 4.35761 9.75 5.75C9.75 7.14239 10.3031 8.47774 11.2877 9.46231C12.2723 10.4469 13.6076 11 15 11ZM15 3.5C15.5967 3.5 16.169 3.73705 16.591 4.15901C17.0129 4.58097 17.25 5.15326 17.25 5.75C17.25 6.34674 17.0129 6.91903 16.591 7.34099C16.169 7.76295 15.5967 8 15 8C14.4033 8 13.831 7.76295 13.409 7.34099C12.9871 6.91903 12.75 6.34674 12.75 5.75C12.75 5.15326 12.9871 4.58097 13.409 4.15901C13.831 3.73705 14.4033 3.5 15 3.5ZM19.5 26C19.5 25.6022 19.342 25.2206 19.0607 24.9393C18.7794 24.658 18.3978 24.5 18 24.5H16.5V21.5H25.5V19.25C25.5 16.355 20.805 14 15 14C9.195 14 4.5 16.355 4.5 19.25V21.5H13.5V24.5H12C11.6022 24.5 11.2206 24.658 10.9393 24.9393C10.658 25.2206 10.5 25.6022 10.5 26H0V29H10.5C10.5 29.3978 10.658 29.7794 10.9393 30.0607C11.2206 30.342 11.6022 30.5 12 30.5H18C18.3978 30.5 18.7794 30.342 19.0607 30.0607C19.342 29.7794 19.5 29.3978 19.5 29H30V26H19.5ZM8.415 18.5C9.585 17.795 11.835 17 15 17C18.165 17 20.415 17.795 21.585 18.5H8.415Z" fill="white"/>
+                                </svg>                                                                        
+                                {{ t('VIEW_PROFILES') }}
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a routerLink="/cv/deposer">
+                                <svg width="24" height="30" viewBox="0 0 24 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16.25 3.66732H3.5V26.334H20.5V7.91732H16.25V3.66732ZM3.5 0.833984H17.6667L23.3333 6.50065V26.334C23.3333 27.0854 23.0348 27.8061 22.5035 28.3375C21.9721 28.8688 21.2514 29.1673 20.5 29.1673H3.5C2.74855 29.1673 2.02788 28.8688 1.49653 28.3375C0.965179 27.8061 0.666668 27.0854 0.666668 26.334V3.66732C0.666668 2.91587 0.965179 2.1952 1.49653 1.66385C2.02788 1.1325 2.74855 0.833984 3.5 0.833984ZM6.33333 13.584H17.6667V16.4173H6.33333V13.584ZM6.33333 19.2507H17.6667V22.084H6.33333V19.2507Z" fill="white"/>
+                                </svg>                                                                        
+                                {{ t('SUBMIT_YOUR_CV') }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container pt-3">
+        <div class="row">    
+            <div class="col-sm-8 pr-0">
+                <h3 class="pl-4"> {{ t('FIND_A_JOB_BY_CATEGORY') }} </h3>
+                <div class="row" *ngIf="jobsList">
+                    <div class="col-12 white-background-color border-raduis-15 mb-3 py-4 cursor-pointer" *ngFor="let job of jobsList.data ; let first = first"
+                    (click)="navigateToJobDetail(job.slug)">
+                        <app-job [job]="job" [display]="display" [showPicture]="true"></app-job>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4 categories_list pl-5">
+                <h3 class="pl-4"> {{ t('FIND_A_JOB_BY_CATEGORY') }} </h3>
+                <ul class="list-inline white-background-color border-raduis-15" *ngIf="jobCategories">
+                    <li *ngFor="let category of jobCategories.data" >
+                        <a class="light"  (click)="navigateToJob(category)"  [routerLink]='"/jobs/list/tous-jobs"'>{{ category.name }}</a>
+                    </li>
+                </ul>  
+            </div>
+        </div>
+    </div>
+    
+</ng-container>

@@ -1,0 +1,142 @@
+h1{
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+}
+.project_status{
+    background-color: red;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    top: -50px;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.OPEN{
+        background-color: #699F00;
+    }
+    &.ASSIGNED{
+        background-color: #00ABE1;
+    }
+    &.ENDED{
+        background-color: #E10000;
+    }
+    &.CLOSED{
+        background-color: #E10000;
+    }
+}
+
+.profile_picture{
+    width: 65px;
+    height: 65px;
+    min-width: 65px;
+    min-height: 65px;
+    max-width: 65px;
+    max-height: 65px;
+    margin-right: 8px;
+}
+
+
+table{
+    background-color: #fff;
+    border-radius: 15px;
+    width: 100%;
+    font-size: 12px;
+    tbody{
+        tr{
+            &:not(:last-child){
+                border-bottom: 1px solid #DADADA;
+            }
+            th{
+                padding: 6px 20px;
+                font-weight: 400;
+                color: var(--secondary_color);
+                letter-spacing: 0.13px;
+                border-right: 1px solid #DADADA;
+            }
+            td{
+                padding: 6px 20px;
+                font-weight: 400;
+                color: #607D8B;
+            }
+        }
+    }
+}
+
+.white-background-color{
+    position: relative;
+}
+
+h4{
+    position: absolute;
+    border-bottom: 1px solid #607D8B;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+.nbr_conversations{
+    font-weight: 600;
+    font-size: 16px;
+    background: #FDF0DA;
+    display: inline-block;
+    padding: 6px 28px;
+}
+
+.background-before{
+    position: relative;
+    &:before{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 150px;
+        width: 100%;
+        background-image: url(../../../assets/img/background_job.jpg);
+        background-color: var(--primary_color);
+        background-position: center;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    } 
+    &:after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 150px;
+        top: 0;
+        left: 0;
+        background-color: rgba(17, 59, 58, .45);
+    }
+    div{
+        z-index: 9;
+    }
+}
+
+.days_left{
+    background-color: #FFE600;
+    font-weight: 500;
+    font-size: 13px;
+    display: inline-block;
+    padding: 5px 25px;
+    border-radius: 3px;
+}
+.link_edit{
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    &.bottom{
+        top: unset;
+        bottom: 7px;
+    }
+}

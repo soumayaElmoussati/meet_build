@@ -1,0 +1,45 @@
+<ng-container *transloco="let t">
+    <div class="container">
+        <div class="row position-relative">
+            <div class="col-12 text-center">
+                <h5 class="dialog_title" [innerHTML]="t('IS_THIS_PROJECT_FINISHED')"></h5>
+            </div>
+            <div class="close_pop_up">
+                <a class="secondary" (click)="close()">
+                    <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path class="fill"
+                            d="M13.1303 14.5803C12.804 14.9066 12.3615 15.0899 11.9 15.0899C11.4386 15.0899 10.996 14.9066 10.6697 14.5803L6.82574 10.1868L2.98179 14.5789C2.82071 14.7426 2.62879 14.8728 2.41712 14.962C2.20546 15.0512 1.97823 15.0976 1.74853 15.0986C1.51884 15.0995 1.29124 15.055 1.07886 14.9675C0.866468 14.88 0.673501 14.7514 0.511084 14.589C0.348667 14.4265 0.220015 14.2336 0.132547 14.0212C0.0450801 13.8088 0.000529043 13.5812 0.00146432 13.3515C0.0023996 13.1218 0.0488025 12.8946 0.137996 12.6829C0.22719 12.4712 0.35741 12.2793 0.521145 12.1182L4.52024 7.55075L0.519695 2.98035C0.355961 2.81926 0.22574 2.62734 0.136547 2.41568C0.0473526 2.20401 0.000949704 1.97678 1.4426e-05 1.74709C-0.000920852 1.51739 0.0436302 1.28979 0.131097 1.07741C0.218565 0.865019 0.347217 0.672051 0.509634 0.509634C0.672051 0.347217 0.865019 0.218565 1.07741 0.131098C1.28979 0.0436302 1.51739 -0.000920852 1.74708 1.4426e-05C1.97678 0.000949704 2.20401 0.0473526 2.41568 0.136547C2.62734 0.225741 2.81926 0.355961 2.98034 0.519695L6.82574 4.91464L10.6697 0.519695C10.8308 0.355961 11.0227 0.225741 11.2344 0.136547C11.446 0.0473526 11.6733 0.000949704 11.903 1.4426e-05C12.1326 -0.000920852 12.3602 0.0436302 12.5726 0.131098C12.785 0.218565 12.978 0.347217 13.1404 0.509634C13.3028 0.672051 13.4315 0.865019 13.5189 1.07741C13.6064 1.28979 13.651 1.51739 13.65 1.74709C13.6491 1.97678 13.6027 2.20401 13.5135 2.41568C13.4243 2.62734 13.2941 2.81926 13.1303 2.98035L9.13124 7.55075L13.1303 12.1182C13.2921 12.2798 13.4205 12.4717 13.508 12.683C13.5956 12.8942 13.6407 13.1206 13.6407 13.3493C13.6407 13.578 13.5956 13.8044 13.508 14.0156C13.4205 14.2268 13.2921 14.4187 13.1303 14.5803Z"
+                            fill="#113B3A" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="row text-center justify-content-center" *ngIf="data" >
+            <form [formGroup]="rateForm"
+                class="col-10 custom-padding meduim white-background-color border-raduis-15 pt-5 pb-0"
+                (ngSubmit)="onRateFormSubmit()">
+                <label class="col-12"> {{ t('HOW_WOULD_YOU_RATE_THE_COLLABORATION_WITH') }} </label>
+                <div class="col-12 py-4">
+                    <div class="profile_picture background-center-cover" [ngStyle]="{'background-image': 'url(' +  profileImgUrl + data.profile_picture + ')'}" ></div>
+                    <p class="mb-0"> {{ data.company_name }} </p>
+                    <p> {{ data.vat }} </p>
+                </div>
+                <div class="col-12 mb-3">
+                    <ngb-rating class="rate" formControlName="value"  [readonly]="false" [max]=5></ngb-rating>
+                </div>
+                <label class="col-12 mb-3"> {{ t('DESCRIBE_HERE_WHAT_YOU_APPRECIATED_IN_THIS_COLLABORATION') }} </label>
+                <div class="col-12 mb-3">
+                    <textarea matInput class="w-100" formControlName="evaluation" ></textarea>
+                </div>
+                <div class="col-12">
+                    <button class="btn primary px-4 center mt-3" type="submit">
+                        {{ t('ASSIGN_THE_RATING_AND_COMPLETE_THE_PROJECT') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+</ng-container>

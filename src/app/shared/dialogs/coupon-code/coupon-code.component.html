@@ -1,0 +1,76 @@
+<ng-container *transloco="let t">
+    <div mat-dialog-title>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h5 class="dialog_title" [innerHTML]="t(data.title)"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm-12">
+                    <p [innerHTML]="t(data.content)"></p>
+                    <form [formGroup]="codePromoGroup" class="row">
+                        <div class="col-12 d-flex align-items-center mb-2" >
+                            <p class="color-primary mb-0 mr-2">
+                                {{ t('DO_YOU_HAVE_A_PROMO_CODE') }}
+                            </p>
+                            <mat-slide-toggle formControlName="hasPromoCode"></mat-slide-toggle>
+                        </div>
+                        <div class="col-12" *ngIf="codePromoGroup.value.hasPromoCode" >
+                            <mat-form-field appearance="outline" class="mb-3">
+                                <input matInput formControlName="codePromo" placeholder="{{ t('fields.ENTER_IT_HERE') }}" >    
+                            </mat-form-field> 
+                            <button type="button" class="btn primary field_btn promo" (click)="verifyCodePromo(true)">
+                                <ng-container *ngIf="!showLoader">
+                                    {{t('APPLY_CODE')}}
+                                </ng-container>
+                                <ng-container *ngIf="showLoader">
+                                    <svg width="60px" height="60px" version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100"
+                                        enable-background="new 0 0 0 0" xml:space="preserve">
+                                        <path fill="#fff"
+                                            d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                            <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                                                dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                                        </path>
+                                    </svg>
+                                </ng-container>
+                            </button>
+                        </div>
+                        <div class="col-12 promo_code_message" *ngIf="codePromoDetails?.promoCode" >
+                            <p *ngIf="codePromoDetails.promoCode.gratuity_duration == 0"> {{ t('WELL_DONE_YOUR_ACCOUNT_IS_FREE_FOR_LIFE') }}  </p>
+                            <p *ngIf="codePromoDetails.promoCode.gratuity_duration == 1"> {{ t('WELL_DONE_YOUR_ACCOUNT_IS_FREE_FOR_MONTH') }}  </p>
+                            <p *ngIf="codePromoDetails.promoCode.gratuity_duration == 12"> {{ t('WELL_DONE_YOUR_ACCOUNT_IS_FREE_FOR_ONE_YEAR') }}  </p>
+                        </div>
+                        <div class="col-12" *ngIf="codePromoInvalid">
+                            <div class="code_promo_not_valid">
+                                <p> {{ t('THIS_CODE_IS_INVALID_TRY_AGAIN') }} </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="left">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-12 d-flex">
+                    <button class="btn primary mt-3 px-4 mr-3" (click)="onConfirm()" >
+                        {{ t(data.confirmBtn) }}
+                    </button>
+                    <button class="btn secondary mt-3 px-4" (click)="onCancel()">
+                        {{ t(data.cancelBtn) }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-actions>
+
+
+</ng-container>
+

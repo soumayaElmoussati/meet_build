@@ -1,0 +1,44 @@
+<ng-container *transloco="let t">
+    <section class="">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="row white-background-color border-raduis-15 py-4 px-4" *ngIf="reportDetail">
+                <div class="col-sm-5">
+                    <h3 class="pt-4"> {{ t('admin.REPORTED_BY') }} </h3>
+                    <div class="profile_picture"
+                        [ngStyle]="{'background-image': 'url(' +  profileImgUrl + reportDetail.profile_picture + ')'}"></div>
+                </div>
+                <div class="col-sm-7" >
+                    <h3 class="pt-4"> {{ t('admin.ABOUT') }} </h3>
+                    <p> {{ baseUrl + prefix + reportDetail.slug  }} </p>
+                </div>
+                <div class="col-sm-5">
+                    <h3 class="pt-4"> {{ t('admin.USER') }} </h3>
+                    <p> {{ reportDetail.company_name }} </p>
+                    <h3 class="pt-4"> {{ t('admin.REASON_FOR_THE_REPORT') }} </h3>
+                    <p> {{ reportDetail.reason.reason }} </p>
+                </div>
+                <div class="col-sm-7" >
+                    <h3 class="pt-4" *ngIf="reportDetail.message"> {{ t('admin.MESSAGE') }} </h3>
+                    <p> {{ reportDetail.message  }} </p>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button class="btn primary px-3 mr-3" (click)="sendAlert()"> {{t('admin.SEND_AN_ALERT')}} </button>
+                    <button class="btn primary px-3 mr-3" [ngClass]=" reportDetail.status ? 'red' : 'green' " (click)="block()"> 
+                        <ng-container *ngIf="reportDetail.status" >{{t('admin.BLOCK_THIS_USER')}}</ng-container>
+                        <ng-container *ngIf="!reportDetail.status">{{t('admin.UNBLOCK_THIS_USER')}}</ng-container>
+                    </button>
+                    <button class="btn secondary px-3" (click)="archive()"> 
+                        <ng-container *ngIf="reportDetail.archived" >{{t('admin.IGNORE_ARCHIVE')}}</ng-container>
+                        <ng-container *ngIf="!reportDetail.archived">{{t('admin.IGNORE_UNARCHIVE')}}</ng-container>
+                    </button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+</ng-container>
+
+

@@ -1,0 +1,36 @@
+<ng-container *transloco="let t">
+    <div mat-dialog-title>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h5 class="dialog_title" [innerHTML]="t(data.title)"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-dialog-content>
+        <div class="container">
+            <div class="row ">
+                <div class="col-sm-12">
+                    <p [innerHTML]="t(data.content)"></p>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions align="left">
+        <div class="container">
+            <div class="row mb-3">
+                <div class="col-12 d-flex">
+                    <button class="btn primary mt-3 px-4 mr-3" (click)="setRouter('/register')" >
+                        {{ t(data.confirmBtn) }}
+                    </button>
+                    <button class="btn secondary mt-3 px-4" (click)="goToLogin()">
+                        {{ t(data.cancelBtn) }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-actions>
+
+
+</ng-container>
